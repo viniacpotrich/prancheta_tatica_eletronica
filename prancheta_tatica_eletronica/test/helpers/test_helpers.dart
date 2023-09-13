@@ -28,9 +28,9 @@ void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  getAndRegisterPlayerServiceService();
-  getAndRegisterFormationServiceService();
-  getAndRegisterTeamServiceService();
+  getAndRegisterPlayerService();
+  getAndRegisterFormationService();
+  getAndRegisterTeamService();
   getAndRegisterPatternOfPlayService();
   getAndRegisterConfigService();
   getAndRegisterPlayerContractService();
@@ -87,23 +87,23 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
-MockPlayerServiceService getAndRegisterPlayerServiceService() {
+MockPlayerService getAndRegisterPlayerService() {
   _removeRegistrationIfExists<PlayerService>();
-  final service = MockPlayerServiceService();
+  final service = MockPlayerService();
   locator.registerSingleton<PlayerService>(service);
   return service;
 }
 
-MockFormationServiceService getAndRegisterFormationServiceService() {
+MockFormationService getAndRegisterFormationService() {
   _removeRegistrationIfExists<FormationService>();
-  final service = MockFormationServiceService();
+  final service = MockFormationService();
   locator.registerSingleton<FormationService>(service);
   return service;
 }
 
-MockTeamServiceService getAndRegisterTeamServiceService() {
+MockTeamService getAndRegisterTeamService() {
   _removeRegistrationIfExists<TeamService>();
-  final service = MockTeamServiceService();
+  final service = MockTeamService();
   locator.registerSingleton<TeamService>(service);
   return service;
 }
