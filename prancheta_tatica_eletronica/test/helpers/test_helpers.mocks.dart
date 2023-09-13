@@ -8,6 +8,17 @@ import 'dart:ui' as _i5;
 
 import 'package:flutter/material.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:prancheta_tatica_eletronica/services/config_service.dart'
+    as _i10;
+import 'package:prancheta_tatica_eletronica/services/formation_service.dart'
+    as _i7;
+import 'package:prancheta_tatica_eletronica/services/pattern_of_play_service.dart'
+    as _i9;
+import 'package:prancheta_tatica_eletronica/services/player_contract_service.dart'
+    as _i11;
+import 'package:prancheta_tatica_eletronica/services/player_service.dart'
+    as _i6;
+import 'package:prancheta_tatica_eletronica/services/team_service.dart' as _i8;
 import 'package:stacked_services/stacked_services.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -627,3 +638,35 @@ class MockDialogService extends _i1.Mock implements _i2.DialogService {
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [PlayerService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPlayerService extends _i1.Mock implements _i6.PlayerService {}
+
+/// A class which mocks [FormationService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFormationService extends _i1.Mock implements _i7.FormationService {}
+
+/// A class which mocks [TeamService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTeamService extends _i1.Mock implements _i8.TeamService {}
+
+/// A class which mocks [PatternOfPlayService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPatternOfPlayService extends _i1.Mock
+    implements _i9.PatternOfPlayService {}
+
+/// A class which mocks [ConfigService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockConfigService extends _i1.Mock implements _i10.ConfigService {}
+
+/// A class which mocks [PlayerContractService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPlayerContractService extends _i1.Mock
+    implements _i11.PlayerContractService {}

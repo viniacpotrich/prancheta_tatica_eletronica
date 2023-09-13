@@ -1,0 +1,4 @@
+enum PreferredFootEnum {
+  right,
+  left,
+}

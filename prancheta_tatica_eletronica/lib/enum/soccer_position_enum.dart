@@ -1,0 +1,17 @@
+enum SoccerPositionEnum {
+  goalkeeper,
+  centerBack,
+  rightBack,
+  leftBack,
+  wingBack,
+  sweeper,
+  defensiveMidfielder,
+  centralMidfielder,
+  attackingMidfielder,
+  rightMidfielder,
+  leftMidfielder,
+  rightWinger,
+  leftWinger,
+  forward,
+  striker,
+}

@@ -13,6 +13,12 @@ import 'package:prancheta_tatica_eletronica/ui/views/formation_detail/formation_
 import 'package:prancheta_tatica_eletronica/ui/views/pattern_of_play_list/pattern_of_play_list_view.dart';
 import 'package:prancheta_tatica_eletronica/ui/views/pattern_of_play_detail/pattern_of_play_detail_view.dart';
 import 'package:prancheta_tatica_eletronica/ui/dialogs/alert_dialog/alert_dialog_dialog.dart';
+import 'package:prancheta_tatica_eletronica/services/player_service.dart';
+import 'package:prancheta_tatica_eletronica/services/formation_service.dart';
+import 'package:prancheta_tatica_eletronica/services/team_service.dart';
+import 'package:prancheta_tatica_eletronica/services/pattern_of_play_service.dart';
+import 'package:prancheta_tatica_eletronica/services/config_service.dart';
+import 'package:prancheta_tatica_eletronica/services/player_contract_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -33,7 +39,13 @@ import 'package:prancheta_tatica_eletronica/ui/dialogs/alert_dialog/alert_dialog
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
-    // @stacked-service
+    LazySingleton(classType: PlayerService),
+    LazySingleton(classType: FormationService),
+    LazySingleton(classType: TeamService),
+    LazySingleton(classType: PatternOfPlayService),
+    LazySingleton(classType: ConfigService),
+    LazySingleton(classType: PlayerContractService),
+// @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),

@@ -13,9 +13,13 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
     Widget? child,
   ) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Players"),
+      ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+        child: Text("Players"),
       ),
     );
   }

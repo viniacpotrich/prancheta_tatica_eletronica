@@ -2,6 +2,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:prancheta_tatica_eletronica/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:prancheta_tatica_eletronica/services/player_service.dart';
+import 'package:prancheta_tatica_eletronica/services/formation_service.dart';
+import 'package:prancheta_tatica_eletronica/services/team_service.dart';
+import 'package:prancheta_tatica_eletronica/services/pattern_of_play_service.dart';
+import 'package:prancheta_tatica_eletronica/services/config_service.dart';
+import 'package:prancheta_tatica_eletronica/services/player_contract_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -10,13 +16,25 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  // @stacked-mock-spec
+  MockSpec<PlayerService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<FormationService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TeamService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PatternOfPlayService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ConfigService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PlayerContractService>(onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
 ])
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterPlayerServiceService();
+  getAndRegisterFormationServiceService();
+  getAndRegisterTeamServiceService();
+  getAndRegisterPatternOfPlayService();
+  getAndRegisterConfigService();
+  getAndRegisterPlayerContractService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -69,6 +87,47 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockPlayerServiceService getAndRegisterPlayerServiceService() {
+  _removeRegistrationIfExists<PlayerService>();
+  final service = MockPlayerServiceService();
+  locator.registerSingleton<PlayerService>(service);
+  return service;
+}
+
+MockFormationServiceService getAndRegisterFormationServiceService() {
+  _removeRegistrationIfExists<FormationService>();
+  final service = MockFormationServiceService();
+  locator.registerSingleton<FormationService>(service);
+  return service;
+}
+
+MockTeamServiceService getAndRegisterTeamServiceService() {
+  _removeRegistrationIfExists<TeamService>();
+  final service = MockTeamServiceService();
+  locator.registerSingleton<TeamService>(service);
+  return service;
+}
+
+MockPatternOfPlayService getAndRegisterPatternOfPlayService() {
+  _removeRegistrationIfExists<PatternOfPlayService>();
+  final service = MockPatternOfPlayService();
+  locator.registerSingleton<PatternOfPlayService>(service);
+  return service;
+}
+
+MockConfigService getAndRegisterConfigService() {
+  _removeRegistrationIfExists<ConfigService>();
+  final service = MockConfigService();
+  locator.registerSingleton<ConfigService>(service);
+  return service;
+}
+
+MockPlayerContractService getAndRegisterPlayerContractService() {
+  _removeRegistrationIfExists<PlayerContractService>();
+  final service = MockPlayerContractService();
+  locator.registerSingleton<PlayerContractService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {
