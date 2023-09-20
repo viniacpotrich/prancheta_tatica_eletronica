@@ -4,12 +4,19 @@ import 'package:tactical_e_clipboard/app/app.dialogs.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
+void _setDataBaseFactory() {
+  setupBottomSheetUi();
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   setupDialogUi();
-  setupBottomSheetUi();
+  _setDataBaseFactory()
   runApp(const MainApp());
 }
 
