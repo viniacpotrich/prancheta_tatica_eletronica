@@ -11,7 +11,7 @@ class DatabaseManager {
   DatabaseManager._internal();
 
   static final _databaseName = Environment.getDatabaseName();
-  static final _databaseVersion = 1;
+  static const _databaseVersion = 1;
   late Database _db;
 
   Database getInstanceDB() {

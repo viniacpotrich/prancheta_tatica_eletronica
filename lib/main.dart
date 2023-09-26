@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
-import 'package:tactical_e_clipboard/app/app.dialogs.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,10 +12,9 @@ void _setDataBaseFactory() {
 }
 
 Future<void> main() async {
+  await setupLocator(); 
   WidgetsFlutterBinding.ensureInitialized();
-  await setupLocator();
-  setupDialogUi();
-  _setDataBaseFactory()
+  _setDataBaseFactory();
   runApp(const MainApp());
 }
 

@@ -1,12 +1,11 @@
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:tactical_e_clipboard/services/player_service.dart';
 
 class PlayerListViewModel extends FutureViewModel {
-  final _navigationService = locator<NavigationService>();
-
   late List<PlayerModel> players;
+  final service = locator<PlayerService>();
 
   @override
   Future futureToRun() async {
@@ -23,7 +22,6 @@ class PlayerListViewModel extends FutureViewModel {
   }
 
   void teste() {
-    print(_navigationService.currentRoute);
-    print(_navigationService.currentArguments);
+    service.getAll();
   }
 }

@@ -1,19 +1,23 @@
-import 'package:uuid/uuid.dart';
+import 'package:tactical_e_clipboard/repository/repository.dart';
 
-abstract class AbstractService<T> {
+import '../app/app.locator.dart';
+
+abstract class AbstractService<T, R, K extends RepositoryInterface<R, T>> {
+  final repository = locator<K>();
+
   Future<List<T>> getAll() async {
-    return [];
+    return repository.getAll();
   }
 
-  Future<T?> get(Uuid id) async {
-    return null;
+  Future<T?> get(R id) async {
+    return repository.get(id);
   }
 
-  Future<bool> put() async {
-    return true;
+  Future<T> put(T t) async {
+    return repository.put(t);
   }
 
-  Future<bool> delete(Uuid id) async {
-    return true;
+  Future<bool> delete(R id) async {
+    return repository.delete(id);
   }
 }
