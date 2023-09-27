@@ -14,12 +14,42 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Players"),
+        title: Text("Players"),
+        actions: [
+          InkWell(onTap: () {}, child: Icon(Icons.search)),
+          InkWell(onTap: () {}, child: Icon(Icons.add)),
+        ],
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-        child: const Text("Players"),
+        child: ListView.builder(
+          itemCount: viewModel.players.length,
+          itemBuilder: (context, index) => ListTile(
+            title: Row(
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Text(viewModel.players[index].namePlayer),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: InkWell(
+                    onTap: () => viewModel.editPlayer(index),
+                    child: const Icon(Icons.edit),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: InkWell(
+                    onTap: () => viewModel.deletePlayer(index),
+                    child: const Icon(Icons.delete),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

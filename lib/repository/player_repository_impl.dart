@@ -17,7 +17,6 @@ interface class PlayerRepositoryImpl implements PlayerRepository {
 
   @override
   Future<bool> delete(Uuid k) {
-
     throw UnimplementedError();
   }
 
@@ -27,17 +26,19 @@ interface class PlayerRepositoryImpl implements PlayerRepository {
         .getInstanceDB()
         .rawQuery("SELECT sqlite_version();")
         .then((value) => print(value));
-    return [PlayerModel("Teste", "TesteNicname", [SoccerPositionEnum.goalkeeper], PreferredFootEnum.left)];
+    return [
+      PlayerModel("Teste", "TesteNicname", [SoccerPositionEnum.goalkeeper],
+          PreferredFootEnum.left)
+    ];
   }
 
   @override
   Future<PlayerModel> patch(PlayerModel k) {
-
     throw UnimplementedError();
   }
 
   @override
   Future<PlayerModel> put(PlayerModel k) {
-
     throw UnimplementedError();
   }
+}
