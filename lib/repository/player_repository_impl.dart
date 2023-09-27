@@ -41,4 +41,3 @@ interface class PlayerRepositoryImpl implements PlayerRepository {
 
     throw UnimplementedError();
   }
-}

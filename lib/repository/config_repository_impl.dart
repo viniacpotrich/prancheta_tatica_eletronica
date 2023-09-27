@@ -2,7 +2,6 @@ import 'package:tactical_e_clipboard/database/database_manager.dart';
 import 'package:tactical_e_clipboard/model/config_model.dart';
 import 'package:tactical_e_clipboard/repository/config_repository.dart';
 import 'package:uuid/uuid.dart';
-
 import '../app/app.locator.dart';
 
 interface class ConfigRepositoryImpl implements ConfigRepository {

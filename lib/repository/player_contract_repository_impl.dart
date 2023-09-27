@@ -1,7 +1,6 @@
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart';
 import 'package:tactical_e_clipboard/repository/player_contract_repository.dart';
 import 'package:uuid/uuid.dart';
-
 import '../app/app.locator.dart';
 import '../database/database_manager.dart';
 

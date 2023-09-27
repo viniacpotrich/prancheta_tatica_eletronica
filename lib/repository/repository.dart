@@ -4,7 +4,6 @@
 ///  K is the model
 abstract class RepositoryInterface<T, K> {
   get dbm;
-
   Future<K> get(T t);
   Future<List<K>> getAll();
   Future<bool> delete(T t);
