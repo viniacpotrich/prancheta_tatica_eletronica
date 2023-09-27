@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
-import 'package:tactical_e_clipboard/app/app.dialogs.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await setupLocator();
-  setupDialogUi();
+void _setDataBaseFactory() {
   setupBottomSheetUi();
   sqfliteFfiInit();
-
-  // Set the database factory
   databaseFactory = databaseFactoryFfi;
+}
+
+Future<void> main() async {
+  await setupLocator(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  _setDataBaseFactory();
   runApp(const MainApp());
 }
 

@@ -1,7 +1,7 @@
 class Environment {
-  static const String _DATA_BASE_NAME =
+  static const String _databaseName=
       String.fromEnvironment("tactical_eclipboard_db");
   static String getDatabaseName() {
-    return _DATA_BASE_NAME.isEmpty ? "tactical_eclipboard_db" : _DATA_BASE_NAME;
+    return _databaseName.isEmpty ? "tactical_eclipboard_db" : _databaseName;
   }
 }

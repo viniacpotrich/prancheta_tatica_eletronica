@@ -1,36 +1,42 @@
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart';
 import 'package:tactical_e_clipboard/repository/player_contract_repository.dart';
 import 'package:uuid/uuid.dart';
+import '../app/app.locator.dart';
+import '../database/database_manager.dart';
 
 interface class PlayerContractRepositoryImpl
     implements PlayerContractRepository {
   @override
-  bool delete(PlayerContractModel k) {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
-
+  DatabaseManager get dbm => locator<DatabaseManager>();
+  
   @override
-  PlayerContractModel get(Uuid t) {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
+  Future<bool> delete(Uuid k) {
 
-  @override
-  List<PlayerContractModel> getAll() {
-    // TODO: implement getAll
     throw UnimplementedError();
   }
+  
+  @override
+  Future<PlayerContractModel> get(Uuid t) {
+   
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<PlayerContractModel>> getAll() {
 
-  @override
-  PlayerContractModel patch(PlayerContractModel k) {
-    // TODO: implement patch
     throw UnimplementedError();
   }
+  
+  @override
+  Future<PlayerContractModel> patch(PlayerContractModel k) {
 
-  @override
-  PlayerContractModel put(PlayerContractModel k) {
-    // TODO: implement put
     throw UnimplementedError();
   }
+  
+  @override
+  Future<PlayerContractModel> put(PlayerContractModel k) {
+
+    throw UnimplementedError();
+  }
+  
 }

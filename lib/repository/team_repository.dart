@@ -4,32 +4,37 @@ import 'package:uuid/uuid.dart';
 
 interface class TeamRepository extends RepositoryInterface<Uuid, TeamModel> {
   @override
-  bool delete(TeamModel k) {
-    // TODO: implement delete
+  get dbm => throw UnimplementedError();
+  
+  @override
+  Future<bool> delete(Uuid t) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<TeamModel> get(Uuid t) {
+   
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<TeamModel>> getAll() {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<TeamModel> patch(TeamModel k) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<TeamModel> put(TeamModel k) {
+
     throw UnimplementedError();
   }
 
-  @override
-  TeamModel get(Uuid t) {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
 
-  @override
-  List<TeamModel> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
-
-  @override
-  TeamModel patch(TeamModel k) {
-    // TODO: implement patch
-    throw UnimplementedError();
-  }
-
-  @override
-  TeamModel put(TeamModel k) {
-    // TODO: implement put
-    throw UnimplementedError();
-  }
 }

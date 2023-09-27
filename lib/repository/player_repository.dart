@@ -5,32 +5,37 @@ import 'package:uuid/uuid.dart';
 interface class PlayerRepository
     extends RepositoryInterface<Uuid, PlayerModel> {
   @override
-  bool delete(PlayerModel k) {
-    // TODO: implement delete
+  get dbm => throw UnimplementedError();
+  
+  @override
+  Future<bool> delete(Uuid t) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<PlayerModel> get(Uuid t) {
+   
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<PlayerModel>> getAll() {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<PlayerModel> patch(PlayerModel k) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<PlayerModel> put(PlayerModel k) {
+
     throw UnimplementedError();
   }
 
-  @override
-  PlayerModel get(Uuid t) {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
-
-  @override
-  List<PlayerModel> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
-
-  @override
-  PlayerModel patch(PlayerModel k) {
-    // TODO: implement patch
-    throw UnimplementedError();
-  }
-
-  @override
-  PlayerModel put(PlayerModel k) {
-    // TODO: implement put
-    throw UnimplementedError();
-  }
+  
 }

@@ -4,33 +4,39 @@ import 'package:uuid/uuid.dart';
 
 interface class ConfigRepository
     extends RepositoryInterface<Uuid, ConfigModel> {
+
   @override
-  bool delete(ConfigModel k) {
-    // TODO: implement delete
+  get dbm => throw UnimplementedError();
+  
+  @override
+  Future<bool> delete(Uuid t) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<ConfigModel> get(Uuid t) {
+   
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<ConfigModel>> getAll() {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<ConfigModel> patch(ConfigModel k) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<ConfigModel> put(ConfigModel k) {
+
     throw UnimplementedError();
   }
 
-  @override
-  ConfigModel get(Uuid t) {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
 
-  @override
-  List<ConfigModel> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
-  }
-
-  @override
-  ConfigModel patch(ConfigModel k) {
-    // TODO: implement patch
-    throw UnimplementedError();
-  }
-
-  @override
-  ConfigModel put(ConfigModel k) {
-    // TODO: implement put
-    throw UnimplementedError();
-  }
 }

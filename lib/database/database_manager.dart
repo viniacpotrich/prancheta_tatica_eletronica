@@ -1,6 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/model/environment.dart';
-
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -12,9 +11,8 @@ class DatabaseManager {
   DatabaseManager._internal();
 
   static final _databaseName = Environment.getDatabaseName();
-
+  static const _databaseVersion = 1;
   late Database _db;
-  static final _databaseVersion = 1;
 
   Database getInstanceDB() {
     return _db;
@@ -41,3 +39,4 @@ class DatabaseManager {
     ''');
   }
 }
+

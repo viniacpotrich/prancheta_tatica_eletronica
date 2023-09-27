@@ -1,35 +1,39 @@
+import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/formation_model.dart';
 import 'package:tactical_e_clipboard/repository/formation_repository.dart';
 import 'package:uuid/uuid.dart';
+import '../database/database_manager.dart';
 
 interface class FormationRepositoryImpl implements FormationRepository {
   @override
-  bool delete(FormationModel k) {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
+  DatabaseManager get dbm => locator<DatabaseManager>();
 
   @override
-  FormationModel get(Uuid t) {
-    // TODO: implement get
+  Future<bool> delete(Uuid k) {
     throw UnimplementedError();
   }
-
+  
   @override
-  List<FormationModel> getAll() {
-    // TODO: implement getAll
+  Future<FormationModel> get(Uuid t) {
+   
     throw UnimplementedError();
   }
-
+  
   @override
-  FormationModel patch(FormationModel k) {
-    // TODO: implement patch
+  Future<List<FormationModel>> getAll() {
+
     throw UnimplementedError();
   }
-
+  
   @override
-  FormationModel put(FormationModel k) {
-    // TODO: implement put
+  Future<FormationModel> patch(FormationModel k) {
+
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<FormationModel> put(FormationModel k) {
+
     throw UnimplementedError();
   }
 }
