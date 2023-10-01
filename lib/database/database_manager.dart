@@ -31,11 +31,15 @@ class DatabaseManager {
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE my_table (
-        id INTEGER PRIMARY KEY,
-        name TEXT,
-        age INTEGER
-      )
+      CREATE TABLE IF NOT EXISTS Team (
+        idTeam TEXT PRIMARY KEY,
+        nameTeam TEXT NOT NULL,
+        nicknameTeam TEXT NOT NULL,
+        colorPrimaryTeam TEXT NOT NULL,
+        colorSecondaryTeam TEXT NOT NULL,
+        cityTeam TEXT NOT NULL,
+        logoTeam BLOB
+      );
     ''');
   }
 }
