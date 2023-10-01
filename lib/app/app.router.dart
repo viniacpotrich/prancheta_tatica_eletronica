@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i13;
+import 'package:stacked_services/stacked_services.dart' as _i14;
 import 'package:tactical_e_clipboard/ui/views/formation_detail/formation_detail_view.dart'
     as _i9;
 import 'package:tactical_e_clipboard/ui/views/formation_list/formation_list_view.dart'
@@ -27,6 +27,7 @@ import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.dart'
     as _i7;
 import 'package:tactical_e_clipboard/ui/views/team_list/team_list_view.dart'
     as _i6;
+import 'package:uuid/uuid.dart' as _i13;
 
 class Routes {
   static const homeView = '/home-view';
@@ -127,8 +128,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i5.PlayerDetailView: (data) {
+      final args = data.getArgs<PlayerDetailViewArguments>(nullOk: false);
       return _i12.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i5.PlayerDetailView(),
+        builder: (context) => _i5.PlayerDetailView(
+            playerModelID: args.playerModelID, key: args.key),
         settings: data,
       );
     },
@@ -176,7 +179,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i13.NavigationService {
+class PlayerDetailViewArguments {
+  const PlayerDetailViewArguments({
+    required this.playerModelID,
+    this.key,
+  });
+
+  final _i13.Uuid playerModelID;
+
+  final _i12.Key? key;
+
+  @override
+  String toString() {
+    return '{"playerModelID": "$playerModelID", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant PlayerDetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.playerModelID == playerModelID && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return playerModelID.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i14.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -219,14 +249,18 @@ extension NavigatorStateExtension on _i13.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToPlayerDetailView([
+  Future<dynamic> navigateToPlayerDetailView({
+    required _i13.Uuid playerModelID,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.playerDetailView,
+        arguments:
+            PlayerDetailViewArguments(playerModelID: playerModelID, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -359,14 +393,18 @@ extension NavigatorStateExtension on _i13.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithPlayerDetailView([
+  Future<dynamic> replaceWithPlayerDetailView({
+    required _i13.Uuid playerModelID,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.playerDetailView,
+        arguments:
+            PlayerDetailViewArguments(playerModelID: playerModelID, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
