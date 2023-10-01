@@ -14,8 +14,47 @@ class TeamListView extends StackedView<TeamListViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      appBar: AppBar(
+        title: Text(
+          "Times",
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {},
+            child: Icon(Icons.search),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        itemCount: viewModel.teams.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: Text(viewModel.teams[index].nameTeam),
+              ),
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: () => viewModel.editTeam(index),
+                  child: const Icon(Icons.edit),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: () => viewModel.deleteTeam(index),
+                  child: const Icon(Icons.delete),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

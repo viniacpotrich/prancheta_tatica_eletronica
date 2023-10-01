@@ -10,6 +10,7 @@ class PlayerModel {
   PreferredFootEnum preferredFootPlayer;
 
   PlayerModel(
+    this.idPlayer, //TODO REVOMER DEPOIS
     this.namePlayer,
     this.nicknamePlayer,
     this.preferredPositionsPlayer,

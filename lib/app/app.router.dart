@@ -142,8 +142,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i7.TeamDetailView: (data) {
+      final args = data.getArgs<TeamDetailViewArguments>(nullOk: false);
       return _i12.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i7.TeamDetailView(),
+        builder: (context) =>
+            _i7.TeamDetailView(teamModelID: args.teamModelID, key: args.key),
         settings: data,
       );
     },
@@ -203,6 +205,33 @@ class PlayerDetailViewArguments {
   @override
   int get hashCode {
     return playerModelID.hashCode ^ key.hashCode;
+  }
+}
+
+class TeamDetailViewArguments {
+  const TeamDetailViewArguments({
+    required this.teamModelID,
+    this.key,
+  });
+
+  final _i13.Uuid teamModelID;
+
+  final _i12.Key? key;
+
+  @override
+  String toString() {
+    return '{"teamModelID": "$teamModelID", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant TeamDetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.teamModelID == teamModelID && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return teamModelID.hashCode ^ key.hashCode;
   }
 }
 
@@ -281,14 +310,17 @@ extension NavigatorStateExtension on _i14.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToTeamDetailView([
+  Future<dynamic> navigateToTeamDetailView({
+    required _i13.Uuid teamModelID,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.teamDetailView,
+        arguments: TeamDetailViewArguments(teamModelID: teamModelID, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -425,14 +457,17 @@ extension NavigatorStateExtension on _i14.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithTeamDetailView([
+  Future<dynamic> replaceWithTeamDetailView({
+    required _i13.Uuid teamModelID,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.teamDetailView,
+        arguments: TeamDetailViewArguments(teamModelID: teamModelID, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
