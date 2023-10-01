@@ -19,6 +19,13 @@ import 'package:tactical_e_clipboard/services/team_service.dart';
 import 'package:tactical_e_clipboard/services/pattern_of_play_service.dart';
 import 'package:tactical_e_clipboard/services/config_service.dart';
 import 'package:tactical_e_clipboard/services/player_contract_service.dart';
+import 'package:tactical_e_clipboard/services/config_repository_service.dart';
+import 'package:tactical_e_clipboard/services/formation_repository_service.dart';
+import 'package:tactical_e_clipboard/services/pattern_of_play_repository_service.dart';
+import 'package:tactical_e_clipboard/services/player_contract_repository_service.dart';
+import 'package:tactical_e_clipboard/services/player_repository_service.dart';
+import 'package:tactical_e_clipboard/services/team_repository_service.dart';
+import 'package:tactical_e_clipboard/services/database_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -45,6 +52,13 @@ import 'package:tactical_e_clipboard/services/player_contract_service.dart';
     LazySingleton(classType: PatternOfPlayService),
     LazySingleton(classType: ConfigService),
     LazySingleton(classType: PlayerContractService),
+    LazySingleton(classType: ConfigRepositoryService),
+    LazySingleton(classType: FormationRepositoryService),
+    LazySingleton(classType: PatternOfPlayRepositoryService),
+    LazySingleton(classType: PlayerContractRepositoryService),
+    LazySingleton(classType: PlayerRepositoryService),
+    LazySingleton(classType: TeamRepositoryService),
+    LazySingleton(classType: DatabaseService),
 // @stacked-service
   ],
   bottomsheets: [

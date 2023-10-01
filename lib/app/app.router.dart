@@ -7,12 +7,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart' as _i1;
+import 'package:stacked_services/stacked_services.dart' as _i13;
 import 'package:tactical_e_clipboard/ui/views/formation_detail/formation_detail_view.dart'
     as _i9;
 import 'package:tactical_e_clipboard/ui/views/formation_list/formation_list_view.dart'
     as _i8;
-import 'package:tactical_e_clipboard/ui/views/home/home_view.dart'
-    as _i2;
+import 'package:tactical_e_clipboard/ui/views/home/home_view.dart' as _i2;
 import 'package:tactical_e_clipboard/ui/views/pattern_of_play_detail/pattern_of_play_detail_view.dart'
     as _i11;
 import 'package:tactical_e_clipboard/ui/views/pattern_of_play_list/pattern_of_play_list_view.dart'
@@ -21,14 +22,11 @@ import 'package:tactical_e_clipboard/ui/views/player_detail/player_detail_view.d
     as _i5;
 import 'package:tactical_e_clipboard/ui/views/player_list/player_list_view.dart'
     as _i4;
-import 'package:tactical_e_clipboard/ui/views/startup/startup_view.dart'
-    as _i3;
+import 'package:tactical_e_clipboard/ui/views/startup/startup_view.dart' as _i3;
 import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.dart'
     as _i7;
 import 'package:tactical_e_clipboard/ui/views/team_list/team_list_view.dart'
     as _i6;
-import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i13;
 
 class Routes {
   static const homeView = '/home-view';

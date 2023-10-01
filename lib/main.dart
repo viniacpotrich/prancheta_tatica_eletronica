@@ -12,7 +12,7 @@ void _setDataBaseFactory() {
 }
 
 Future<void> main() async {
-  await setupLocator(); 
+  await setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   _setDataBaseFactory();
   runApp(const MainApp());
