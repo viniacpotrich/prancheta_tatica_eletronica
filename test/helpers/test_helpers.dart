@@ -8,6 +8,13 @@ import 'package:tactical_e_clipboard/services/team_service.dart';
 import 'package:tactical_e_clipboard/services/pattern_of_play_service.dart';
 import 'package:tactical_e_clipboard/services/config_service.dart';
 import 'package:tactical_e_clipboard/services/player_contract_service.dart';
+import 'package:tactical_e_clipboard/services/config_repository_service.dart';
+import 'package:tactical_e_clipboard/services/formation_repository_service.dart';
+import 'package:tactical_e_clipboard/services/pattern_of_play_repository_service.dart';
+import 'package:tactical_e_clipboard/services/player_contract_repository_service.dart';
+import 'package:tactical_e_clipboard/services/player_repository_service.dart';
+import 'package:tactical_e_clipboard/services/team_repository_service.dart';
+import 'package:tactical_e_clipboard/services/database_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -22,6 +29,16 @@ import 'test_helpers.mocks.dart';
   MockSpec<PatternOfPlayService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ConfigService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<PlayerContractService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ConfigRepositoryService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<FormationRepositoryService>(
+      onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PatternOfPlayRepositoryService>(
+      onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PlayerContractRepositoryService>(
+      onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PlayerRepositoryService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TeamRepositoryService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<DatabaseService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -34,6 +51,13 @@ void registerServices() {
   getAndRegisterPatternOfPlayService();
   getAndRegisterConfigService();
   getAndRegisterPlayerContractService();
+  getAndRegisterConfigRepositoryService();
+  getAndRegisterFormationRepositoryService();
+  getAndRegisterPatternOfPlayRepositoryService();
+  getAndRegisterPlayerContractRepositoryService();
+  getAndRegisterPlayerRepositoryService();
+  getAndRegisterTeamRepositoryService();
+  getAndRegisterDatabaseService();
 // @stacked-mock-register
 }
 
@@ -126,6 +150,57 @@ MockPlayerContractService getAndRegisterPlayerContractService() {
   _removeRegistrationIfExists<PlayerContractService>();
   final service = MockPlayerContractService();
   locator.registerSingleton<PlayerContractService>(service);
+  return service;
+}
+
+MockConfigRepositoryService getAndRegisterConfigRepositoryService() {
+  _removeRegistrationIfExists<ConfigRepositoryService>();
+  final service = MockConfigRepositoryService();
+  locator.registerSingleton<ConfigRepositoryService>(service);
+  return service;
+}
+
+MockFormationRepositoryService getAndRegisterFormationRepositoryService() {
+  _removeRegistrationIfExists<FormationRepositoryService>();
+  final service = MockFormationRepositoryService();
+  locator.registerSingleton<FormationRepositoryService>(service);
+  return service;
+}
+
+MockPatternOfPlayRepositoryService
+    getAndRegisterPatternOfPlayRepositoryService() {
+  _removeRegistrationIfExists<PatternOfPlayRepositoryService>();
+  final service = MockPatternOfPlayRepositoryService();
+  locator.registerSingleton<PatternOfPlayRepositoryService>(service);
+  return service;
+}
+
+MockPlayerContractRepositoryService
+    getAndRegisterPlayerContractRepositoryService() {
+  _removeRegistrationIfExists<PlayerContractRepositoryService>();
+  final service = MockPlayerContractRepositoryService();
+  locator.registerSingleton<PlayerContractRepositoryService>(service);
+  return service;
+}
+
+MockPlayerRepositoryService getAndRegisterPlayerRepositoryService() {
+  _removeRegistrationIfExists<PlayerRepositoryService>();
+  final service = MockPlayerRepositoryService();
+  locator.registerSingleton<PlayerRepositoryService>(service);
+  return service;
+}
+
+MockTeamRepositoryService getAndRegisterTeamRepositoryService() {
+  _removeRegistrationIfExists<TeamRepositoryService>();
+  final service = MockTeamRepositoryService();
+  locator.registerSingleton<TeamRepositoryService>(service);
+  return service;
+}
+
+MockDatabaseService getAndRegisterDatabaseService() {
+  _removeRegistrationIfExists<DatabaseService>();
+  final service = MockDatabaseService();
+  locator.registerSingleton<DatabaseService>(service);
   return service;
 }
 // @stacked-mock-create

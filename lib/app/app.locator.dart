@@ -11,11 +11,18 @@ import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
+import '../services/config_repository_service.dart';
 import '../services/config_service.dart';
+import '../services/database_service.dart';
+import '../services/formation_repository_service.dart';
 import '../services/formation_service.dart';
+import '../services/pattern_of_play_repository_service.dart';
 import '../services/pattern_of_play_service.dart';
+import '../services/player_contract_repository_service.dart';
 import '../services/player_contract_service.dart';
+import '../services/player_repository_service.dart';
 import '../services/player_service.dart';
+import '../services/team_repository_service.dart';
 import '../services/team_service.dart';
 
 final locator = StackedLocator.instance;
@@ -38,4 +45,11 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => PatternOfPlayService());
   locator.registerLazySingleton(() => ConfigService());
   locator.registerLazySingleton(() => PlayerContractService());
+  locator.registerLazySingleton(() => ConfigRepositoryService());
+  locator.registerLazySingleton(() => FormationRepositoryService());
+  locator.registerLazySingleton(() => PatternOfPlayRepositoryService());
+  locator.registerLazySingleton(() => PlayerContractRepositoryService());
+  locator.registerLazySingleton(() => PlayerRepositoryService());
+  locator.registerLazySingleton(() => TeamRepositoryService());
+  locator.registerLazySingleton(() => DatabaseService());
 }

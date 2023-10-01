@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:tactical_e_clipboard/database/database_manager.dart';
+import 'package:tactical_e_clipboard/services/database_service.dart';
 
 class StartupViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -11,7 +11,7 @@ class StartupViewModel extends BaseViewModel {
   Future runStartupLogic() async {
     await Future.delayed(const Duration(seconds: 3));
 
-    DatabaseManager databaseManager = DatabaseManager();
+    DatabaseService databaseManager = DatabaseService();
     databaseManager.open();
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic

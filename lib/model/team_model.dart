@@ -18,4 +18,30 @@ class TeamModel {
     this.cityTeam,
     this.logoTeam,
   );
+
+  static fromMap(Map<String, Object?> map) {
+    var team = TeamModel(
+        map['nameTeam'] as String,
+        map['nicknameTeam'] as String,
+        map['colorPrimaryTeam'] as String,
+        map['colorSecondaryTeam'] as String,
+        map['cityTeam'] as String,
+        null // Missing Image
+        );
+    if (map['idTeam'] != null) {
+      team.idTeam = map['idTeam'] as Uuid;
+    }
+  }
+
+  Map<String, Object?> toMap() {
+    return {
+      'nameTeam': nameTeam,
+      'nicknameTeam': nicknameTeam,
+      'colorPrimaryTeam': colorPrimaryTeam,
+      'colorSecondaryTeam': colorSecondaryTeam,
+      'cityTeam': cityTeam,
+      // 'logoTeam': logoTeam, // You might need to convert this to a suitable format
+      // 'idTeam': idTeam, // You might need to convert this to a suitable format
+    };
+  }
 }

@@ -14,10 +14,10 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Players"),
+        title: const Text("Players"),
         actions: [
-          InkWell(onTap: () {}, child: Icon(Icons.search)),
-          InkWell(onTap: () {}, child: Icon(Icons.add)),
+          InkWell(onTap: () {}, child: const Icon(Icons.search)),
+          InkWell(onTap: () {}, child: const Icon(Icons.add)),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.background,

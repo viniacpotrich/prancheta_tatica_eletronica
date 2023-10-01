@@ -1,6 +1,6 @@
 ///
 ///  T is the id/key
-/// 
+///
 ///  K is the model
 abstract class RepositoryInterface<T, K> {
   get dbm;

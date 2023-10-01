@@ -31,6 +31,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel> {
 
   final Uuid playerModelID;
 
+  @override
   void onViewModelReady(viewModel) {
     viewModel.getPlayer(playerModelID);
   }
@@ -44,11 +45,11 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text("Player Detail"),
+        title: const Text("Player Detail"),
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-        child: Text("${playerModelID}"),
+        child: Text("$playerModelID"),
       ),
     );
   }
