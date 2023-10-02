@@ -17,6 +17,10 @@ abstract class AbstractService<T, R, K extends RepositoryInterface<R, T>> {
     return repository.put(t);
   }
 
+  Future<T> update(T t) async {
+    return repository.patch(t);
+  }
+
   Future<bool> delete(R id) async {
     return repository.delete(id);
   }
