@@ -3,6 +3,8 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/repository/team_repository.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
+import 'package:uuid/data.dart';
+import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
 
 class TeamRepositoryService implements TeamRepository {
@@ -12,7 +14,7 @@ class TeamRepositoryService implements TeamRepository {
   DatabaseService get dbm => locator<DatabaseService>();
 
   @override
-  Future<bool> delete(Uuid k) async {
+  Future<bool> delete(String k) async {
     var result = await dbm.getInstanceDB().delete(
       _table,
       where: "idTeam = ?",
@@ -22,7 +24,7 @@ class TeamRepositoryService implements TeamRepository {
   }
 
   @override
-  Future<TeamModel> get(Uuid t) async {
+  Future<TeamModel> get(String t) async {
     List<Map<String, dynamic>> results = await dbm.getInstanceDB().rawQuery(
       "SELECT * FROM $_table WHERE idTeam = ?",
       [t.toString()],
@@ -36,10 +38,13 @@ class TeamRepositoryService implements TeamRepository {
 
   @override
   Future<List<TeamModel>> getAll() async {
-    final List<Map<String, dynamic>> queryResult =
-        await dbm.getInstanceDB().query(_table);
-    return queryResult.map((value) => TeamModel.fromMap(value)).toList()
-        as List<TeamModel>;
+    return dbm
+        .getInstanceDB()
+        .query(_table)
+        .asStream()
+        .map((list) => list.map((v) => TeamModel.fromMap(v)))
+        .handleError((err) => print("Error: $err"))
+        .toList() as Future<List<TeamModel>>;
   }
 
   @override
@@ -55,6 +60,10 @@ class TeamRepositoryService implements TeamRepository {
 
   @override
   Future<TeamModel> put(TeamModel k) async {
+    k.idTeam = Uuid().v4(config: V4Options(null, CryptoRNG()));
+    if (k.idTeam == null) {
+      Exception("UUID cannot be null");
+    }
     await dbm.getInstanceDB().insert(
           _table,
           k.toMap(),

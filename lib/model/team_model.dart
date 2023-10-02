@@ -8,7 +8,7 @@ class TeamModel {
   String colorSecondaryTeam = '';
   String cityTeam = '';
   Image? logoTeam;
-  Uuid? idTeam;
+  String? idTeam;
 
   TeamModel(
     this.nameTeam,
@@ -29,7 +29,7 @@ class TeamModel {
         null // Missing Image
         );
     if (map['idTeam'] != null) {
-      team.idTeam = map['idTeam'] as Uuid;
+      team.idTeam = map['idTeam'] as String;
     }
   }
 
@@ -40,8 +40,8 @@ class TeamModel {
       'colorPrimaryTeam': colorPrimaryTeam,
       'colorSecondaryTeam': colorSecondaryTeam,
       'cityTeam': cityTeam,
+      'idTeam': idTeam, // You might need to convert this to a suitable format
       // 'logoTeam': logoTeam, // You might need to convert this to a suitable format
-      // 'idTeam': idTeam, // You might need to convert this to a suitable format
     };
   }
 }
