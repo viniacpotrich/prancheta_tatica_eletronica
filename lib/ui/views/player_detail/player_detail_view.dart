@@ -65,8 +65,9 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                 labelText: NamePlayerInputValueKey,
               ),
               controller: namePlayerInputController,
-              onChanged: viewModel.controllerNameInput(
-                namePlayerInputController.text,
+              onChanged: (value) => viewModel.controllerNameInput(
+                value,
+                // namePlayerInputController.text
               ),
             ),
             TextFormField(
@@ -74,8 +75,8 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                 labelText: NicknamePlayerInputValueKey,
               ),
               controller: nicknamePlayerInputController,
-              onChanged: viewModel.controllerNickNameInput(
-                nicknamePlayerInputController.text,
+              onChanged: (value) => viewModel.controllerNickNameInput(
+                value,
               ),
             ),
             DropdownButtonFormField(

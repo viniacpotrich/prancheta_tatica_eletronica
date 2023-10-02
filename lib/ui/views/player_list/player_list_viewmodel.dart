@@ -5,6 +5,7 @@ import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:uuid/uuid.dart';
 
 class PlayerListViewModel extends FutureViewModel {
   final _navigationService = locator<NavigationService>();

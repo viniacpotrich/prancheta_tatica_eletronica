@@ -14,29 +14,29 @@ class PlayerDetailViewModel extends FutureViewModel
     // TODO: implement futureToRun
   }
 
-  controllerNameInput(String text) {
-    print("controller name  = $text");
+  void controllerNameInput(String text) {
+    print("palyer controller name  = $text");
   }
 
-  controllerNickNameInput(String text) {
-    print("controller nick name  = $text");
+  void controllerNickNameInput(String text) {
+    print("palyer controller nick name  = $text");
   }
 
-  controllerPositionsPlayerDropDown(String? text) {
+  void controllerPositionsPlayerDropDown(String? text) {
     if (text != null && text.isNotEmpty) {
       //TODO
       print(text);
     }
   }
 
-  controllerPreferredFootPlayerDropDown(String? text) {
+  void controllerPreferredFootPlayerDropDown(String? text) {
     if (text != null && text.isNotEmpty) {
       //TODO
       print(text);
     }
   }
 
-  controllerTeamDropDown(String? text) {
+  void controllerTeamDropDown(String? text) {
     if (text != null && text.isNotEmpty) {
       //TODO
       print(text);
