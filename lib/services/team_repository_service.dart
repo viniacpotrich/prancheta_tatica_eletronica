@@ -34,15 +34,6 @@ class TeamRepositoryService implements TeamRepository {
     }
   }
 
-  // @override
-  // Future<List<TeamModel>> getAll() async {
-  // return dbm
-  //     .getInstanceDB()
-  //     .query(_table)
-  //     .asStream()
-  //     .map((element) => element.map((value) => TeamModel.fromMap(value)))
-  //     .toList() as Future<List<TeamModel>>;
-  // }]  @override
   @override
   Future<List<TeamModel>> getAll() async {
     final List<Map<String, dynamic>> queryResult =

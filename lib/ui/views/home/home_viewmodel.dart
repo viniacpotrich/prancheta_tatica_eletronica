@@ -1,10 +1,10 @@
+import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/item_home_menu_model.dart';
 import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends FutureViewModel {
   @override
