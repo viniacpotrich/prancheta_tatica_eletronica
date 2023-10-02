@@ -12,6 +12,15 @@ import 'package:stacked/stacked.dart';
 const bool _autoTextFieldValidation = true;
 
 const String NameTeamInputValueKey = 'nameTeamInput';
+const String NicknameTeamInputValueKey = 'nicknameTeamInput';
+const String CitiesTeamValueKey = 'citiesTeam';
+
+final Map<String, String> CitiesTeamValueToTitleMap = {
+  '1': 'city1',
+  '2': 'city2',
+  '3': 'city3',
+  '4': 'city4',
+};
 
 final Map<String, TextEditingController> _TeamDetailViewTextEditingControllers =
     {};
@@ -20,14 +29,19 @@ final Map<String, FocusNode> _TeamDetailViewFocusNodes = {};
 
 final Map<String, String? Function(String?)?> _TeamDetailViewTextValidations = {
   NameTeamInputValueKey: null,
+  NicknameTeamInputValueKey: null,
 };
 
 mixin $TeamDetailView {
   TextEditingController get nameTeamInputController =>
       _getFormTextEditingController(NameTeamInputValueKey);
+  TextEditingController get nicknameTeamInputController =>
+      _getFormTextEditingController(NicknameTeamInputValueKey);
 
   FocusNode get nameTeamInputFocusNode =>
       _getFormFocusNode(NameTeamInputValueKey);
+  FocusNode get nicknameTeamInputFocusNode =>
+      _getFormFocusNode(NicknameTeamInputValueKey);
 
   TextEditingController _getFormTextEditingController(
     String key, {
@@ -54,6 +68,7 @@ mixin $TeamDetailView {
   /// with the latest textController values
   void syncFormWithViewModel(FormStateHelper model) {
     nameTeamInputController.addListener(() => _updateFormData(model));
+    nicknameTeamInputController.addListener(() => _updateFormData(model));
 
     _updateFormData(model, forceValidate: _autoTextFieldValidation);
   }
@@ -66,6 +81,7 @@ mixin $TeamDetailView {
   )
   void listenToFormUpdated(FormViewModel model) {
     nameTeamInputController.addListener(() => _updateFormData(model));
+    nicknameTeamInputController.addListener(() => _updateFormData(model));
 
     _updateFormData(model, forceValidate: _autoTextFieldValidation);
   }
@@ -76,6 +92,7 @@ mixin $TeamDetailView {
       model.formValueMap
         ..addAll({
           NameTeamInputValueKey: nameTeamInputController.text,
+          NicknameTeamInputValueKey: nicknameTeamInputController.text,
         }),
     );
 
@@ -119,6 +136,10 @@ extension ValueProperties on FormStateHelper {
 
   String? get nameTeamInputValue =>
       this.formValueMap[NameTeamInputValueKey] as String?;
+  String? get nicknameTeamInputValue =>
+      this.formValueMap[NicknameTeamInputValueKey] as String?;
+  String? get citiesTeamValue =>
+      this.formValueMap[CitiesTeamValueKey] as String?;
 
   set nameTeamInputValue(String? value) {
     this.setData(
@@ -132,30 +153,73 @@ extension ValueProperties on FormStateHelper {
     }
   }
 
+  set nicknameTeamInputValue(String? value) {
+    this.setData(
+      this.formValueMap..addAll({NicknameTeamInputValueKey: value}),
+    );
+
+    if (_TeamDetailViewTextEditingControllers.containsKey(
+        NicknameTeamInputValueKey)) {
+      _TeamDetailViewTextEditingControllers[NicknameTeamInputValueKey]?.text =
+          value ?? '';
+    }
+  }
+
   bool get hasNameTeamInput =>
       this.formValueMap.containsKey(NameTeamInputValueKey) &&
       (nameTeamInputValue?.isNotEmpty ?? false);
+  bool get hasNicknameTeamInput =>
+      this.formValueMap.containsKey(NicknameTeamInputValueKey) &&
+      (nicknameTeamInputValue?.isNotEmpty ?? false);
+  bool get hasCitiesTeam => this.formValueMap.containsKey(CitiesTeamValueKey);
 
   bool get hasNameTeamInputValidationMessage =>
       this.fieldsValidationMessages[NameTeamInputValueKey]?.isNotEmpty ?? false;
+  bool get hasNicknameTeamInputValidationMessage =>
+      this.fieldsValidationMessages[NicknameTeamInputValueKey]?.isNotEmpty ??
+      false;
+  bool get hasCitiesTeamValidationMessage =>
+      this.fieldsValidationMessages[CitiesTeamValueKey]?.isNotEmpty ?? false;
 
   String? get nameTeamInputValidationMessage =>
       this.fieldsValidationMessages[NameTeamInputValueKey];
+  String? get nicknameTeamInputValidationMessage =>
+      this.fieldsValidationMessages[NicknameTeamInputValueKey];
+  String? get citiesTeamValidationMessage =>
+      this.fieldsValidationMessages[CitiesTeamValueKey];
 }
 
 extension Methods on FormStateHelper {
+  void setCitiesTeam(String citiesTeam) {
+    this.setData(
+      this.formValueMap..addAll({CitiesTeamValueKey: citiesTeam}),
+    );
+
+    if (_autoTextFieldValidation) {
+      this.validateForm();
+    }
+  }
+
   setNameTeamInputValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[NameTeamInputValueKey] = validationMessage;
+  setNicknameTeamInputValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[NicknameTeamInputValueKey] =
+          validationMessage;
+  setCitiesTeamValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[CitiesTeamValueKey] = validationMessage;
 
   /// Clears text input fields on the Form
   void clearForm() {
     nameTeamInputValue = '';
+    nicknameTeamInputValue = '';
   }
 
   /// Validates text input fields on the Form
   void validateForm() {
     this.setValidationMessages({
       NameTeamInputValueKey: getValidationMessage(NameTeamInputValueKey),
+      NicknameTeamInputValueKey:
+          getValidationMessage(NicknameTeamInputValueKey),
     });
   }
 }
@@ -176,4 +240,6 @@ String? getValidationMessage(String key) {
 void updateValidationData(FormStateHelper model) =>
     model.setValidationMessages({
       NameTeamInputValueKey: getValidationMessage(NameTeamInputValueKey),
+      NicknameTeamInputValueKey:
+          getValidationMessage(NicknameTeamInputValueKey),
     });

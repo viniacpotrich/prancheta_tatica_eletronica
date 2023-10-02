@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:stacked/stacked.dart';
 import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.form.dart';
 import 'package:uuid/uuid.dart';
@@ -8,6 +9,7 @@ import 'team_detail_viewmodel.dart';
 
 @FormView(fields: [
   FormTextField(name: 'nameTeamInput'),
+  FormTextField(name: 'nicknameTeamInput'),
   FormDropdownField(
     name: "citiesTeam",
     items: [
@@ -41,8 +43,76 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
           ),
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      body: Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: NameTeamInputValueKey,
+            ),
+            controller: nameTeamInputController,
+            onChanged: (value) => viewModel.controllerNameInput(
+              value,
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: NicknameTeamInputValueKey,
+            ),
+            controller: nicknameTeamInputController,
+            onChanged: (value) => viewModel.controllerNickNameInput(
+              value,
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => showColorPicker(
+              context,
+              viewModel.picker1Color,
+              viewModel.controllerColor1Team,
+            ),
+            child: Text("color1"),
+          ),
+          ElevatedButton(
+            onPressed: () => showColorPicker(
+              context,
+              viewModel.picker2Color,
+              viewModel.controllerColor2Team,
+            ),
+            child: Text("color1"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  showColorPicker(context, picker, onChengePicker) async {
+    return showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Pick a color!'),
+        content: SingleChildScrollView(
+          child: Column(
+            children: [
+              SlidePicker(
+                pickerColor: picker,
+                onColorChanged: (color) => onChengePicker(color),
+                colorModel: ColorModel.rgb,
+                enableAlpha: false,
+                showParams: true,
+                showIndicator: true,
+                indicatorBorderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(25)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  print("escolheu ");
+                },
+                child: Icon(
+                  Icons.check,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

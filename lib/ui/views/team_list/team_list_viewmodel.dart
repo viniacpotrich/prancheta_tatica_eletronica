@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
+import 'package:tactical_e_clipboard/services/team_service.dart';
 import 'package:uuid/uuid.dart';
 
 class TeamListViewModel extends FutureViewModel {
@@ -50,6 +51,8 @@ class TeamListViewModel extends FutureViewModel {
         null,
       ),
     ];
+    // TeamService teamService = TeamService();
+    // print(teamService.getAll());
   }
 
   void editTeam(int index) {
