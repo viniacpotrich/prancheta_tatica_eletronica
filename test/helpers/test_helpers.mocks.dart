@@ -1907,12 +1907,25 @@ class MockDatabaseService extends _i1.Mock implements _i14.DatabaseService {
         ),
       ) as _i15.Database);
   @override
-  _i18.Future<void> open() => (super.noSuchMethod(
+  _i18.Future<_i15.Database> open() => (super.noSuchMethod(
         Invocation.method(
           #open,
           [],
         ),
-        returnValue: _i18.Future<void>.value(),
-        returnValueForMissingStub: _i18.Future<void>.value(),
-      ) as _i18.Future<void>);
+        returnValue: _i18.Future<_i15.Database>.value(_FakeDatabase_13(
+          this,
+          Invocation.method(
+            #open,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i18.Future<_i15.Database>.value(_FakeDatabase_13(
+          this,
+          Invocation.method(
+            #open,
+            [],
+          ),
+        )),
+      ) as _i18.Future<_i15.Database>);
 }
