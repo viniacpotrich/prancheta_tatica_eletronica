@@ -27,7 +27,7 @@ class TeamRepositoryService implements TeamRepository {
   Future<TeamModel> get(String t) async {
     List<Map<String, dynamic>> results = await dbm.getInstanceDB().rawQuery(
       "SELECT * FROM $_table WHERE idTeam = ?",
-      [t.toString()],
+      [t],
     );
     if (results.isNotEmpty) {
       return TeamModel.fromMap(results.first);

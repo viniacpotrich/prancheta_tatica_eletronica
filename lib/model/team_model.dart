@@ -31,6 +31,7 @@ class TeamModel {
     if (map['idTeam'] != null) {
       team.idTeam = map['idTeam'] as String;
     }
+    return team;
   }
 
   Map<String, Object?> toMap() {
