@@ -65,8 +65,8 @@ class TeamRepositoryService implements TeamRepository {
 
   @override
   Future<TeamModel> put(TeamModel k) async {
-    var mapped = await k.toMap();
     k.idTeam = Uuid().v4(config: V4Options(null, CryptoRNG()));
+    var mapped = await k.toMap();
     if (k.idTeam == null) {
       Exception("UUID cannot be null");
     }

@@ -17,7 +17,10 @@ class TeamListViewModel extends FutureViewModel {
 
   void populate() {
     TeamService teamService = TeamService();
-    teamService.getAll().then((value) => teams = value);
+    teamService.getAll().then((value) {
+      teams = value;
+      rebuildUi();
+    });
   }
 
   void addTeam() {
