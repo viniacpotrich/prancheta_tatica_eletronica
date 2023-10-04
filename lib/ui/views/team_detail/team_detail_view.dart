@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:stacked/stacked.dart';
+import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.form.dart';
-import 'package:uuid/uuid.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 import 'team_detail_viewmodel.dart';
@@ -22,9 +21,15 @@ import 'team_detail_viewmodel.dart';
 ])
 class TeamDetailView extends StackedView<TeamDetailViewModel>
     with $TeamDetailView {
-  const TeamDetailView({required this.teamModelID, Key? key}) : super(key: key);
+  const TeamDetailView({required this.teamModel, Key? key}) : super(key: key);
 
-  final Uuid teamModelID;
+  final TeamModel? teamModel;
+
+  @override
+  void onViewModelReady(viewModel) {
+    syncFormWithViewModel(viewModel);
+    viewModel.getTeam(teamModel);
+  }
 
   @override
   Widget builder(
@@ -38,7 +43,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
         title: Text("Team Detail"),
         actions: [
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => viewModel.submit(),
             child: Icon(Icons.check),
           ),
         ],
@@ -49,7 +54,8 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
             decoration: const InputDecoration(
               labelText: NameTeamInputValueKey,
             ),
-            controller: nameTeamInputController,
+            // controller: nameTeamInputController,
+            initialValue: viewModel.teamModelTemp.nameTeam,
             onChanged: (value) => viewModel.controllerNameInput(
               value,
             ),
@@ -58,61 +64,50 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
             decoration: const InputDecoration(
               labelText: NicknameTeamInputValueKey,
             ),
-            controller: nicknameTeamInputController,
+            // controller: nicknameTeamInputController,
+            initialValue: viewModel.teamModelTemp.nicknameTeam,
             onChanged: (value) => viewModel.controllerNickNameInput(
               value,
             ),
           ),
-          ElevatedButton(
-            onPressed: () => showColorPicker(
-              context,
-              viewModel.picker1Color,
-              viewModel.controllerColor1Team,
-            ),
-            child: Text("color1"),
-          ),
-          ElevatedButton(
-            onPressed: () => showColorPicker(
-              context,
-              viewModel.picker2Color,
-              viewModel.controllerColor2Team,
-            ),
-            child: Text("color1"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  showColorPicker(context, picker, onChengePicker) async {
-    return showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Pick a color!'),
-        content: SingleChildScrollView(
-          child: Column(
+          Row(
             children: [
-              SlidePicker(
-                pickerColor: picker,
-                onColorChanged: (color) => onChengePicker(color),
-                colorModel: ColorModel.rgb,
-                enableAlpha: false,
-                showParams: true,
-                showIndicator: true,
-                indicatorBorderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(25)),
+              Container(
+                height: 100,
+                width: 100,
+                color: viewModel.picker1Color,
               ),
               ElevatedButton(
-                onPressed: () {
-                  print("escolheu ");
-                },
-                child: Icon(
-                  Icons.check,
+                onPressed: () => viewModel.showColorPicker(
+                  context,
+                  viewModel.picker1Color,
+                  viewModel.controllerColor1Team,
                 ),
-              )
+                child: Text("color1"),
+              ),
             ],
           ),
-        ),
+          Row(
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                color: viewModel.picker2Color,
+              ),
+              ElevatedButton(
+                onPressed: () => viewModel.showColorPicker(
+                  context,
+                  viewModel.picker2Color,
+                  viewModel.controllerColor2Team,
+                ),
+                child: const Text("color2"),
+              ),
+            ],
+          ),
+          Container(
+            child: viewModel.getImage(),
+          )
+        ],
       ),
     );
   }

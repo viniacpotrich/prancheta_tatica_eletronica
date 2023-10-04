@@ -24,7 +24,7 @@ class TeamListView extends StackedView<TeamListViewModel> {
             child: Icon(Icons.search),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => viewModel.addTeam(),
             child: Icon(Icons.add),
           ),
         ],
@@ -36,7 +36,7 @@ class TeamListView extends StackedView<TeamListViewModel> {
             children: [
               Expanded(
                 flex: 8,
-                child: Text(viewModel.teams[index].nameTeam),
+                child: Text(viewModel.teams[index].nameTeam!),
               ),
               Expanded(
                 flex: 1,

@@ -1,66 +1,127 @@
-import 'dart:ui';
-
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:stacked/stacked.dart';
-import 'package:uuid/uuid.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:tactical_e_clipboard/app/app.locator.dart';
+import 'package:tactical_e_clipboard/model/team_model.dart';
+import 'package:tactical_e_clipboard/services/team_service.dart';
 
 class TeamDetailViewModel extends FutureViewModel
     with FormStateHelper
     implements FormViewModel {
   // create some values
-  Color picker1Color = Color(0xff443a49);
-  Color picker2Color = Color(0xff443a49);
+  final _navigationService = locator<NavigationService>();
+  late Color picker1Color;
+  late Color picker2Color;
+  bool isEditing = false;
 
-// ValueChanged<Color> callback
-  void changeColor(Color pickerColor, Color color) {
-    pickerColor = color;
-    rebuildUi();
-  }
+  late TeamModel teamModelTemp;
 
   @override
   Future futureToRun() async {
     // TODO: implement futureToRun
   }
 
-  void getTeam(Uuid uuid) {
-    print(uuid);
-    //TODO pesquisar o player pelo uuid no banco
+  void getTeam(TeamModel? teamModel) {
+    if (teamModel != null) {
+      isEditing = true;
+      teamModelTemp = teamModel;
+      picker1Color = Color(int.parse(teamModelTemp.colorPrimaryTeam!));
+      picker2Color = Color(int.parse(teamModelTemp.colorSecondaryTeam!));
+    } else {
+      teamModelTemp = TeamModel();
+      picker1Color = const Color.fromARGB(0xFF, 0x33, 0x33, 0x33);
+      picker2Color = const Color.fromARGB(0xFF, 0x33, 0x33, 0x33);
+    }
   }
 
   void controllerNameInput(String text) {
-    print("team controller name  = $text");
+    teamModelTemp.nameTeam = text;
   }
 
   void controllerNickNameInput(String text) {
-    print("team controller nick name  = $text");
+    teamModelTemp.nicknameTeam = text;
   }
 
   void controllerColor1Team(Color color) {
-    print(color);
-    changeColor(picker1Color, color);
+    picker1Color = color;
+    _navigationService.back();
+    rebuildUi();
   }
 
   void controllerColor2Team(Color color) {
-    print(color);
-    changeColor(picker2Color, color);
-  }
-
-  void controllerPreferredFootPlayerDropDown(String? text) {
-    if (text != null && text.isNotEmpty) {
-      //TODO
-      print(text);
-    }
-  }
-
-  void controllerTeamDropDown(String? text) {
-    if (text != null && text.isNotEmpty) {
-      //TODO
-      print(text);
-    }
+    picker2Color = color;
+    _navigationService.back();
+    rebuildUi();
   }
 
   submit() {
-    print("submitou");
-    //salve
-    //retorna
+    teamModelTemp.colorPrimaryTeam = picker1Color.value.toString();
+    teamModelTemp.colorSecondaryTeam = picker2Color.value.toString();
+    teamModelTemp.cityTeam = "cidade";
+    TeamService teamService = TeamService();
+    if (isEditing) {
+      teamService.update(teamModelTemp);
+    } else {
+      teamService.put(teamModelTemp);
+    }
+    _navigationService.back();
+    rebuildUi(); //TODO buscar valores no bancos
+  }
+
+  void pickFile() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      teamModelTemp.logoTeam = file;
+      rebuildUi();
+    } else {
+      // User canceled the picker
+    }
+  }
+
+  Widget getImage() {
+    if (teamModelTemp.logoTeam == null) {
+      return InkWell(onTap: () => pickFile(), child: const Placeholder());
+    } else {
+      return Image.file(teamModelTemp.logoTeam!);
+    }
+  }
+
+  Future<void> showColorPicker(context, picker, onChengePicker) async {
+    return showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Pick a color!'),
+        content: SingleChildScrollView(
+          child: Column(
+            children: [
+              SlidePicker(
+                pickerColor: picker,
+                onColorChanged: (color) => picker = color,
+                colorModel: ColorModel.rgb,
+                enableAlpha: false,
+                showParams: true,
+                showIndicator: true,
+                indicatorBorderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(25)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  onChengePicker(picker);
+                },
+                child: const Icon(
+                  Icons.check,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

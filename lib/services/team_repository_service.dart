@@ -30,7 +30,7 @@ class TeamRepositoryService implements TeamRepository {
       [t],
     );
     if (results.isNotEmpty) {
-      return TeamModel.fromMap(results.first);
+      return await TeamModel.fromMap(results.first);
     } else {
       throw Exception('No record found for Uuid: $t');
     }
@@ -38,35 +38,41 @@ class TeamRepositoryService implements TeamRepository {
 
   @override
   Future<List<TeamModel>> getAll() async {
-    return dbm
-        .getInstanceDB()
-        .query(_table)
-        .asStream()
-        .map((list) => list.map((v) => TeamModel.fromMap(v)))
-        .handleError((err) => print("Error: $err"))
-        .toList() as Future<List<TeamModel>>;
+    var data = await dbm.getInstanceDB().query(_table);
+    List<TeamModel> result = []; // specify the type here
+    for (var element in data) {
+      result.add(await TeamModel.fromMap(element));
+    }
+    return result; // no need for 'as' here
   }
 
   @override
   Future<TeamModel> patch(TeamModel k) async {
-    await dbm.getInstanceDB().update(
-      _table,
-      k.toMap(),
-      where: "idTeam = ?",
-      whereArgs: [k.idTeam.toString()],
-    );
+    var mapped = await k.toMap();
+
+    try {
+      await dbm.getInstanceDB().update(
+        _table,
+        mapped,
+        where: "idTeam = ?",
+        whereArgs: [k.idTeam.toString()],
+      );
+    } catch (e) {
+      print(e);
+    }
     return k;
   }
 
   @override
   Future<TeamModel> put(TeamModel k) async {
+    var mapped = await k.toMap();
     k.idTeam = Uuid().v4(config: V4Options(null, CryptoRNG()));
     if (k.idTeam == null) {
       Exception("UUID cannot be null");
     }
     await dbm.getInstanceDB().insert(
           _table,
-          k.toMap(),
+          mapped,
           conflictAlgorithm: ConflictAlgorithm.replace,
         );
     return k;
