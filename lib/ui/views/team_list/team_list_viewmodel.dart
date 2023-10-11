@@ -23,16 +23,18 @@ class TeamListViewModel extends FutureViewModel {
     });
   }
 
-  void addTeam() {
-    _navigationService.navigateToTeamDetailView(
+  Future<void> addTeam() async {
+    await _navigationService.navigateToTeamDetailView(
       teamModel: null,
     );
+    await futureToRun();
   }
 
-  void editTeam(int index) {
-    _navigationService.navigateToTeamDetailView(
+  Future<void> editTeam(int index) async {
+    await _navigationService.navigateToTeamDetailView(
       teamModel: teams.elementAt(index),
     );
+    await futureToRun();
   }
 
   void deleteTeam(int index) {

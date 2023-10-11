@@ -48,66 +48,68 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
           ),
         ],
       ),
-      body: Column(
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: NameTeamInputValueKey,
-            ),
-            // controller: nameTeamInputController,
-            initialValue: viewModel.teamModelTemp.nameTeam,
-            onChanged: (value) => viewModel.controllerNameInput(
-              value,
-            ),
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: NicknameTeamInputValueKey,
-            ),
-            // controller: nicknameTeamInputController,
-            initialValue: viewModel.teamModelTemp.nicknameTeam,
-            onChanged: (value) => viewModel.controllerNickNameInput(
-              value,
-            ),
-          ),
-          Row(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                color: viewModel.picker1Color,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: NameTeamInputValueKey,
               ),
-              ElevatedButton(
-                onPressed: () => viewModel.showColorPicker(
-                  context,
-                  viewModel.picker1Color,
-                  viewModel.controllerColor1Team,
+              // controller: nameTeamInputController,
+              initialValue: viewModel.teamModelTemp.nameTeam,
+              onChanged: (value) => viewModel.controllerNameInput(
+                value,
+              ),
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: NicknameTeamInputValueKey,
+              ),
+              // controller: nicknameTeamInputController,
+              initialValue: viewModel.teamModelTemp.nicknameTeam,
+              onChanged: (value) => viewModel.controllerNickNameInput(
+                value,
+              ),
+            ),
+            Row(
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: viewModel.picker1Color,
                 ),
-                child: Text("color1"),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                color: viewModel.picker2Color,
-              ),
-              ElevatedButton(
-                onPressed: () => viewModel.showColorPicker(
-                  context,
-                  viewModel.picker2Color,
-                  viewModel.controllerColor2Team,
+                ElevatedButton(
+                  onPressed: () => viewModel.showColorPicker(
+                    context,
+                    viewModel.picker1Color,
+                    viewModel.controllerColor1Team,
+                  ),
+                  child: Text("color1"),
                 ),
-                child: const Text("color2"),
-              ),
-            ],
-          ),
-          Container(
-            child: viewModel.getImage(),
-          )
-        ],
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: viewModel.picker2Color,
+                ),
+                ElevatedButton(
+                  onPressed: () => viewModel.showColorPicker(
+                    context,
+                    viewModel.picker2Color,
+                    viewModel.controllerColor2Team,
+                  ),
+                  child: const Text("color2"),
+                ),
+              ],
+            ),
+            Container(
+              child: viewModel.getImage(),
+            )
+          ],
+        ),
       ),
     );
   }

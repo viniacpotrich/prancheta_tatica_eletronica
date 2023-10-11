@@ -1,34 +1,33 @@
-import 'package:tactical_e_clipboard/model/config_model.dart';
+import 'package:tactical_e_clipboard/model/parameter_model.dart';
 import 'package:tactical_e_clipboard/repository/repository.dart';
-import 'package:uuid/uuid.dart';
 
-interface class ConfigRepository
-    extends RepositoryInterface<Uuid, ConfigModel> {
+interface class ParameterRepository
+    extends RepositoryInterface<String, ParameterModel> {
   @override
   get dbm => throw UnimplementedError();
 
   @override
-  Future<bool> delete(Uuid t) {
+  Future<bool> delete(String t) {
     throw UnimplementedError();
   }
 
   @override
-  Future<ConfigModel> get(Uuid t) {
+  Future<ParameterModel> get(String t) {
     throw UnimplementedError();
   }
 
   @override
-  Future<List<ConfigModel>> getAll() {
+  Future<List<ParameterModel>> getAll() {
     throw UnimplementedError();
   }
 
   @override
-  Future<ConfigModel> patch(ConfigModel k) {
+  Future<ParameterModel> patch(ParameterModel k) {
     throw UnimplementedError();
   }
 
   @override
-  Future<ConfigModel> put(ConfigModel k) {
+  Future<ParameterModel> put(ParameterModel k) {
     throw UnimplementedError();
   }
 }

@@ -6,15 +6,16 @@ import 'package:tactical_e_clipboard/services/player_service.dart';
 import 'package:tactical_e_clipboard/services/formation_service.dart';
 import 'package:tactical_e_clipboard/services/team_service.dart';
 import 'package:tactical_e_clipboard/services/pattern_of_play_service.dart';
-import 'package:tactical_e_clipboard/services/config_service.dart';
+import 'package:tactical_e_clipboard/services/parameter_service.dart';
 import 'package:tactical_e_clipboard/services/player_contract_service.dart';
-import 'package:tactical_e_clipboard/services/config_repository_service.dart';
+import 'package:tactical_e_clipboard/services/parameter_repository_service.dart';
 import 'package:tactical_e_clipboard/services/formation_repository_service.dart';
 import 'package:tactical_e_clipboard/services/pattern_of_play_repository_service.dart';
 import 'package:tactical_e_clipboard/services/player_contract_repository_service.dart';
 import 'package:tactical_e_clipboard/services/player_repository_service.dart';
 import 'package:tactical_e_clipboard/services/team_repository_service.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
+import 'package:tactical_e_clipboard/services/password_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -27,9 +28,10 @@ import 'test_helpers.mocks.dart';
   MockSpec<FormationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TeamService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<PatternOfPlayService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<ConfigService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ParameterService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<PlayerContractService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<ConfigRepositoryService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ParameterRepositoryService>(
+      onMissingStub: OnMissingStub.returnDefault),
   MockSpec<FormationRepositoryService>(
       onMissingStub: OnMissingStub.returnDefault),
   MockSpec<PatternOfPlayRepositoryService>(
@@ -39,6 +41,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<PlayerRepositoryService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TeamRepositoryService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DatabaseService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PasswordService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -58,6 +61,7 @@ void registerServices() {
   getAndRegisterPlayerRepositoryService();
   getAndRegisterTeamRepositoryService();
   getAndRegisterDatabaseService();
+  getAndRegisterPasswordService();
 // @stacked-mock-register
 }
 
@@ -140,9 +144,9 @@ MockPatternOfPlayService getAndRegisterPatternOfPlayService() {
 }
 
 MockConfigService getAndRegisterConfigService() {
-  _removeRegistrationIfExists<ConfigService>();
+  _removeRegistrationIfExists<ParameterService>();
   final service = MockConfigService();
-  locator.registerSingleton<ConfigService>(service);
+  locator.registerSingleton<ParameterService>(service);
   return service;
 }
 
@@ -154,9 +158,9 @@ MockPlayerContractService getAndRegisterPlayerContractService() {
 }
 
 MockConfigRepositoryService getAndRegisterConfigRepositoryService() {
-  _removeRegistrationIfExists<ConfigRepositoryService>();
+  _removeRegistrationIfExists<ParameterRepositoryService>();
   final service = MockConfigRepositoryService();
-  locator.registerSingleton<ConfigRepositoryService>(service);
+  locator.registerSingleton<ParameterRepositoryService>(service);
   return service;
 }
 
@@ -201,6 +205,13 @@ MockDatabaseService getAndRegisterDatabaseService() {
   _removeRegistrationIfExists<DatabaseService>();
   final service = MockDatabaseService();
   locator.registerSingleton<DatabaseService>(service);
+  return service;
+}
+
+MockPasswordService getAndRegisterPasswordService() {
+  _removeRegistrationIfExists<PasswordService>();
+  final service = MockPasswordService();
+  locator.registerSingleton<PasswordService>(service);
   return service;
 }
 // @stacked-mock-create

@@ -5,7 +5,6 @@ import 'team_list_viewmodel.dart';
 
 class TeamListView extends StackedView<TeamListViewModel> {
   const TeamListView({Key? key}) : super(key: key);
-
   @override
   Widget builder(
     BuildContext context,

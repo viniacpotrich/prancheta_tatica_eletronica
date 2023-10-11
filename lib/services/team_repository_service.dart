@@ -38,18 +38,22 @@ class TeamRepositoryService implements TeamRepository {
 
   @override
   Future<List<TeamModel>> getAll() async {
-    var data = await dbm.getInstanceDB().query(_table);
-    List<TeamModel> result = []; // specify the type here
-    for (var element in data) {
-      result.add(await TeamModel.fromMap(element));
+    try {
+      var data = await dbm.getInstanceDB().query(_table);
+      List<TeamModel> result = [];
+      for (var element in data) {
+        result.add(await TeamModel.fromMap(element));
+      }
+      return result;
+    } catch (e) {
+      print(e);
+      return [];
     }
-    return result; // no need for 'as' here
   }
 
   @override
   Future<TeamModel> patch(TeamModel k) async {
     var mapped = await k.toMap();
-
     try {
       await dbm.getInstanceDB().update(
         _table,

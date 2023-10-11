@@ -12,7 +12,9 @@ class StartupViewModel extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 3));
 
     DatabaseService databaseManager = DatabaseService();
-    databaseManager.open().whenComplete(() => _navigationService.replaceWithHomeView());
+    databaseManager
+        .open()
+        .whenComplete(() => _navigationService.replaceWithHomeView());
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic
   }

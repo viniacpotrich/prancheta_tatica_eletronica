@@ -2,6 +2,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/model/environment.dart';
+import 'package:tactical_e_clipboard/model/parameter_model.dart';
 
 class DatabaseService {
   static final DatabaseService _databaseManager = DatabaseService._internal();
@@ -29,8 +30,7 @@ class DatabaseService {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute(
-        '''
+    await db.execute('''
      CREATE TABLE IF NOT EXISTS Team (
       idTeam TEXT PRIMARY KEY,
       nameTeam TEXT NOT NULL,
@@ -41,5 +41,18 @@ class DatabaseService {
       logoTeam BLOB
     );
     ''');
+    await db.execute('''
+     CREATE TABLE IF NOT EXISTS Params (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
+    ''');
+    await db.insert(
+      "Params",
+      ParameterModel(
+        key: "password",
+        value: "",
+      ).toMap(),
+    );
   }
 }
