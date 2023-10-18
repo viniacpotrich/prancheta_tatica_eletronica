@@ -45,6 +45,10 @@ class TeamDetailViewModel extends FutureViewModel
     teamModelTemp.nicknameTeam = text;
   }
 
+   void controllerCitiesTeamInput(String text) {
+    teamModelTemp.nicknameTeam = text;
+  }
+
   void controllerColor1Team(Color color) {
     picker1Color = color;
     _navigationService.back();
@@ -60,7 +64,7 @@ class TeamDetailViewModel extends FutureViewModel
   submit() {
     teamModelTemp.colorPrimaryTeam = picker1Color.value.toString();
     teamModelTemp.colorSecondaryTeam = picker2Color.value.toString();
-    teamModelTemp.cityTeam = "cidade";
+    teamModelTemp.cityTeam = "";
     TeamService teamService = TeamService();
     if (isEditing) {
       teamService.update(teamModelTemp);

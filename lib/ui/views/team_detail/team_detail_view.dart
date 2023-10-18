@@ -9,14 +9,8 @@ import 'team_detail_viewmodel.dart';
 @FormView(fields: [
   FormTextField(name: 'nameTeamInput'),
   FormTextField(name: 'nicknameTeamInput'),
-  FormDropdownField(
-    name: "citiesTeam",
-    items: [
-      StaticDropdownItem(title: "city1", value: "1"),
-      StaticDropdownItem(title: "city2", value: "2"),
-      StaticDropdownItem(title: "city3", value: "3"),
-      StaticDropdownItem(title: "city4", value: "4"),
-    ],
+  FormTextField(
+    name: "citiesTeamInput",
   ),
 ])
 class TeamDetailView extends StackedView<TeamDetailViewModel>
@@ -68,6 +62,16 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
               // controller: nicknameTeamInputController,
               initialValue: viewModel.teamModelTemp.nicknameTeam,
               onChanged: (value) => viewModel.controllerNickNameInput(
+                value,
+              ),
+            ),
+             TextFormField(
+              decoration: const InputDecoration(
+                labelText: NicknameTeamInputValueKey,
+              ),
+              // controller: nicknameTeamInputController,
+              initialValue: viewModel.teamModelTemp.cityTeam,
+              onChanged: (value) => viewModel.controllerCitiesTeamInput(
                 value,
               ),
             ),
