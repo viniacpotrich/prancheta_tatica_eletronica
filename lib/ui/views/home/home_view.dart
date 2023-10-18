@@ -27,7 +27,7 @@ class HomeView extends StackedView<HomeViewModel> {
         itemBuilder: (context, index) => Container(
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
-            color: Colors.amber,
+            color: Colors.indigo,
             borderRadius: BorderRadius.all(
               Radius.circular(50),
             ),

@@ -1943,4 +1943,32 @@ class MockDatabaseService extends _i1.Mock implements _i8.DatabaseService {
 /// A class which mocks [PasswordService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPasswordService extends _i1.Mock implements _i27.PasswordService {}
+class MockPasswordService extends _i1.Mock implements _i27.PasswordService {
+  @override
+  _i12.Future<bool> hasPassword() => (super.noSuchMethod(
+        Invocation.method(
+          #hasPassword,
+          [],
+        ),
+        returnValue: _i12.Future<bool>.value(false),
+        returnValueForMissingStub: _i12.Future<bool>.value(false),
+      ) as _i12.Future<bool>);
+  @override
+  _i12.Future<void> updatePassword(String? str) => (super.noSuchMethod(
+        Invocation.method(
+          #updatePassword,
+          [str],
+        ),
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
+  @override
+  _i12.Future<bool> isValid(String? enteredPassword) => (super.noSuchMethod(
+        Invocation.method(
+          #isValid,
+          [enteredPassword],
+        ),
+        returnValue: _i12.Future<bool>.value(false),
+        returnValueForMissingStub: _i12.Future<bool>.value(false),
+      ) as _i12.Future<bool>);
+}

@@ -5,6 +5,8 @@ import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+import 'app/app.dialogs.dart';
+
 void _setDataBaseFactory() {
   setupBottomSheetUi();
   sqfliteFfiInit();
@@ -13,6 +15,8 @@ void _setDataBaseFactory() {
 
 Future<void> main() async {
   await setupLocator(); //TODO Remover daqui e colocar na inicialização
+  setupDialogUi();
+  setupBottomSheetUi();
   WidgetsFlutterBinding.ensureInitialized();
   _setDataBaseFactory();
   runApp(const MainApp());

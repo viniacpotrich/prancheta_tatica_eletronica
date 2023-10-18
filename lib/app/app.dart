@@ -27,6 +27,7 @@ import 'package:tactical_e_clipboard/services/player_repository_service.dart';
 import 'package:tactical_e_clipboard/services/team_repository_service.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
 import 'package:tactical_e_clipboard/services/password_service.dart';
+import 'package:tactical_e_clipboard/ui/dialogs/password/password_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -70,6 +71,7 @@ import 'package:tactical_e_clipboard/services/password_service.dart';
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: AlertDialogDialog),
+    StackedDialog(classType: PasswordDialog),
 // @stacked-dialog
   ],
 )
