@@ -14,7 +14,7 @@ void _setDataBaseFactory() {
 }
 
 Future<void> main() async {
-  await setupLocator(); //TODO Remover daqui e colocar na inicialização
+  await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
   WidgetsFlutterBinding.ensureInitialized();

@@ -20,28 +20,28 @@ class PlayerListViewModel extends FutureViewModel {
   void populate() {
     players = [
       PlayerModel(
-        Uuid(),
+        const Uuid(),
         "namePlayer 1",
         "nicknamePlayer 1",
         [SoccerPositionEnum.attackingMidfielder],
         PreferredFootEnum.left,
       ),
       PlayerModel(
-        Uuid(),
+        const Uuid(),
         "namePlayer 2",
         "nicknamePlayer 2",
         [SoccerPositionEnum.attackingMidfielder],
         PreferredFootEnum.left,
       ),
       PlayerModel(
-        Uuid(),
+        const Uuid(),
         "namePlayer 3",
         "nicknamePlayer 3",
         [SoccerPositionEnum.attackingMidfielder],
         PreferredFootEnum.left,
       ),
       PlayerModel(
-        Uuid(),
+        const Uuid(),
         "namePlayer 4",
         "nicknamePlayer 4",
         [SoccerPositionEnum.attackingMidfielder],

@@ -52,7 +52,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
         actions: [
           ElevatedButton(
             onPressed: viewModel.submit,
-            child: Icon(Icons.check),
+            child: const Icon(Icons.check),
           ),
         ],
       ),
@@ -91,7 +91,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                   .toList()
                   .map((val) => DropdownMenuItem(
                         value: val,
-                        child: Text("${val}"),
+                        child: Text(val),
                       ))
                   .toList(),
             ),
@@ -126,7 +126,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                   .toList()
                   .map((val) => DropdownMenuItem(
                         value: val,
-                        child: Text("${val}"),
+                        child: Text(val),
                       ))
                   .toList(),
             ),

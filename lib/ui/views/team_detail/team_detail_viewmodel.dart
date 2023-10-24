@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class TeamDetailViewModel extends FutureViewModel
     teamModelTemp.nicknameTeam = text;
   }
 
-   void controllerCitiesTeamInput(String text) {
+  void controllerCitiesTeamInput(String text) {
     teamModelTemp.nicknameTeam = text;
   }
 
@@ -81,7 +82,8 @@ class TeamDetailViewModel extends FutureViewModel
 
     if (result != null) {
       File file = File(result.files.single.path!);
-      teamModelTemp.logoTeam = file;
+      var base64 = await TeamModel.fileToBase64(file);
+      teamModelTemp.logoTeam = await TeamModel.base64ToImage(base64);
       rebuildUi();
     } else {
       // User canceled the picker
@@ -92,7 +94,12 @@ class TeamDetailViewModel extends FutureViewModel
     if (teamModelTemp.logoTeam == null) {
       return InkWell(onTap: () => pickFile(), child: const Placeholder());
     } else {
-      return Image.file(teamModelTemp.logoTeam!);
+      return InkWell(
+          onTap: () => pickFile(),
+          child: RawImage(
+            image: teamModelTemp.logoTeam,
+            fit: BoxFit.cover,
+          ));
     }
   }
 

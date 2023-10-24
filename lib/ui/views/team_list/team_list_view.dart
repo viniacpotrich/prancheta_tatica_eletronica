@@ -14,17 +14,17 @@ class TeamListView extends StackedView<TeamListViewModel> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Times",
         ),
         actions: [
           ElevatedButton(
             onPressed: () {},
-            child: Icon(Icons.search),
+            child: const Icon(Icons.search),
           ),
           ElevatedButton(
             onPressed: () => viewModel.addTeam(),
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
         ],
       ),

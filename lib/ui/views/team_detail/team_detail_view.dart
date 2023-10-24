@@ -34,11 +34,11 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text("Team Detail"),
+        title: const Text("Team Detail"),
         actions: [
           ElevatedButton(
             onPressed: () => viewModel.submit(),
-            child: Icon(Icons.check),
+            child: const Icon(Icons.check),
           ),
         ],
       ),
@@ -67,7 +67,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
             ),
              TextFormField(
               decoration: const InputDecoration(
-                labelText: NicknameTeamInputValueKey,
+                labelText: CitiesTeamInputValueKey,
               ),
               // controller: nicknameTeamInputController,
               initialValue: viewModel.teamModelTemp.cityTeam,
@@ -88,7 +88,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                     viewModel.picker1Color,
                     viewModel.controllerColor1Team,
                   ),
-                  child: Text("color1"),
+                  child: const Text("color1"),
                 ),
               ],
             ),

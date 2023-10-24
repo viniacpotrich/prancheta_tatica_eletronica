@@ -27,7 +27,7 @@ class PlayerRepositoryService implements PlayerRepository {
         .rawQuery("SELECT sqlite_version();")
         .then((value) => print(value));
     return [
-      PlayerModel(Uuid(), "Teste", "TesteNicname",
+      PlayerModel(const Uuid(), "Teste", "TesteNicname",
           [SoccerPositionEnum.goalkeeper], PreferredFootEnum.left)
     ];
   }
