@@ -5,7 +5,7 @@ import 'package:tactical_e_clipboard/services/parameter_service.dart';
 import '../app/app.locator.dart';
 
 class PasswordService {
-  var _parameterService = locator<ParameterService>();
+  final _parameterService = locator<ParameterService>();
 
   Future<bool> hasPassword() async {
     bool result = false;

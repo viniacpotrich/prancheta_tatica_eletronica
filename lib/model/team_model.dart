@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:ui';
 
 class TeamModel {
   String? nameTeam;
@@ -8,7 +9,7 @@ class TeamModel {
   String? colorPrimaryTeam;
   String? colorSecondaryTeam;
   String? cityTeam;
-  File? logoTeam;
+  Image? logoTeam;
   String? idTeam;
 
   TeamModel({
@@ -21,8 +22,8 @@ class TeamModel {
   });
 
   static fromMap(Map<String, Object?> map) async {
-    var file = map['logoTeam'] != null
-        ? await base64ToFile(map['logoTeam'] as String, map['idTeam'] as String)
+    var image = map['logoTeam'] != null
+        ? await base64ToImage(map['logoTeam'] as String)
         : null;
 
     var team = TeamModel(
@@ -31,7 +32,7 @@ class TeamModel {
         colorPrimaryTeam: map['colorPrimaryTeam'] as String,
         colorSecondaryTeam: map['colorSecondaryTeam'] as String,
         cityTeam: map['cityTeam'] as String,
-        logoTeam: file);
+        logoTeam: image);
     if (map['idTeam'] != null) {
       team.idTeam = map['idTeam'] as String;
     }
@@ -47,27 +48,28 @@ class TeamModel {
       'colorPrimaryTeam': colorPrimaryTeam,
       'colorSecondaryTeam': colorSecondaryTeam,
       'cityTeam': cityTeam,
-      'idTeam': idTeam, // You might need to convert this to a suitable format
-      'logoTeam': blob, // You might need to convert this to a suitable format
+      'idTeam': idTeam,
+      'logoTeam': blob,
     };
   }
 
-  Future<String> imageToBase64(File imageFile) async {
-    List<int> imageBytes = await imageFile.readAsBytesSync();
+  static Future<String> fileToBase64(File imageFile) async {
+    List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
     return base64Image;
   }
 
-  // static File base64ToImage(String base64String) {
-  //   Uint8List bytes = base64Decode(base64String);
-  //   File file = File.fromRawPath(bytes);
-  //   return file;
-  // }
+  static Future<String?> imageToBase64(Image image) async {
+    var byteData = await image.toByteData(format: ImageByteFormat.png);
+    Uint8List? pngBytes = byteData?.buffer.asUint8List();
+    String? base64Image = pngBytes != null ? base64Encode(pngBytes) : null;
+    return base64Image;
+  }
 
-  static Future<File> base64ToFile(String base64String, String filePath) async {
+  static Future<Image> base64ToImage(String base64String) async {
     Uint8List bytes = base64Decode(base64String);
-    File imgFile = File(filePath);
-    await imgFile.writeAsBytes(bytes);
-    return imgFile;
+    var codec = await instantiateImageCodec(bytes);
+    FrameInfo frameInfo = await codec.getNextFrame();
+    return frameInfo.image;
   }
 }
