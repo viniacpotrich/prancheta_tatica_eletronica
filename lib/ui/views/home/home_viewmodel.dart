@@ -64,6 +64,10 @@ class HomeViewModel extends FutureViewModel {
         title: "Formations",
         callBack: _navigationService.navigateToFormationListView,
       ),
+      ItemHomeMenuModel(
+        title: "Contracts",
+        callBack: _navigationService.navigateToPlayerContractListView,
+      ),
     ];
   }
 

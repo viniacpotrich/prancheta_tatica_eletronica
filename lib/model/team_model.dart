@@ -4,15 +4,16 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 class TeamModel {
+  String? idTeam;
   String? nameTeam;
   String? nicknameTeam;
   String? colorPrimaryTeam;
   String? colorSecondaryTeam;
   String? cityTeam;
   Image? logoTeam;
-  String? idTeam;
 
   TeamModel({
+    this.idTeam = '',
     this.nameTeam = '',
     this.nicknameTeam = '',
     this.colorPrimaryTeam = '',
@@ -43,12 +44,12 @@ class TeamModel {
     var blob = await imageToBase64(logoTeam!);
 
     return {
+      'idTeam': idTeam,
       'nameTeam': nameTeam,
       'nicknameTeam': nicknameTeam,
       'colorPrimaryTeam': colorPrimaryTeam,
       'colorSecondaryTeam': colorSecondaryTeam,
       'cityTeam': cityTeam,
-      'idTeam': idTeam,
       'logoTeam': blob,
     };
   }

@@ -7,7 +7,6 @@ import 'package:tactical_e_clipboard/ui/dialogs/password/password_dialog.form.da
 
 import 'password_dialog_model.dart';
 
-
 @FormView(fields: [
   FormTextField(name: 'passwordInput'),
 ])

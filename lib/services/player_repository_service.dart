@@ -11,12 +11,31 @@ class PlayerRepositoryService implements PlayerRepository {
   DatabaseService get dbm => locator<DatabaseService>();
 
   @override
-  Future<PlayerModel> get(Uuid t) async {
-    throw UnimplementedError();
+  Future<PlayerModel> get(String t) async {
+    final List<Map<String, dynamic>> maps =
+        await dbm.getInstanceDB().rawQuery('''
+      SELECT * FROM Player
+      LEFT JOIN PlayerPositions ON Player.idPlayer = PlayerPositions.idPlayer
+      WHERE Player.idPlayer = ?
+    ''', [t]);
+
+    if (maps.isNotEmpty) {
+      return PlayerModel(
+        maps[0]['idPlayer'],
+        maps[0]['namePlayer'],
+        maps[0]['nicknamePlayer'],
+        (maps)
+            .map((map) => SoccerPositionEnum.values[map['position']])
+            .toList(),
+        PreferredFootEnum.values[maps[0]['preferredFootPlayer']],
+      );
+    }
+
+    throw Exception('ID $t not found');
   }
 
   @override
-  Future<bool> delete(Uuid k) {
+  Future<bool> delete(String k) {
     throw UnimplementedError();
   }
 

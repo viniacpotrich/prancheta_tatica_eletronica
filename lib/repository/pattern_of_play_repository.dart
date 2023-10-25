@@ -1,19 +1,18 @@
 import 'package:tactical_e_clipboard/model/pattern_of_play_model.dart';
 import 'package:tactical_e_clipboard/repository/repository.dart';
-import 'package:uuid/uuid.dart';
 
 interface class PatternOfPlayRepository
-    extends RepositoryInterface<Uuid, PatternOfPlayModel> {
+    extends RepositoryInterface<String, PatternOfPlayModel> {
   @override
   get dbm => throw UnimplementedError();
 
   @override
-  Future<bool> delete(Uuid t) {
+  Future<bool> delete(String t) {
     throw UnimplementedError();
   }
 
   @override
-  Future<PatternOfPlayModel> get(Uuid t) {
+  Future<PatternOfPlayModel> get(String t) {
     throw UnimplementedError();
   }
 

@@ -7,6 +7,7 @@ import 'package:tactical_e_clipboard/services/team_service.dart';
 
 class TeamListViewModel extends FutureViewModel {
   final _navigationService = locator<NavigationService>();
+  final _teamService = locator<TeamService>();
 
   List<TeamModel> teams = [];
 
@@ -16,8 +17,7 @@ class TeamListViewModel extends FutureViewModel {
   }
 
   void populate() {
-    TeamService teamService = TeamService();
-    teamService.getAll().then((value) {
+    _teamService.getAll().then((value) {
       teams = value;
       rebuildUi();
     });
@@ -38,8 +38,7 @@ class TeamListViewModel extends FutureViewModel {
   }
 
   void deleteTeam(int index) {
-    TeamService teamService = TeamService();
-    teamService.delete(teams.elementAt(index).idTeam!).then((_) {
+    _teamService.delete(teams.elementAt(index).idTeam!).then((_) {
       teams.removeAt(index); //TODO consultar denovo
       rebuildUi();
     });

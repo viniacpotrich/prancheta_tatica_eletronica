@@ -5,11 +5,12 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i12;
+import 'package:flutter/material.dart' as _i14;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
-import 'package:tactical_e_clipboard/model/team_model.dart' as _i14;
+import 'package:stacked_services/stacked_services.dart' as _i18;
+import 'package:tactical_e_clipboard/model/palyer_contract_model.dart' as _i17;
+import 'package:tactical_e_clipboard/model/team_model.dart' as _i16;
 import 'package:tactical_e_clipboard/ui/views/formation_detail/formation_detail_view.dart'
     as _i9;
 import 'package:tactical_e_clipboard/ui/views/formation_list/formation_list_view.dart'
@@ -19,6 +20,10 @@ import 'package:tactical_e_clipboard/ui/views/pattern_of_play_detail/pattern_of_
     as _i11;
 import 'package:tactical_e_clipboard/ui/views/pattern_of_play_list/pattern_of_play_list_view.dart'
     as _i10;
+import 'package:tactical_e_clipboard/ui/views/player_contract_detail/player_contract_detail_view.dart'
+    as _i13;
+import 'package:tactical_e_clipboard/ui/views/player_contract_list/player_contract_list_view.dart'
+    as _i12;
 import 'package:tactical_e_clipboard/ui/views/player_detail/player_detail_view.dart'
     as _i5;
 import 'package:tactical_e_clipboard/ui/views/player_list/player_list_view.dart'
@@ -28,7 +33,7 @@ import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.dart'
     as _i7;
 import 'package:tactical_e_clipboard/ui/views/team_list/team_list_view.dart'
     as _i6;
-import 'package:uuid/uuid.dart' as _i13;
+import 'package:uuid/uuid.dart' as _i15;
 
 class Routes {
   static const homeView = '/home-view';
@@ -51,6 +56,10 @@ class Routes {
 
   static const patternOfPlayDetailView = '/pattern-of-play-detail-view';
 
+  static const playerContractListView = '/player-contract-list-view';
+
+  static const playerContractDetailView = '/player-contract-detail-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -62,6 +71,8 @@ class Routes {
     formationDetailView,
     patternOfPlayListView,
     patternOfPlayDetailView,
+    playerContractListView,
+    playerContractDetailView,
   };
 }
 
@@ -107,70 +118,93 @@ class StackedRouter extends _i1.RouterBase {
       Routes.patternOfPlayDetailView,
       page: _i11.PatternOfPlayDetailView,
     ),
+    _i1.RouteDef(
+      Routes.playerContractListView,
+      page: _i12.PlayerContractListView,
+    ),
+    _i1.RouteDef(
+      Routes.playerContractDetailView,
+      page: _i13.PlayerContractDetailView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.PlayerListView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.PlayerListView(),
         settings: data,
       );
     },
     _i5.PlayerDetailView: (data) {
       final args = data.getArgs<PlayerDetailViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => _i5.PlayerDetailView(
             playerModelID: args.playerModelID, key: args.key),
         settings: data,
       );
     },
     _i6.TeamListView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.TeamListView(),
         settings: data,
       );
     },
     _i7.TeamDetailView: (data) {
       final args = data.getArgs<TeamDetailViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i7.TeamDetailView(teamModel: args.teamModel, key: args.key),
         settings: data,
       );
     },
     _i8.FormationListView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.FormationListView(),
         settings: data,
       );
     },
     _i9.FormationDetailView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.FormationDetailView(),
         settings: data,
       );
     },
     _i10.PatternOfPlayListView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.PatternOfPlayListView(),
         settings: data,
       );
     },
     _i11.PatternOfPlayDetailView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.PatternOfPlayDetailView(),
+        settings: data,
+      );
+    },
+    _i12.PlayerContractListView: (data) {
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i12.PlayerContractListView(),
+        settings: data,
+      );
+    },
+    _i13.PlayerContractDetailView: (data) {
+      final args =
+          data.getArgs<PlayerContractDetailViewArguments>(nullOk: false);
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => _i13.PlayerContractDetailView(
+            playerContractModel: args.playerContractModel, key: args.key),
         settings: data,
       );
     },
@@ -188,9 +222,9 @@ class PlayerDetailViewArguments {
     this.key,
   });
 
-  final _i13.Uuid playerModelID;
+  final _i15.Uuid playerModelID;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -215,9 +249,9 @@ class TeamDetailViewArguments {
     this.key,
   });
 
-  final _i14.TeamModel? teamModel;
+  final _i16.TeamModel? teamModel;
 
-  final _i12.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
@@ -236,7 +270,34 @@ class TeamDetailViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+class PlayerContractDetailViewArguments {
+  const PlayerContractDetailViewArguments({
+    required this.playerContractModel,
+    this.key,
+  });
+
+  final _i17.PlayerContractModel? playerContractModel;
+
+  final _i14.Key? key;
+
+  @override
+  String toString() {
+    return '{"playerContractModel": "$playerContractModel", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant PlayerContractDetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.playerContractModel == playerContractModel && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return playerContractModel.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i18.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -280,8 +341,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToPlayerDetailView({
-    required _i13.Uuid playerModelID,
-    _i12.Key? key,
+    required _i15.Uuid playerModelID,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -312,8 +373,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToTeamDetailView({
-    required _i14.TeamModel? teamModel,
-    _i12.Key? key,
+    required _i16.TeamModel? teamModel,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -384,6 +445,38 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToPlayerContractListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.playerContractListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToPlayerContractDetailView({
+    required _i17.PlayerContractModel? playerContractModel,
+    _i14.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.playerContractDetailView,
+        arguments: PlayerContractDetailViewArguments(
+            playerContractModel: playerContractModel, key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -427,8 +520,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithPlayerDetailView({
-    required _i13.Uuid playerModelID,
-    _i12.Key? key,
+    required _i15.Uuid playerModelID,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -459,8 +552,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithTeamDetailView({
-    required _i14.TeamModel? teamModel,
-    _i12.Key? key,
+    required _i16.TeamModel? teamModel,
+    _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -525,6 +618,38 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.patternOfPlayDetailView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithPlayerContractListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.playerContractListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithPlayerContractDetailView({
+    required _i17.PlayerContractModel? playerContractModel,
+    _i14.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.playerContractDetailView,
+        arguments: PlayerContractDetailViewArguments(
+            playerContractModel: playerContractModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

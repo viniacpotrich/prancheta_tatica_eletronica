@@ -65,7 +65,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                 value,
               ),
             ),
-             TextFormField(
+            TextFormField(
               decoration: const InputDecoration(
                 labelText: CitiesTeamInputValueKey,
               ),
