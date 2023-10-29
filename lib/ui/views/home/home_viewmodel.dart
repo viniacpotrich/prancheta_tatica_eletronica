@@ -38,14 +38,17 @@ class HomeViewModel extends FutureViewModel {
   }
 
   Future<void> askNewPassword() async {
-    _dialogService
+    final newPassword = await _dialogService
         .showCustomDialog(
           variant: DialogType.password,
-          title: "Informe uma NOVA senha",
-        )
-        .then(
-          (value) => _passwordService.updatePassword(value!.data.text),
+          title: "Informe uma NOVA senha (pelo menos 5 caracteres)",
         );
+    if (newPassword!.data.text.length < 5) {
+      askNewPassword();
+    } else {
+      _passwordService.updatePassword(newPassword!.data.text);
+    }
+
   }
 
   Future<void> askAndValidatePassword() async {
