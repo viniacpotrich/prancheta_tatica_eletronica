@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
 import 'package:tactical_e_clipboard/ui/views/player_detail/player_detail_view.form.dart';
-import 'package:uuid/uuid.dart';
 
+import '../../../enum/soccer_position_enum.dart';
 import 'player_detail_viewmodel.dart';
 
 @FormView(fields: [
@@ -12,31 +13,42 @@ import 'player_detail_viewmodel.dart';
   FormDropdownField(
     name: "preferredPositionsPlayer",
     items: [
-      StaticDropdownItem(title: "titulo1", value: "1"),
-      StaticDropdownItem(title: "titulo2", value: "2"),
-      StaticDropdownItem(title: "titulo3", value: "3"),
-      StaticDropdownItem(title: "titulo4", value: "4"),
+      StaticDropdownItem(title: "Goalkeeper", value: '1'),
+      StaticDropdownItem(title: "Center Back", value: '2'),
+      StaticDropdownItem(title: "Right Back", value: '3'),
+      StaticDropdownItem(title: "Left Back", value: '4'),
+      StaticDropdownItem(title: "Wing Back", value: '5'),
+      StaticDropdownItem(title: "Sweeper", value: '6'),
+      StaticDropdownItem(title: "Defensive Midfielder", value: '7'),
+      StaticDropdownItem(title: "Central Midfielder", value: '8'),
+      StaticDropdownItem(title: "Attacking Midfielder", value: '9'),
+      StaticDropdownItem(title: "Right Midfielder", value: '10'),
+      StaticDropdownItem(title: "Left Midfielder", value: '11'),
+      StaticDropdownItem(title: "Right Winger", value: '12'),
+      StaticDropdownItem(title: "Left Winger", value: '13'),
+      StaticDropdownItem(title: "Forward", value: '14'),
+      StaticDropdownItem(title: "Striker", value: '15'),
     ],
   ),
   FormDropdownField(
     name: "preferredFootPlayer",
     items: [
-      StaticDropdownItem(title: "Right", value: "1"),
-      StaticDropdownItem(title: "Left", value: "2"),
+      StaticDropdownItem(title: 'Left', value: '1'),
+      StaticDropdownItem(title: 'Right', value: '2'),
     ],
   ),
 ])
 class PlayerDetailView extends StackedView<PlayerDetailViewModel>
     with $PlayerDetailView {
-  const PlayerDetailView({required this.playerModelID, Key? key})
+  const PlayerDetailView({this.playerModelID, Key? key})
       : super(key: key);
 
-  final Uuid playerModelID;
+  final String? playerModelID;
 
   @override
   void onViewModelReady(viewModel) {
     syncFormWithViewModel(viewModel);
-    viewModel.getPlayer(playerModelID);
+    viewModel.getPlayer(playerModelID);  
   }
 
   @override
@@ -67,7 +79,6 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
               controller: namePlayerInputController,
               onChanged: (value) => viewModel.controllerNameInput(
                 value,
-                // namePlayerInputController.text
               ),
             ),
             TextFormField(
@@ -82,52 +93,35 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
             DropdownButtonFormField(
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
-                labelText: "Select an option",
+                labelText: "Select a position",
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
               ),
               onChanged: (value) =>
                   viewModel.controllerPositionsPlayerDropDown(value),
-              items: PreferredPositionsPlayerValueToTitleMap.values
+              items: SoccerPositionEnum.values
                   .toList()
                   .map((val) => DropdownMenuItem(
                         value: val,
-                        child: Text("${val}"),
+                        child: Text(val.toString()),
                       ))
                   .toList(),
             ),
             DropdownButtonFormField(
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
-                labelText: "Selecione o pé preferido",
+                labelText: "Selecione preferred foot",
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
               ),
               onChanged: (value) =>
                   viewModel.controllerPreferredFootPlayerDropDown(value),
-              items: PreferredFootPlayerValueToTitleMap.values
+              items: PreferredFootEnum.values
                   .toList()
                   .map(
                     (val) => DropdownMenuItem(
                       value: val,
-                      child: Text(val),
+                      child: Text(val.toString()),
                     ),
                   )
-                  .toList(),
-            ),
-            DropdownButtonFormField(
-              icon: const Icon(Icons.arrow_downward),
-              decoration: const InputDecoration(
-                labelText: "Selecione o Time",
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              ),
-              onChanged: (value) =>
-                  viewModel.controllerPositionsPlayerDropDown(value),
-              items: PreferredFootPlayerValueToTitleMap
-                  .values // TODO buscar os times
-                  .toList()
-                  .map((val) => DropdownMenuItem(
-                        value: val,
-                        child: Text("${val}"),
-                      ))
                   .toList(),
             ),
           ],

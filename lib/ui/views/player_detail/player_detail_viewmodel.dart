@@ -1,12 +1,34 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
+import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
+import 'package:tactical_e_clipboard/model/player_model.dart';
+import 'package:tactical_e_clipboard/services/player_service.dart';
 import 'package:uuid/uuid.dart';
+import '../../../app/app.locator.dart';
 
 class PlayerDetailViewModel extends FutureViewModel
     with FormStateHelper
     implements FormViewModel {
-  void getPlayer(Uuid uuid) {
-    print(uuid);
-    //TODO pesquisar o player pelo uuid no banco
+  final _service = locator<PlayerService>();
+  final _navigationService = locator<NavigationService>();
+
+  late PlayerModel tempPlayer;
+  bool isEditing = false;
+
+  void getPlayer(String? id) async {
+    if (id != null) {
+      isEditing = true;
+      tempPlayer = (await _service.get(id))!;
+    } else {
+      tempPlayer = PlayerModel(
+        const Uuid().v4(),
+        "",
+        "",
+        [],
+        PreferredFootEnum.left,
+      );
+    }
   }
 
   @override
@@ -15,37 +37,33 @@ class PlayerDetailViewModel extends FutureViewModel
   }
 
   void controllerNameInput(String text) {
-    print("palyer controller name  = $text");
+    tempPlayer.namePlayer = text;
   }
 
   void controllerNickNameInput(String text) {
-    print("palyer controller nick name  = $text");
+    tempPlayer.nicknamePlayer = text;
   }
 
-  void controllerPositionsPlayerDropDown(String? text) {
-    if (text != null && text.isNotEmpty) {
-      //TODO
-      print(text);
+  void controllerPositionsPlayerDropDown(SoccerPositionEnum? position) {
+    if (position != null) {
+      tempPlayer.preferredPositionsPlayer = [position];
     }
   }
 
-  void controllerPreferredFootPlayerDropDown(String? text) {
-    if (text != null && text.isNotEmpty) {
-      //TODO
-      print(text);
-    }
-  }
-
-  void controllerTeamDropDown(String? text) {
-    if (text != null && text.isNotEmpty) {
-      //TODO
-      print(text);
+  void controllerPreferredFootPlayerDropDown(PreferredFootEnum? foot) {
+    if (foot != null) {
+      tempPlayer.preferredFootPlayer = foot;
     }
   }
 
   submit() {
-    print("submitou");
-    //salve
-    //retorna
+    print(isEditing);
+    if (isEditing) {
+      _service.update(tempPlayer);
+    } else {
+      _service.put(tempPlayer);
+    }
+    _navigationService.back();
+    rebuildUi();
   }
 }

@@ -19,7 +19,7 @@ import 'package:tactical_e_clipboard/model/team_model.dart' as _i4;
 import 'package:tactical_e_clipboard/services/database_service.dart' as _i8;
 import 'package:tactical_e_clipboard/services/formation_repository_service.dart'
     as _i22;
-import 'package:tactical_e_clipboard/services/formation_service.dart' as _i16;
+import 'package:tactical_e_clipboard/services/formation_service.dart' as _i15;
 import 'package:tactical_e_clipboard/services/parameter_repository_service.dart'
     as _i21;
 import 'package:tactical_e_clipboard/services/parameter_service.dart' as _i19;
@@ -38,7 +38,7 @@ import 'package:tactical_e_clipboard/services/player_service.dart' as _i14;
 import 'package:tactical_e_clipboard/services/team_repository_service.dart'
     as _i26;
 import 'package:tactical_e_clipboard/services/team_service.dart' as _i17;
-import 'package:uuid/uuid.dart' as _i15;
+import 'package:uuid/uuid.dart' as _i16;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -759,7 +759,7 @@ class MockPlayerService extends _i1.Mock implements _i14.PlayerService {
             _i12.Future<List<_i2.PlayerModel>>.value(<_i2.PlayerModel>[]),
       ) as _i12.Future<List<_i2.PlayerModel>>);
   @override
-  _i12.Future<_i2.PlayerModel?> get(_i15.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<_i2.PlayerModel?> get(String? id) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [id],
@@ -813,7 +813,7 @@ class MockPlayerService extends _i1.Mock implements _i14.PlayerService {
         )),
       ) as _i12.Future<_i2.PlayerModel>);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -826,7 +826,7 @@ class MockPlayerService extends _i1.Mock implements _i14.PlayerService {
 /// A class which mocks [FormationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormationService extends _i1.Mock implements _i16.FormationService {
+class MockFormationService extends _i1.Mock implements _i15.FormationService {
   @override
   _i12.Future<List<_i3.FormationModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
@@ -839,7 +839,7 @@ class MockFormationService extends _i1.Mock implements _i16.FormationService {
             _i12.Future<List<_i3.FormationModel>>.value(<_i3.FormationModel>[]),
       ) as _i12.Future<List<_i3.FormationModel>>);
   @override
-  _i12.Future<_i3.FormationModel?> get(_i15.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<_i3.FormationModel?> get(_i16.Uuid? id) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [id],
@@ -896,7 +896,7 @@ class MockFormationService extends _i1.Mock implements _i16.FormationService {
         )),
       ) as _i12.Future<_i3.FormationModel>);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(_i16.Uuid? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -1002,7 +1002,7 @@ class MockPatternOfPlayService extends _i1.Mock
                 <_i5.PatternOfPlayModel>[]),
       ) as _i12.Future<List<_i5.PatternOfPlayModel>>);
   @override
-  _i12.Future<_i5.PatternOfPlayModel?> get(_i15.Uuid? id) =>
+  _i12.Future<_i5.PatternOfPlayModel?> get(_i16.Uuid? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #get,
@@ -1060,7 +1060,7 @@ class MockPatternOfPlayService extends _i1.Mock
         )),
       ) as _i12.Future<_i5.PatternOfPlayModel>);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(_i16.Uuid? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -1171,7 +1171,7 @@ class MockPlayerContractService extends _i1.Mock
                 <_i7.PlayerContractModel>[]),
       ) as _i12.Future<List<_i7.PlayerContractModel>>);
   @override
-  _i12.Future<_i7.PlayerContractModel?> get(_i15.Uuid? id) =>
+  _i12.Future<_i7.PlayerContractModel?> get(_i16.Uuid? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #get,
@@ -1230,7 +1230,7 @@ class MockPlayerContractService extends _i1.Mock
         )),
       ) as _i12.Future<_i7.PlayerContractModel>);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(_i16.Uuid? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -1368,7 +1368,7 @@ class MockFormationRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? k) => (super.noSuchMethod(
+  _i12.Future<bool> delete(_i16.Uuid? k) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [k],
@@ -1377,7 +1377,7 @@ class MockFormationRepositoryService extends _i1.Mock
         returnValueForMissingStub: _i12.Future<bool>.value(false),
       ) as _i12.Future<bool>);
   @override
-  _i12.Future<_i3.FormationModel> get(_i15.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i3.FormationModel> get(_i16.Uuid? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1478,7 +1478,7 @@ class MockPatternOfPlayRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? k) => (super.noSuchMethod(
+  _i12.Future<bool> delete(_i16.Uuid? k) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [k],
@@ -1487,7 +1487,7 @@ class MockPatternOfPlayRepositoryService extends _i1.Mock
         returnValueForMissingStub: _i12.Future<bool>.value(false),
       ) as _i12.Future<bool>);
   @override
-  _i12.Future<_i5.PatternOfPlayModel> get(_i15.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i5.PatternOfPlayModel> get(_i16.Uuid? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1589,7 +1589,7 @@ class MockPlayerContractRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? k) => (super.noSuchMethod(
+  _i12.Future<bool> delete(_i16.Uuid? k) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [k],
@@ -1598,7 +1598,7 @@ class MockPlayerContractRepositoryService extends _i1.Mock
         returnValueForMissingStub: _i12.Future<bool>.value(false),
       ) as _i12.Future<bool>);
   @override
-  _i12.Future<_i7.PlayerContractModel> get(_i15.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i7.PlayerContractModel> get(_i16.Uuid? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1700,7 +1700,7 @@ class MockPlayerRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<_i2.PlayerModel> get(_i15.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i2.PlayerModel> get(String? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1722,15 +1722,6 @@ class MockPlayerRepositoryService extends _i1.Mock
         )),
       ) as _i12.Future<_i2.PlayerModel>);
   @override
-  _i12.Future<bool> delete(_i15.Uuid? k) => (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [k],
-        ),
-        returnValue: _i12.Future<bool>.value(false),
-        returnValueForMissingStub: _i12.Future<bool>.value(false),
-      ) as _i12.Future<bool>);
-  @override
   _i12.Future<List<_i2.PlayerModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
@@ -1741,6 +1732,15 @@ class MockPlayerRepositoryService extends _i1.Mock
         returnValueForMissingStub:
             _i12.Future<List<_i2.PlayerModel>>.value(<_i2.PlayerModel>[]),
       ) as _i12.Future<List<_i2.PlayerModel>>);
+  @override
+  _i12.Future<bool> delete(String? k) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [k],
+        ),
+        returnValue: _i12.Future<bool>.value(false),
+        returnValueForMissingStub: _i12.Future<bool>.value(false),
+      ) as _i12.Future<bool>);
   @override
   _i12.Future<_i2.PlayerModel> patch(_i2.PlayerModel? k) => (super.noSuchMethod(
         Invocation.method(

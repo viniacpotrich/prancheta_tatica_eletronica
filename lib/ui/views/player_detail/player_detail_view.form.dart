@@ -17,14 +17,25 @@ const String PreferredPositionsPlayerValueKey = 'preferredPositionsPlayer';
 const String PreferredFootPlayerValueKey = 'preferredFootPlayer';
 
 final Map<String, String> PreferredPositionsPlayerValueToTitleMap = {
-  '1': 'titulo1',
-  '2': 'titulo2',
-  '3': 'titulo3',
-  '4': 'titulo4',
+  '1': 'Goalkeeper',
+  '2': 'Center Back',
+  '3': 'Right Back',
+  '4': 'Left Back',
+  '5': 'Wing Back',
+  '6': 'Sweeper',
+  '7': 'Defensive Midfielder',
+  '8': 'Central Midfielder',
+  '9': 'Attacking Midfielder',
+  '10': 'Right Midfielder',
+  '11': 'Left Midfielder',
+  '12': 'Right Winger',
+  '13': 'Left Winger',
+  '14': 'Forward',
+  '15': 'Striker',
 };
 final Map<String, String> PreferredFootPlayerValueToTitleMap = {
-  '1': 'Right',
-  '2': 'Left',
+  '1': 'Left',
+  '2': 'Right',
 };
 
 final Map<String, TextEditingController>
