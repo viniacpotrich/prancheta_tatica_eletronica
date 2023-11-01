@@ -64,7 +64,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
         actions: [
           ElevatedButton(
             onPressed: viewModel.submit,
-            child: Icon(Icons.check),
+            child: const Icon(Icons.check),
           ),
         ],
       ),
@@ -76,7 +76,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
               decoration: const InputDecoration(
                 labelText: NamePlayerInputValueKey,
               ),
-              controller: namePlayerInputController,
+              initialValue: viewModel.tempPlayer.namePlayer,
               onChanged: (value) => viewModel.controllerNameInput(
                 value,
               ),
@@ -85,7 +85,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
               decoration: const InputDecoration(
                 labelText: NicknamePlayerInputValueKey,
               ),
-              controller: nicknamePlayerInputController,
+              initialValue: viewModel.tempPlayer.nicknamePlayer,
               onChanged: (value) => viewModel.controllerNickNameInput(
                 value,
               ),
@@ -109,7 +109,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
             DropdownButtonFormField(
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
-                labelText: "Selecione preferred foot",
+                labelText: "Select Preferred foot",
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
               ),
               onChanged: (value) =>

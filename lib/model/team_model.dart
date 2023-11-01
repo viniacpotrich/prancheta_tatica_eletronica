@@ -39,7 +39,10 @@ class TeamModel {
   }
 
   Future<Map<String, Object?>> toMap() async {
-    var blob = await imageToBase64(logoTeam!);
+    String blob = '';
+    if (logoTeam != null) {
+      blob = await imageToBase64(logoTeam!);
+    }
 
     return {
       'nameTeam': nameTeam,
@@ -47,13 +50,13 @@ class TeamModel {
       'colorPrimaryTeam': colorPrimaryTeam,
       'colorSecondaryTeam': colorSecondaryTeam,
       'cityTeam': cityTeam,
-      'idTeam': idTeam, // You might need to convert this to a suitable format
-      'logoTeam': blob, // You might need to convert this to a suitable format
+      'idTeam': idTeam,
+      'logoTeam': blob,
     };
   }
 
   Future<String> imageToBase64(File imageFile) async {
-    List<int> imageBytes = await imageFile.readAsBytesSync();
+    List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
     return base64Image;
   }

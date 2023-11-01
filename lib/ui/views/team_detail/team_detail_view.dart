@@ -59,7 +59,6 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
               decoration: const InputDecoration(
                 labelText: NicknameTeamInputValueKey,
               ),
-              // controller: nicknameTeamInputController,
               initialValue: viewModel.teamModelTemp.nicknameTeam,
               onChanged: (value) => viewModel.controllerNickNameInput(
                 value,
@@ -69,7 +68,6 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
               decoration: const InputDecoration(
                 labelText: NicknameTeamInputValueKey,
               ),
-              // controller: nicknameTeamInputController,
               initialValue: viewModel.teamModelTemp.cityTeam,
               onChanged: (value) => viewModel.controllerCitiesTeamInput(
                 value,
@@ -88,7 +86,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                     viewModel.picker1Color,
                     viewModel.controllerColor1Team,
                   ),
-                  child: Text("color1"),
+                  child: const Text("color1"),
                 ),
               ],
             ),

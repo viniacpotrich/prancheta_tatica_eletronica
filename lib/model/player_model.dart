@@ -24,4 +24,24 @@ class PlayerModel {
       'preferredFootPlayer': preferredFootPlayer.index
     };
   }
+
+  static PlayerModel fromMap(Map<String, dynamic> map) {
+    return PlayerModel(
+      map['idPlayer'],
+      map['namePlayer'],
+      map['nicknamePlayer'],
+      map['positions'] == null ? [] : convertPositions(map['positions']),
+      PreferredFootEnum.values[map['preferredFootPlayer']],
+    );
+  }
+
+  static List<SoccerPositionEnum> convertPositions(String positions) {
+    return positions.split(',').map((position) {
+      int index = int.parse(position.trim());
+      if (index < 0 || index >= SoccerPositionEnum.values.length) {
+        throw ArgumentError('Invalid position: $position');
+      }
+      return SoccerPositionEnum.values[index];
+    }).toList();
+  }
 }

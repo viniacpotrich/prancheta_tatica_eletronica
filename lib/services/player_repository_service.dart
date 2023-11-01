@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
-import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
-import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/repository/player_repository.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
@@ -10,44 +8,36 @@ import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
 
 class PlayerRepositoryService implements PlayerRepository {
+  final _table = "Player";
+  final _primaryKey = "idPlayer";
+
   @override
   DatabaseService get dbm => locator<DatabaseService>();
 
   @override
-  Future<PlayerModel> get(String t) async {
-    final List<Map<String, dynamic>> maps = await dbm.getInstanceDB().rawQuery(
-        '''
-      SELECT * FROM Player
-      LEFT JOIN PlayerPositions ON Player.idPlayer = PlayerPositions.idPlayer
-      WHERE Player.idPlayer = ?
-    ''',
-        [t]);
+  Future<PlayerModel> get(String id) async {
+    final List<Map<String, dynamic>> maps = await _getPlayers(id);
 
     if (maps.isNotEmpty) {
-      return PlayerModel(
-        maps[0]['idPlayer'],
-        maps[0]['namePlayer'],
-        maps[0]['nicknamePlayer'],
-        (maps)
-            .map((map) => SoccerPositionEnum.values[map['position']])
-            .toList(),
-        PreferredFootEnum.values[maps[0]['preferredFootPlayer']],
-      );
+      return PlayerModel.fromMap(maps[0]);
     }
 
-    throw Exception('ID $t not found');
+    throw Exception('ID $id not found');
   }
 
   @override
   Future<List<PlayerModel>> getAll() async {
-    await dbm
-        .getInstanceDB()
-        .rawQuery("SELECT sqlite_version();")
-        .then((value) => print(value));
-    return [
-      PlayerModel(const Uuid().toString(), "Teste", "TesteNicname",
-          [SoccerPositionEnum.goalkeeper], PreferredFootEnum.left)
-    ];
+    try {
+      final List<Map<String, dynamic>> data = await _getPlayers(null);
+      List<PlayerModel> result = [];
+      for (var element in data) {
+        result.add(PlayerModel.fromMap(element));
+      }
+      return result;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   @override
@@ -60,8 +50,8 @@ class PlayerRepositoryService implements PlayerRepository {
         whereArgs: [k],
       );
       await txn.delete(
-        'Player',
-        where: 'idPlayer = ?',
+        _table,
+        where: '$_primaryKey = ?',
         whereArgs: [k],
       );
     });
@@ -74,9 +64,9 @@ class PlayerRepositoryService implements PlayerRepository {
     final db = dbm.getInstanceDB();
     await db.transaction((txn) async {
       await txn.update(
-        'Player',
+        _table,
         k.toMap(),
-        where: 'idPlayer = ?',
+        where: '$_primaryKey = ?',
         whereArgs: [k.idPlayer],
       );
       await txn.delete(
@@ -101,7 +91,7 @@ class PlayerRepositoryService implements PlayerRepository {
     k.idPlayer = const Uuid().v4(config: V4Options(null, CryptoRNG()));
     await db.transaction((txn) async {
       await txn.insert(
-        'Player',
+        _table,
         k.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
@@ -114,5 +104,28 @@ class PlayerRepositoryService implements PlayerRepository {
     });
 
     return k;
+  }
+
+  Future<List<Map<String, dynamic>>> _getPlayers(String? id) {
+    String query = '''
+        SELECT $_table.$_primaryKey, 
+          $_table.namePlayer, 
+          $_table.nicknamePlayer, 
+          $_table.preferredFootPlayer, 
+          GROUP_CONCAT(PlayerPositions.position) as positions
+        FROM $_table
+        LEFT JOIN PlayerPositions 
+        ON $_table.$_primaryKey = PlayerPositions.idPlayer
+    ''';
+
+    if (id != null) {
+      query += ''' WHERE Player.idPlayer = ?''';
+    }
+
+    query += ''' GROUP BY Player.idPlayer''';
+
+    return id == null
+        ? dbm.getInstanceDB().rawQuery(query)
+        : dbm.getInstanceDB().rawQuery(query, [id]);
   }
 }

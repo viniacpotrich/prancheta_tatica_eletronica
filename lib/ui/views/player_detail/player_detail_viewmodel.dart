@@ -4,7 +4,6 @@ import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
 import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/services/player_service.dart';
-import 'package:uuid/uuid.dart';
 import '../../../app/app.locator.dart';
 
 class PlayerDetailViewModel extends FutureViewModel
@@ -13,28 +12,34 @@ class PlayerDetailViewModel extends FutureViewModel
   final _service = locator<PlayerService>();
   final _navigationService = locator<NavigationService>();
 
-  late PlayerModel tempPlayer;
+  late PlayerModel tempPlayer = PlayerModel(
+    "",
+    "",
+    "",
+    [],
+    PreferredFootEnum.left,
+  );
   bool isEditing = false;
 
   void getPlayer(String? id) async {
     if (id != null) {
       isEditing = true;
       tempPlayer = (await _service.get(id))!;
+      rebuildUi();
     } else {
       tempPlayer = PlayerModel(
-        const Uuid().v4(),
+        "",
         "",
         "",
         [],
         PreferredFootEnum.left,
       );
     }
+    rebuildUi();
   }
 
   @override
-  Future futureToRun() async {
-    // TODO: implement futureToRun
-  }
+  Future futureToRun() async {}
 
   void controllerNameInput(String text) {
     tempPlayer.namePlayer = text;
@@ -57,7 +62,6 @@ class PlayerDetailViewModel extends FutureViewModel
   }
 
   submit() {
-    print(isEditing);
     if (isEditing) {
       _service.update(tempPlayer);
     } else {
