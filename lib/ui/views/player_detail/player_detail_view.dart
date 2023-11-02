@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
+import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/ui/views/player_detail/player_detail_view.form.dart';
 
 import '../../../enum/soccer_position_enum.dart';
@@ -40,15 +41,14 @@ import 'player_detail_viewmodel.dart';
 ])
 class PlayerDetailView extends StackedView<PlayerDetailViewModel>
     with $PlayerDetailView {
-  const PlayerDetailView({this.playerModelID, Key? key})
-      : super(key: key);
+  const PlayerDetailView({this.playerModel, Key? key}) : super(key: key);
 
-  final String? playerModelID;
+  final PlayerModel? playerModel;
 
   @override
   void onViewModelReady(viewModel) {
     syncFormWithViewModel(viewModel);
-    viewModel.getPlayer(playerModelID);  
+    // viewModel.getPlayer(playerModel);
   }
 
   @override
@@ -91,6 +91,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
               ),
             ),
             DropdownButtonFormField(
+              value: viewModel.actualSoccerPositionEnum,
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
                 labelText: "Select a position",
@@ -107,6 +108,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                   .toList(),
             ),
             DropdownButtonFormField(
+              value: viewModel.actualPreferredFootEnum,
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
                 labelText: "Select Preferred foot",

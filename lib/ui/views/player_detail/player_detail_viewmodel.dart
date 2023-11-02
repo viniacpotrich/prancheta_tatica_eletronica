@@ -12,6 +12,9 @@ class PlayerDetailViewModel extends FutureViewModel
   final _service = locator<PlayerService>();
   final _navigationService = locator<NavigationService>();
 
+  SoccerPositionEnum actualSoccerPositionEnum = SoccerPositionEnum.goalkeeper;
+  PreferredFootEnum actualPreferredFootEnum = PreferredFootEnum.left;
+
   late PlayerModel tempPlayer = PlayerModel(
     "",
     "",
@@ -21,11 +24,13 @@ class PlayerDetailViewModel extends FutureViewModel
   );
   bool isEditing = false;
 
-  void getPlayer(String? id) async {
-    if (id != null) {
+  void getPlayer(PlayerModel? playerModel) async {
+    if (playerModel != null) {
       isEditing = true;
-      tempPlayer = (await _service.get(id))!;
-      rebuildUi();
+      // tempPlayer = (await _service.get(playerModel))!;
+      tempPlayer = playerModel;
+      actualSoccerPositionEnum = tempPlayer.preferredPositionsPlayer[0];
+      actualPreferredFootEnum = tempPlayer.preferredFootPlayer;
     } else {
       tempPlayer = PlayerModel(
         "",
@@ -39,7 +44,9 @@ class PlayerDetailViewModel extends FutureViewModel
   }
 
   @override
-  Future futureToRun() async {}
+  Future futureToRun() async {
+    getPlayer(_navigationService.currentArguments.playerModel);
+  }
 
   void controllerNameInput(String text) {
     tempPlayer.namePlayer = text;

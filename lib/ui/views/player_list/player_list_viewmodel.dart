@@ -25,7 +25,7 @@ class PlayerListViewModel extends FutureViewModel {
 
   void editPlayer(int index) async {
     await _navigationService.navigateToPlayerDetailView(
-      playerModelID: players.elementAt(index).idPlayer,
+      playerModel: players.elementAt(index),
     );
     await futureToRun();
   }
@@ -39,7 +39,7 @@ class PlayerListViewModel extends FutureViewModel {
 
   Future<void> addPlayer() async {
     await _navigationService.navigateToPlayerDetailView(
-      playerModelID: null,
+      playerModel: null,
     );
     await futureToRun();
   }

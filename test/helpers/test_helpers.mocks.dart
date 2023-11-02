@@ -1700,16 +1700,16 @@ class MockPlayerRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<_i2.PlayerModel> get(String? t) => (super.noSuchMethod(
+  _i12.Future<_i2.PlayerModel> get(String? id) => (super.noSuchMethod(
         Invocation.method(
           #get,
-          [t],
+          [id],
         ),
         returnValue: _i12.Future<_i2.PlayerModel>.value(_FakePlayerModel_0(
           this,
           Invocation.method(
             #get,
-            [t],
+            [id],
           ),
         )),
         returnValueForMissingStub:
@@ -1717,7 +1717,7 @@ class MockPlayerRepositoryService extends _i1.Mock
           this,
           Invocation.method(
             #get,
-            [t],
+            [id],
           ),
         )),
       ) as _i12.Future<_i2.PlayerModel>);

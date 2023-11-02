@@ -8,8 +8,9 @@
 import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i14;
-import 'package:tactical_e_clipboard/model/team_model.dart' as _i13;
+import 'package:stacked_services/stacked_services.dart' as _i15;
+import 'package:tactical_e_clipboard/model/player_model.dart' as _i13;
+import 'package:tactical_e_clipboard/model/team_model.dart' as _i14;
 import 'package:tactical_e_clipboard/ui/views/formation_detail/formation_detail_view.dart'
     as _i9;
 import 'package:tactical_e_clipboard/ui/views/formation_list/formation_list_view.dart'
@@ -132,8 +133,8 @@ class StackedRouter extends _i1.RouterBase {
         orElse: () => const PlayerDetailViewArguments(),
       );
       return _i12.MaterialPageRoute<dynamic>(
-        builder: (context) => _i5.PlayerDetailView(
-            playerModelID: args.playerModelID, key: args.key),
+        builder: (context) =>
+            _i5.PlayerDetailView(playerModel: args.playerModel, key: args.key),
         settings: data,
       );
     },
@@ -185,28 +186,28 @@ class StackedRouter extends _i1.RouterBase {
 
 class PlayerDetailViewArguments {
   const PlayerDetailViewArguments({
-    this.playerModelID,
+    this.playerModel,
     this.key,
   });
 
-  final String? playerModelID;
+  final _i13.PlayerModel? playerModel;
 
   final _i12.Key? key;
 
   @override
   String toString() {
-    return '{"playerModelID": "$playerModelID", "key": "$key"}';
+    return '{"playerModel": "$playerModel", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant PlayerDetailViewArguments other) {
     if (identical(this, other)) return true;
-    return other.playerModelID == playerModelID && other.key == key;
+    return other.playerModel == playerModel && other.key == key;
   }
 
   @override
   int get hashCode {
-    return playerModelID.hashCode ^ key.hashCode;
+    return playerModel.hashCode ^ key.hashCode;
   }
 }
 
@@ -216,7 +217,7 @@ class TeamDetailViewArguments {
     this.key,
   });
 
-  final _i13.TeamModel? teamModel;
+  final _i14.TeamModel? teamModel;
 
   final _i12.Key? key;
 
@@ -237,7 +238,7 @@ class TeamDetailViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i14.NavigationService {
+extension NavigatorStateExtension on _i15.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -281,7 +282,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> navigateToPlayerDetailView({
-    String? playerModelID,
+    _i13.PlayerModel? playerModel,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -291,7 +292,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.playerDetailView,
         arguments:
-            PlayerDetailViewArguments(playerModelID: playerModelID, key: key),
+            PlayerDetailViewArguments(playerModel: playerModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -313,7 +314,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> navigateToTeamDetailView({
-    required _i13.TeamModel? teamModel,
+    required _i14.TeamModel? teamModel,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -428,7 +429,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> replaceWithPlayerDetailView({
-    String? playerModelID,
+    _i13.PlayerModel? playerModel,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -438,7 +439,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.playerDetailView,
         arguments:
-            PlayerDetailViewArguments(playerModelID: playerModelID, key: key),
+            PlayerDetailViewArguments(playerModel: playerModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -460,7 +461,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> replaceWithTeamDetailView({
-    required _i13.TeamModel? teamModel,
+    required _i14.TeamModel? teamModel,
     _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
