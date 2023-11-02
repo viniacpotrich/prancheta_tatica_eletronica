@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +22,7 @@ class TeamDetailViewModel extends FutureViewModel
   @override
   Future futureToRun() async {
     // TODO: implement futureToRun
+    getTeam(_navigationService.currentArguments.teamModel);
   }
 
   void getTeam(TeamModel? teamModel) {

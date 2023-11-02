@@ -22,7 +22,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
   @override
   void onViewModelReady(viewModel) {
     syncFormWithViewModel(viewModel);
-    viewModel.getTeam(teamModel);
+    //viewModel.getTeam(teamModel);
   }
 
   @override
