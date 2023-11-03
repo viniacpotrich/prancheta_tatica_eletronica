@@ -12,7 +12,7 @@ class PlayerDetailViewModel extends FutureViewModel
   final _service = locator<PlayerService>();
   final _navigationService = locator<NavigationService>();
 
-  SoccerPositionEnum actualSoccerPositionEnum = SoccerPositionEnum.goalkeeper;
+  List<SoccerPositionEnum> actualSoccerPositionsEnum = [SoccerPositionEnum.goalkeeper];
   PreferredFootEnum actualPreferredFootEnum = PreferredFootEnum.left;
 
   late PlayerModel tempPlayer = PlayerModel(
@@ -27,9 +27,8 @@ class PlayerDetailViewModel extends FutureViewModel
   void getPlayer(PlayerModel? playerModel) async {
     if (playerModel != null) {
       isEditing = true;
-      // tempPlayer = (await _service.get(playerModel))!;
       tempPlayer = playerModel;
-      actualSoccerPositionEnum = tempPlayer.preferredPositionsPlayer[0];
+      actualSoccerPositionsEnum = tempPlayer.preferredPositionsPlayer;
       actualPreferredFootEnum = tempPlayer.preferredFootPlayer;
     } else {
       tempPlayer = PlayerModel(
@@ -40,6 +39,7 @@ class PlayerDetailViewModel extends FutureViewModel
         PreferredFootEnum.left,
       );
     }
+
     rebuildUi();
   }
 
@@ -56,10 +56,8 @@ class PlayerDetailViewModel extends FutureViewModel
     tempPlayer.nicknamePlayer = text;
   }
 
-  void controllerPositionsPlayerDropDown(SoccerPositionEnum? position) {
-    if (position != null) {
-      tempPlayer.preferredPositionsPlayer = [position];
-    }
+  void controllerPositionsPlayerDropDown(List<SoccerPositionEnum> positions) {
+    tempPlayer.preferredPositionsPlayer = positions;
   }
 
   void controllerPreferredFootPlayerDropDown(PreferredFootEnum? foot) {

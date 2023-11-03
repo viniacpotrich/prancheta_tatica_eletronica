@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
@@ -89,22 +90,19 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                 value,
               ),
             ),
-            DropdownButtonFormField(
-              value: viewModel.actualSoccerPositionEnum,
-              icon: const Icon(Icons.arrow_downward),
-              decoration: const InputDecoration(
-                labelText: "Select a position",
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              ),
-              onChanged: (value) =>
-                  viewModel.controllerPositionsPlayerDropDown(value),
-              items: SoccerPositionEnum.values
+            MultiSelectDialogField(
+              initialValue: viewModel.actualSoccerPositionsEnum,
+              items:  SoccerPositionEnum.values
                   .toList()
-                  .map((val) => DropdownMenuItem(
-                        value: val,
-                        child: Text(val.toString()),
+                  .map((val) => MultiSelectItem(
+                         val,
+                        val.toString(),
                       ))
                   .toList(),
+              listType: MultiSelectListType.LIST,
+              onConfirm: (values) {
+                viewModel.controllerPositionsPlayerDropDown(values);
+              },
             ),
             DropdownButtonFormField(
               value: viewModel.actualPreferredFootEnum,
@@ -125,7 +123,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                   )
                   .toList(),
             ),
-           /* DropdownButtonFormField(
+            /* DropdownButtonFormField(
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
                 labelText: "Selecione o Time",
