@@ -34,11 +34,11 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text("Team Detail"),
+        title: const Text("Team Detail"),
         actions: [
           ElevatedButton(
             onPressed: () => viewModel.submit(),
-            child: Icon(Icons.check),
+            child: const Icon(Icons.check),
           ),
         ],
       ),
