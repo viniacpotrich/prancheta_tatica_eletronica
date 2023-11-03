@@ -21,7 +21,7 @@ class TeamDetailViewModel extends FutureViewModel
 
   @override
   Future futureToRun() async {
-    // TODO: implement futureToRun
+    getTeam(_navigationService.currentArguments.teamModel);
   }
 
   void getTeam(TeamModel? teamModel) {
@@ -45,7 +45,7 @@ class TeamDetailViewModel extends FutureViewModel
     teamModelTemp.nicknameTeam = text;
   }
 
-   void controllerCitiesTeamInput(String text) {
+  void controllerCitiesTeamInput(String text) {
     teamModelTemp.nicknameTeam = text;
   }
 
@@ -72,7 +72,7 @@ class TeamDetailViewModel extends FutureViewModel
       teamService.put(teamModelTemp);
     }
     _navigationService.back();
-    rebuildUi(); //TODO buscar valores no bancos
+    rebuildUi();
   }
 
   void pickFile() async {
@@ -81,7 +81,8 @@ class TeamDetailViewModel extends FutureViewModel
 
     if (result != null) {
       File file = File(result.files.single.path!);
-      teamModelTemp.logoTeam = file;
+      var base64 = await TeamModel.fileToBase64(file);
+      teamModelTemp.logoTeam = await TeamModel.base64ToImage(base64);
       rebuildUi();
     } else {
       // User canceled the picker
@@ -92,7 +93,12 @@ class TeamDetailViewModel extends FutureViewModel
     if (teamModelTemp.logoTeam == null) {
       return InkWell(onTap: () => pickFile(), child: const Placeholder());
     } else {
-      return Image.file(teamModelTemp.logoTeam!);
+      return InkWell(
+          onTap: () => pickFile(),
+          child: RawImage(
+            image: teamModelTemp.logoTeam,
+            fit: BoxFit.cover,
+          ));
     }
   }
 

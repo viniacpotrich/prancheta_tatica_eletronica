@@ -7,8 +7,6 @@ import 'package:tactical_e_clipboard/ui/dialogs/password/password_dialog.form.da
 
 import 'password_dialog_model.dart';
 
-const double _graphicSize = 60;
-
 @FormView(fields: [
   FormTextField(name: 'passwordInput'),
 ])
@@ -38,7 +36,7 @@ class PasswordDialog extends StackedView<PasswordDialogModel>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              request.title ?? 'Hello Stacked Dialog!!',
+              request.title ?? 'Password Dialog',
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black,

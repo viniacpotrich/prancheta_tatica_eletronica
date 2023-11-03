@@ -1,19 +1,18 @@
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart';
 import 'package:tactical_e_clipboard/repository/repository.dart';
-import 'package:uuid/uuid.dart';
 
 interface class PlayerContractRepository
-    extends RepositoryInterface<Uuid, PlayerContractModel> {
+    extends RepositoryInterface<String, PlayerContractModel> {
   @override
   get dbm => throw UnimplementedError();
 
   @override
-  Future<bool> delete(Uuid t) {
+  Future<bool> delete(String t) {
     throw UnimplementedError();
   }
 
   @override
-  Future<PlayerContractModel> get(Uuid t) {
+  Future<PlayerContractModel> get(String t) {
     throw UnimplementedError();
   }
 

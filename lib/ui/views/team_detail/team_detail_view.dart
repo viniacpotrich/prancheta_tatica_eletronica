@@ -22,7 +22,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
   @override
   void onViewModelReady(viewModel) {
     syncFormWithViewModel(viewModel);
-    viewModel.getTeam(teamModel);
+    //viewModel.getTeam(teamModel);
   }
 
   @override
@@ -64,9 +64,9 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                 value,
               ),
             ),
-             TextFormField(
+            TextFormField(
               decoration: const InputDecoration(
-                labelText: NicknameTeamInputValueKey,
+                labelText: CitiesTeamInputValueKey,
               ),
               initialValue: viewModel.teamModelTemp.cityTeam,
               onChanged: (value) => viewModel.controllerCitiesTeamInput(

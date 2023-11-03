@@ -1,19 +1,18 @@
 import 'package:tactical_e_clipboard/model/formation_model.dart';
 import 'package:tactical_e_clipboard/repository/repository.dart';
-import 'package:uuid/uuid.dart';
 
 interface class FormationRepository
-    extends RepositoryInterface<Uuid, FormationModel> {
+    extends RepositoryInterface<String, FormationModel> {
   @override
   get dbm => throw UnimplementedError();
 
   @override
-  Future<bool> delete(Uuid t) {
+  Future<bool> delete(String t) {
     throw UnimplementedError();
   }
 
   @override
-  Future<FormationModel> get(Uuid t) {
+  Future<FormationModel> get(String t) {
     throw UnimplementedError();
   }
 

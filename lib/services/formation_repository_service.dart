@@ -2,19 +2,18 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/formation_model.dart';
 import 'package:tactical_e_clipboard/repository/formation_repository.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
-import 'package:uuid/uuid.dart';
 
 class FormationRepositoryService implements FormationRepository {
   @override
   DatabaseService get dbm => locator<DatabaseService>();
 
   @override
-  Future<bool> delete(Uuid k) {
+  Future<bool> delete(String k) {
     throw UnimplementedError();
   }
 
   @override
-  Future<FormationModel> get(Uuid t) {
+  Future<FormationModel> get(String t) {
     throw UnimplementedError();
   }
 

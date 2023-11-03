@@ -18,27 +18,26 @@ import 'package:tactical_e_clipboard/model/player_model.dart' as _i2;
 import 'package:tactical_e_clipboard/model/team_model.dart' as _i4;
 import 'package:tactical_e_clipboard/services/database_service.dart' as _i8;
 import 'package:tactical_e_clipboard/services/formation_repository_service.dart'
-    as _i22;
+    as _i21;
 import 'package:tactical_e_clipboard/services/formation_service.dart' as _i15;
 import 'package:tactical_e_clipboard/services/parameter_repository_service.dart'
-    as _i21;
-import 'package:tactical_e_clipboard/services/parameter_service.dart' as _i19;
-import 'package:tactical_e_clipboard/services/password_service.dart' as _i27;
-import 'package:tactical_e_clipboard/services/pattern_of_play_repository_service.dart'
-    as _i23;
-import 'package:tactical_e_clipboard/services/pattern_of_play_service.dart'
-    as _i18;
-import 'package:tactical_e_clipboard/services/player_contract_repository_service.dart'
-    as _i24;
-import 'package:tactical_e_clipboard/services/player_contract_service.dart'
     as _i20;
+import 'package:tactical_e_clipboard/services/parameter_service.dart' as _i18;
+import 'package:tactical_e_clipboard/services/password_service.dart' as _i26;
+import 'package:tactical_e_clipboard/services/pattern_of_play_repository_service.dart'
+    as _i22;
+import 'package:tactical_e_clipboard/services/pattern_of_play_service.dart'
+    as _i17;
+import 'package:tactical_e_clipboard/services/player_contract_repository_service.dart'
+    as _i23;
+import 'package:tactical_e_clipboard/services/player_contract_service.dart'
+    as _i19;
 import 'package:tactical_e_clipboard/services/player_repository_service.dart'
-    as _i25;
+    as _i24;
 import 'package:tactical_e_clipboard/services/player_service.dart' as _i14;
 import 'package:tactical_e_clipboard/services/team_repository_service.dart'
-    as _i26;
-import 'package:tactical_e_clipboard/services/team_service.dart' as _i17;
-import 'package:uuid/uuid.dart' as _i16;
+    as _i25;
+import 'package:tactical_e_clipboard/services/team_service.dart' as _i16;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -839,7 +838,7 @@ class MockFormationService extends _i1.Mock implements _i15.FormationService {
             _i12.Future<List<_i3.FormationModel>>.value(<_i3.FormationModel>[]),
       ) as _i12.Future<List<_i3.FormationModel>>);
   @override
-  _i12.Future<_i3.FormationModel?> get(_i16.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<_i3.FormationModel?> get(String? id) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [id],
@@ -896,7 +895,7 @@ class MockFormationService extends _i1.Mock implements _i15.FormationService {
         )),
       ) as _i12.Future<_i3.FormationModel>);
   @override
-  _i12.Future<bool> delete(_i16.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -909,7 +908,7 @@ class MockFormationService extends _i1.Mock implements _i15.FormationService {
 /// A class which mocks [TeamService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTeamService extends _i1.Mock implements _i17.TeamService {
+class MockTeamService extends _i1.Mock implements _i16.TeamService {
   @override
   _i12.Future<List<_i4.TeamModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
@@ -988,7 +987,7 @@ class MockTeamService extends _i1.Mock implements _i17.TeamService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPatternOfPlayService extends _i1.Mock
-    implements _i18.PatternOfPlayService {
+    implements _i17.PatternOfPlayService {
   @override
   _i12.Future<List<_i5.PatternOfPlayModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
@@ -1002,8 +1001,7 @@ class MockPatternOfPlayService extends _i1.Mock
                 <_i5.PatternOfPlayModel>[]),
       ) as _i12.Future<List<_i5.PatternOfPlayModel>>);
   @override
-  _i12.Future<_i5.PatternOfPlayModel?> get(_i16.Uuid? id) =>
-      (super.noSuchMethod(
+  _i12.Future<_i5.PatternOfPlayModel?> get(String? id) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [id],
@@ -1060,7 +1058,7 @@ class MockPatternOfPlayService extends _i1.Mock
         )),
       ) as _i12.Future<_i5.PatternOfPlayModel>);
   @override
-  _i12.Future<bool> delete(_i16.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -1073,7 +1071,7 @@ class MockPatternOfPlayService extends _i1.Mock
 /// A class which mocks [ParameterService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockParameterService extends _i1.Mock implements _i19.ParameterService {
+class MockParameterService extends _i1.Mock implements _i18.ParameterService {
   @override
   _i12.Future<List<_i6.ParameterModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
@@ -1157,7 +1155,7 @@ class MockParameterService extends _i1.Mock implements _i19.ParameterService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPlayerContractService extends _i1.Mock
-    implements _i20.PlayerContractService {
+    implements _i19.PlayerContractService {
   @override
   _i12.Future<List<_i7.PlayerContractModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
@@ -1171,8 +1169,7 @@ class MockPlayerContractService extends _i1.Mock
                 <_i7.PlayerContractModel>[]),
       ) as _i12.Future<List<_i7.PlayerContractModel>>);
   @override
-  _i12.Future<_i7.PlayerContractModel?> get(_i16.Uuid? id) =>
-      (super.noSuchMethod(
+  _i12.Future<_i7.PlayerContractModel?> get(String? id) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [id],
@@ -1230,7 +1227,7 @@ class MockPlayerContractService extends _i1.Mock
         )),
       ) as _i12.Future<_i7.PlayerContractModel>);
   @override
-  _i12.Future<bool> delete(_i16.Uuid? id) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
@@ -1244,7 +1241,7 @@ class MockPlayerContractService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockParameterRepositoryService extends _i1.Mock
-    implements _i21.ParameterRepositoryService {
+    implements _i20.ParameterRepositoryService {
   @override
   _i8.DatabaseService get dbm => (super.noSuchMethod(
         Invocation.getter(#dbm),
@@ -1354,7 +1351,7 @@ class MockParameterRepositoryService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFormationRepositoryService extends _i1.Mock
-    implements _i22.FormationRepositoryService {
+    implements _i21.FormationRepositoryService {
   @override
   _i8.DatabaseService get dbm => (super.noSuchMethod(
         Invocation.getter(#dbm),
@@ -1368,7 +1365,7 @@ class MockFormationRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<bool> delete(_i16.Uuid? k) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? k) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [k],
@@ -1377,7 +1374,7 @@ class MockFormationRepositoryService extends _i1.Mock
         returnValueForMissingStub: _i12.Future<bool>.value(false),
       ) as _i12.Future<bool>);
   @override
-  _i12.Future<_i3.FormationModel> get(_i16.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i3.FormationModel> get(String? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1464,7 +1461,7 @@ class MockFormationRepositoryService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPatternOfPlayRepositoryService extends _i1.Mock
-    implements _i23.PatternOfPlayRepositoryService {
+    implements _i22.PatternOfPlayRepositoryService {
   @override
   _i8.DatabaseService get dbm => (super.noSuchMethod(
         Invocation.getter(#dbm),
@@ -1478,7 +1475,7 @@ class MockPatternOfPlayRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<bool> delete(_i16.Uuid? k) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? k) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [k],
@@ -1487,7 +1484,7 @@ class MockPatternOfPlayRepositoryService extends _i1.Mock
         returnValueForMissingStub: _i12.Future<bool>.value(false),
       ) as _i12.Future<bool>);
   @override
-  _i12.Future<_i5.PatternOfPlayModel> get(_i16.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i5.PatternOfPlayModel> get(String? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1575,7 +1572,7 @@ class MockPatternOfPlayRepositoryService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPlayerContractRepositoryService extends _i1.Mock
-    implements _i24.PlayerContractRepositoryService {
+    implements _i23.PlayerContractRepositoryService {
   @override
   _i8.DatabaseService get dbm => (super.noSuchMethod(
         Invocation.getter(#dbm),
@@ -1589,7 +1586,7 @@ class MockPlayerContractRepositoryService extends _i1.Mock
         ),
       ) as _i8.DatabaseService);
   @override
-  _i12.Future<bool> delete(_i16.Uuid? k) => (super.noSuchMethod(
+  _i12.Future<bool> delete(String? k) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [k],
@@ -1598,7 +1595,7 @@ class MockPlayerContractRepositoryService extends _i1.Mock
         returnValueForMissingStub: _i12.Future<bool>.value(false),
       ) as _i12.Future<bool>);
   @override
-  _i12.Future<_i7.PlayerContractModel> get(_i16.Uuid? t) => (super.noSuchMethod(
+  _i12.Future<_i7.PlayerContractModel> get(String? t) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [t],
@@ -1686,7 +1683,7 @@ class MockPlayerContractRepositoryService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPlayerRepositoryService extends _i1.Mock
-    implements _i25.PlayerRepositoryService {
+    implements _i24.PlayerRepositoryService {
   @override
   _i8.DatabaseService get dbm => (super.noSuchMethod(
         Invocation.getter(#dbm),
@@ -1791,7 +1788,7 @@ class MockPlayerRepositoryService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTeamRepositoryService extends _i1.Mock
-    implements _i26.TeamRepositoryService {
+    implements _i25.TeamRepositoryService {
   @override
   _i8.DatabaseService get dbm => (super.noSuchMethod(
         Invocation.getter(#dbm),
@@ -1943,7 +1940,7 @@ class MockDatabaseService extends _i1.Mock implements _i8.DatabaseService {
 /// A class which mocks [PasswordService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPasswordService extends _i1.Mock implements _i27.PasswordService {
+class MockPasswordService extends _i1.Mock implements _i26.PasswordService {
   @override
   _i12.Future<bool> hasPassword() => (super.noSuchMethod(
         Invocation.method(

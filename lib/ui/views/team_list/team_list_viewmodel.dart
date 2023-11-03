@@ -17,7 +17,6 @@ class TeamListViewModel extends FutureViewModel {
   }
 
   void populate() {
-   
     _teamService.getAll().then((value) {
       teams = value;
       rebuildUi();
@@ -39,8 +38,8 @@ class TeamListViewModel extends FutureViewModel {
   }
 
   void deleteTeam(int index) {
-      _teamService.delete(teams.elementAt(index).idTeam!).then((_) {
-      teams.removeAt(index); //TODO consultar denovo
+    _teamService.delete(teams.elementAt(index).idTeam!).then((_) {
+      teams.removeAt(index);
       rebuildUi();
     });
   }

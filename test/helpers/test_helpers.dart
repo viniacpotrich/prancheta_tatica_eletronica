@@ -52,9 +52,7 @@ void registerServices() {
   getAndRegisterFormationService();
   getAndRegisterTeamService();
   getAndRegisterPatternOfPlayService();
-  getAndRegisterConfigService();
   getAndRegisterPlayerContractService();
-  getAndRegisterConfigRepositoryService();
   getAndRegisterFormationRepositoryService();
   getAndRegisterPatternOfPlayRepositoryService();
   getAndRegisterPlayerContractRepositoryService();
@@ -143,24 +141,10 @@ MockPatternOfPlayService getAndRegisterPatternOfPlayService() {
   return service;
 }
 
-MockConfigService getAndRegisterConfigService() {
-  _removeRegistrationIfExists<ParameterService>();
-  final service = MockConfigService();
-  locator.registerSingleton<ParameterService>(service);
-  return service;
-}
-
 MockPlayerContractService getAndRegisterPlayerContractService() {
   _removeRegistrationIfExists<PlayerContractService>();
   final service = MockPlayerContractService();
   locator.registerSingleton<PlayerContractService>(service);
-  return service;
-}
-
-MockConfigRepositoryService getAndRegisterConfigRepositoryService() {
-  _removeRegistrationIfExists<ParameterRepositoryService>();
-  final service = MockConfigRepositoryService();
-  locator.registerSingleton<ParameterRepositoryService>(service);
   return service;
 }
 

@@ -32,7 +32,7 @@ class PlayerListViewModel extends FutureViewModel {
 
   void deletePlayer(int index) {
     _playerService.delete(players.elementAt(index).idPlayer!).then((_) {
-      players.removeAt(index); //TODO consultar denovo
+      players.removeAt(index);
       rebuildUi();
     });
   }

@@ -30,8 +30,7 @@ class DatabaseService {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute(
-        '''
+    await db.execute('''
      CREATE TABLE IF NOT EXISTS Team (
       idTeam TEXT PRIMARY KEY,
       nameTeam TEXT NOT NULL,
@@ -42,15 +41,7 @@ class DatabaseService {
       logoTeam BLOB
     );
     ''');
-    await db.execute(
-        '''
-     CREATE TABLE IF NOT EXISTS Params (
-      key TEXT PRIMARY KEY,
-      value TEXT NOT NULL
-    );
-    ''');
-    await db.execute(
-    '''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS Player (
         idPlayer TEXT PRIMARY KEY,
         namePlayer TEXT NOT NULL,
@@ -58,13 +49,29 @@ class DatabaseService {
         preferredFootPlayer INT NOT NULL
       );
     ''');
-    await db.execute(
-        '''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS PlayerPositions (
         idPlayer TEXT NOT NULL,
         position INT NOT NULL,
         FOREIGN KEY (idPlayer) REFERENCES Player (idPlayer)
       );
+    ''');
+    await db.execute('''
+     CREATE TABLE IF NOT EXISTS PlayerContract (
+      idPlayerContract TEXT PRIMARY KEY,
+      idPlayer TEXT NOT NULL,
+      idTeam TEXT NOT NULL,
+      dateStart INT NOT NULL,
+      dateEnd INT NOT NULL,
+      FOREIGN KEY (idPlayer) REFERENCES Player(idPlayer),
+      FOREIGN KEY (idTeam) REFERENCES Team(idTeam)
+    );
+    ''');
+    await db.execute('''
+     CREATE TABLE IF NOT EXISTS Params (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
     ''');
     await db.insert(
       "Params",
