@@ -13,7 +13,10 @@ class HomeView extends StackedView<HomeViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Prancheta Eletronica")),
+      appBar: AppBar(
+        title: const Text("Prancheta Eletronica"),
+        backgroundColor: Theme.of(context).colorScheme.background,
+      ),
       body: SafeArea(
           child: GridView.builder(
         padding: const EdgeInsets.all(10.0),
@@ -27,7 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
         itemBuilder: (context, index) => Container(
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
-            color: Colors.indigo,
+            color: Colors.transparent,
             borderRadius: BorderRadius.all(
               Radius.circular(50),
             ),

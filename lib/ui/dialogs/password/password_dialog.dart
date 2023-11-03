@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/ui/dialogs/password/password_dialog.form.dart';
 
+import '../../common/app_strings.dart';
 import 'password_dialog_model.dart';
 
 @FormView(fields: [
@@ -29,7 +30,7 @@ class PasswordDialog extends StackedView<PasswordDialogModel>
   ) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
@@ -45,9 +46,18 @@ class PasswordDialog extends StackedView<PasswordDialogModel>
             ),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: PasswordInputValueKey,
+                labelText: passwordString,
               ),
               controller: passwordInputController,
+              autofocus: true,
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: true,
+              onFieldSubmitted:(value)   {
+                completer(DialogResponse(
+                  confirmed: true,
+                  data: passwordInputController.value,
+                ));
+              },
             ),
             verticalSpaceMedium,
             GestureDetector(

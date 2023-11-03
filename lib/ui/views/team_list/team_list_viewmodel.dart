@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
@@ -37,10 +38,38 @@ class TeamListViewModel extends FutureViewModel {
     await futureToRun();
   }
 
-  void deleteTeam(int index) {
-    _teamService.delete(teams.elementAt(index).idTeam!).then((_) {
-      teams.removeAt(index);
-      rebuildUi();
-    });
+  void deleteTeam(int index, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Please Confirm'),
+            content: const Text('Are you sure to delete the Team?'),
+            actions: [
+              // The "Yes" button
+              TextButton(
+                  onPressed: () {
+                    _teamService
+                        .delete(teams.elementAt(index).idTeam!)
+                        .then((_) {
+                      teams.removeAt(index);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Deleted Successfully!'),
+                        showCloseIcon: true,
+                        backgroundColor: Color(0xFF00C853),
+                      ));
+                      rebuildUi();
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Yes')),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'))
+            ],
+          );
+        });
   }
 }

@@ -12,7 +12,7 @@ class PlayerDetailViewModel extends FutureViewModel
   final _service = locator<PlayerService>();
   final _navigationService = locator<NavigationService>();
 
-  List<SoccerPositionEnum> actualSoccerPositionsEnum = [SoccerPositionEnum.goalkeeper];
+  List<SoccerPositionEnum> actualSoccerPositionsEnum = [];
   PreferredFootEnum actualPreferredFootEnum = PreferredFootEnum.left;
 
   late PlayerModel tempPlayer = PlayerModel(
