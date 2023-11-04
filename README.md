@@ -6,9 +6,8 @@ This is a project that aims to provide tactical visualization for coaching staff
 
 ** Short Term **
 
-- [ ] Manage Teams
-- [ ] Manage Players
-- [ ] Manage Matches
+- [X] Manage Teams
+- [X] Manage Players
 - [ ] Manage and View Formations
 - [ ] Manage and View Patterns of Play
 

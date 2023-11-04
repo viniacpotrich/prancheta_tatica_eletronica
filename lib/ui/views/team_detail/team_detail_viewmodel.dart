@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -11,13 +12,11 @@ import 'package:tactical_e_clipboard/services/team_service.dart';
 class TeamDetailViewModel extends FutureViewModel
     with FormStateHelper
     implements FormViewModel {
-  // create some values
   final _navigationService = locator<NavigationService>();
+  late TeamModel teamModelTemp;
   late Color picker1Color;
   late Color picker2Color;
   bool isEditing = false;
-
-  late TeamModel teamModelTemp;
 
   @override
   Future futureToRun() async {
@@ -61,18 +60,35 @@ class TeamDetailViewModel extends FutureViewModel
     rebuildUi();
   }
 
-  submit() {
+  SnackBar getSuccessSnackBar(String msg) {
+    return SnackBar(
+      content: Text(msg),
+      showCloseIcon: true,
+      backgroundColor: Color(0xFF00C853),
+    );
+  }
+
+  void submit(BuildContext context) {
     teamModelTemp.colorPrimaryTeam = picker1Color.value.toString();
     teamModelTemp.colorSecondaryTeam = picker2Color.value.toString();
     teamModelTemp.cityTeam = "";
     TeamService teamService = TeamService();
     if (isEditing) {
-      teamService.update(teamModelTemp);
+      teamService.update(teamModelTemp).then((value) =>
+          ScaffoldMessenger.of(context)
+              .showSnackBar(getSuccessSnackBar("Updated Succesfully!")));
+      ;
     } else {
-      teamService.put(teamModelTemp);
+      teamService.put(teamModelTemp).then((value) =>
+          ScaffoldMessenger.of(context)
+              .showSnackBar(getSuccessSnackBar("Created Succesfully!")));
     }
     _navigationService.back();
     rebuildUi();
+  }
+
+  void showInSnackBar(ScaffoldMessengerState scaffoldContext, String value) {
+    scaffoldContext.showSnackBar(SnackBar(content: Text(value)));
   }
 
   void pickFile() async {

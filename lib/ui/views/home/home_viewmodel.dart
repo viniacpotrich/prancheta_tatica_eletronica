@@ -1,16 +1,13 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
 import 'package:tactical_e_clipboard/app/app.dialogs.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/item_home_menu_model.dart';
 import 'package:tactical_e_clipboard/services/password_service.dart';
-import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 
 class HomeViewModel extends FutureViewModel {
   final _passwordService = locator<PasswordService>();
-  final _bottomSheetService = locator<BottomSheetService>();
   final _navigationService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
 
@@ -94,14 +91,6 @@ class HomeViewModel extends FutureViewModel {
         callBack: _navigationService.navigateToPlayerContractListView,
       ),
     ];
-  }
-
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
   }
 
   void navigateTo(Function callBack) => callBack();

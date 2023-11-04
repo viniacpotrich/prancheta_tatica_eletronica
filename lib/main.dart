@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
-import 'package:stacked_services/stacked_services.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:tactical_e_clipboard/ui/common/app_colors.dart';
 
 import 'app/app.dialogs.dart';
 
@@ -28,7 +29,14 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light(),
+      theme:  ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: kcPrimaryColor,
+          brightness: Brightness.light,
+          primary: kcPrimaryColor
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,

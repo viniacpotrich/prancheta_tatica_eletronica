@@ -15,16 +15,14 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Players"),
-        actions: [
-          ElevatedButton(
-            onPressed: () {},
-            child: const Icon(Icons.search),
-          ),
-               ElevatedButton(
-            onPressed: () => viewModel.addPlayer(),
-            child: const Icon(Icons.add),
-          ),
-        ],
+        actions: [],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.large(
+        backgroundColor: const Color(0xff03dac6),
+        foregroundColor: Colors.black,
+        onPressed: () => viewModel.addPlayer(),
+        child: const Icon(Icons.add),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
@@ -48,7 +46,7 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
                 Expanded(
                   flex: 1,
                   child: InkWell(
-                    onTap: () => viewModel.deletePlayer(index),
+                    onTap: () => viewModel.deletePlayer(index, context),
                     child: const Icon(Icons.delete),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -72,30 +73,35 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
         child: Column(
           children: [
+            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: NamePlayerInputValueKey,
+                labelText: "Full Name",
               ),
               initialValue: viewModel.tempPlayer.namePlayer,
               onChanged: (value) => viewModel.controllerNameInput(
                 value,
               ),
             ),
+            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: NicknamePlayerInputValueKey,
+                labelText: "Nickname",
               ),
               initialValue: viewModel.tempPlayer.nicknamePlayer,
               onChanged: (value) => viewModel.controllerNickNameInput(
                 value,
               ),
             ),
+            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             MultiSelectDialogField(
+              buttonText: const Text("Preferred Position(s)"),
+              title: const Text("Select Preferred Position(s):"),
               initialValue: viewModel.actualSoccerPositionsEnum,
-              items:  SoccerPositionEnum.values
+              items: SoccerPositionEnum.values
                   .toList()
                   .map((val) => MultiSelectItem(
-                         val,
+                        val,
                         val.toString(),
                       ))
                   .toList(),
@@ -104,6 +110,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                 viewModel.controllerPositionsPlayerDropDown(values);
               },
             ),
+            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             DropdownButtonFormField(
               value: viewModel.actualPreferredFootEnum,
               icon: const Icon(Icons.arrow_downward),
@@ -123,6 +130,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                   )
                   .toList(),
             ),
+            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             /* DropdownButtonFormField(
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
