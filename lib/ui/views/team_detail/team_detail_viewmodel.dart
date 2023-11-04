@@ -21,7 +21,6 @@ class TeamDetailViewModel extends FutureViewModel
 
   @override
   Future futureToRun() async {
-    // TODO: implement futureToRun
     getTeam(_navigationService.currentArguments.teamModel);
   }
 
@@ -73,7 +72,7 @@ class TeamDetailViewModel extends FutureViewModel
       teamService.put(teamModelTemp);
     }
     _navigationService.back();
-    rebuildUi(); //TODO buscar valores no bancos
+    rebuildUi();
   }
 
   void pickFile() async {

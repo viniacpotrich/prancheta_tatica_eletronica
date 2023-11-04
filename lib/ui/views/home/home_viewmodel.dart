@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
@@ -46,7 +45,7 @@ class HomeViewModel extends FutureViewModel {
     if (newPassword!.data.text.length < 5) {
       askNewPassword();
     } else {
-      _passwordService.updatePassword(newPassword!.data.text);
+      _passwordService.updatePassword(newPassword.data.text);
     }
 
   }

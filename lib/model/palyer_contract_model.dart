@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:tactical_e_clipboard/model/team_model.dart';
 
 class PlayerContractModel {

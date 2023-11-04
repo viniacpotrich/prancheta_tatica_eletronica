@@ -41,7 +41,7 @@ class PlayerContractListViewModel extends FutureViewModel {
     _playerContractService
         .delete(playerContracts.elementAt(index).idPlayerContract!)
         .then((_) {
-      playerContracts.removeAt(index); //TODO consultar denovo
+      playerContracts.removeAt(index);
       rebuildUi();
     });
   }

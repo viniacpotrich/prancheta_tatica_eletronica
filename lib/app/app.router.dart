@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i18;
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart' as _i17;
+import 'package:tactical_e_clipboard/model/player_model.dart' as _i15;
 import 'package:tactical_e_clipboard/model/team_model.dart' as _i16;
 import 'package:tactical_e_clipboard/ui/views/formation_detail/formation_detail_view.dart'
     as _i9;
@@ -33,7 +34,6 @@ import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.dart'
     as _i7;
 import 'package:tactical_e_clipboard/ui/views/team_list/team_list_view.dart'
     as _i6;
-import 'package:uuid/uuid.dart' as _i15;
 
 class Routes {
   static const homeView = '/home-view';
@@ -148,10 +148,12 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i5.PlayerDetailView: (data) {
-      final args = data.getArgs<PlayerDetailViewArguments>(nullOk: false);
+      final args = data.getArgs<PlayerDetailViewArguments>(
+        orElse: () => const PlayerDetailViewArguments(),
+      );
       return _i14.MaterialPageRoute<dynamic>(
-        builder: (context) => _i5.PlayerDetailView(
-            playerModelID: args.playerModelID, key: args.key),
+        builder: (context) =>
+            _i5.PlayerDetailView(playerModel: args.playerModel, key: args.key),
         settings: data,
       );
     },
@@ -218,28 +220,28 @@ class StackedRouter extends _i1.RouterBase {
 
 class PlayerDetailViewArguments {
   const PlayerDetailViewArguments({
-    required this.playerModelID,
+    this.playerModel,
     this.key,
   });
 
-  final _i15.Uuid playerModelID;
+  final _i15.PlayerModel? playerModel;
 
   final _i14.Key? key;
 
   @override
   String toString() {
-    return '{"playerModelID": "$playerModelID", "key": "$key"}';
+    return '{"playerModel": "$playerModel", "key": "$key"}';
   }
 
   @override
   bool operator ==(covariant PlayerDetailViewArguments other) {
     if (identical(this, other)) return true;
-    return other.playerModelID == playerModelID && other.key == key;
+    return other.playerModel == playerModel && other.key == key;
   }
 
   @override
   int get hashCode {
-    return playerModelID.hashCode ^ key.hashCode;
+    return playerModel.hashCode ^ key.hashCode;
   }
 }
 
@@ -341,7 +343,7 @@ extension NavigatorStateExtension on _i18.NavigationService {
   }
 
   Future<dynamic> navigateToPlayerDetailView({
-    required _i15.Uuid playerModelID,
+    _i15.PlayerModel? playerModel,
     _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -351,7 +353,7 @@ extension NavigatorStateExtension on _i18.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.playerDetailView,
         arguments:
-            PlayerDetailViewArguments(playerModelID: playerModelID, key: key),
+            PlayerDetailViewArguments(playerModel: playerModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -520,7 +522,7 @@ extension NavigatorStateExtension on _i18.NavigationService {
   }
 
   Future<dynamic> replaceWithPlayerDetailView({
-    required _i15.Uuid playerModelID,
+    _i15.PlayerModel? playerModel,
     _i14.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -530,7 +532,7 @@ extension NavigatorStateExtension on _i18.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.playerDetailView,
         arguments:
-            PlayerDetailViewArguments(playerModelID: playerModelID, key: key),
+            PlayerDetailViewArguments(playerModel: playerModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

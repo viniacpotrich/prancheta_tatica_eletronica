@@ -20,8 +20,8 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
             onPressed: () {},
             child: const Icon(Icons.search),
           ),
-          ElevatedButton(
-            onPressed: () {},
+               ElevatedButton(
+            onPressed: () => viewModel.addPlayer(),
             child: const Icon(Icons.add),
           ),
         ],

@@ -42,9 +42,19 @@ class DatabaseService {
     );
     ''');
     await db.execute('''
-     CREATE TABLE IF NOT EXISTS Player (
-      idPlayer TEXT PRIMARY KEY
-    );
+      CREATE TABLE IF NOT EXISTS Player (
+        idPlayer TEXT PRIMARY KEY,
+        namePlayer TEXT NOT NULL,
+        nicknamePlayer TEXT NOT NULL,
+        preferredFootPlayer INT NOT NULL
+      );
+    ''');
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS PlayerPositions (
+        idPlayer TEXT NOT NULL,
+        position INT NOT NULL,
+        FOREIGN KEY (idPlayer) REFERENCES Player (idPlayer)
+      );
     ''');
     await db.execute('''
      CREATE TABLE IF NOT EXISTS PlayerContract (

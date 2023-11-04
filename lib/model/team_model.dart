@@ -41,7 +41,10 @@ class TeamModel {
   }
 
   Future<Map<String, Object?>> toMap() async {
-    var blob = await imageToBase64(logoTeam!);
+    String? blob = '';
+    if (logoTeam != null) {
+      blob = await imageToBase64(logoTeam!);
+    }
 
     return {
       'idTeam': idTeam,
