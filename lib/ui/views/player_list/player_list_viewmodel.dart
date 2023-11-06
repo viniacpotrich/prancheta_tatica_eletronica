@@ -11,7 +11,7 @@ class PlayerListViewModel extends FutureViewModel {
   final PlayerService _playerService = locator<PlayerService>();
   final _navigationService = locator<NavigationService>();
 
-  late List<PlayerModel> players = [];
+  List<PlayerModel> players = [];
 
   @override
   Future futureToRun() async {

@@ -52,7 +52,7 @@ class PasswordDialog extends StackedView<PasswordDialogModel>
               autofocus: true,
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
-              onFieldSubmitted:(value)   {
+              onFieldSubmitted: (value) {
                 completer(DialogResponse(
                   confirmed: true,
                   data: passwordInputController.value,

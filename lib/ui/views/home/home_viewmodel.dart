@@ -34,39 +34,36 @@ class HomeViewModel extends FutureViewModel {
   }
 
   Future<void> askNewPassword() async {
-    final newPassword = await _dialogService
-        .showCustomDialog(
-          variant: DialogType.password,
-          title: "Informe uma NOVA senha (pelo menos 5 caracteres)",
-        );
+    final newPassword = await _dialogService.showCustomDialog(
+      variant: DialogType.password,
+      title: "Informe uma NOVA senha (pelo menos 5 caracteres)",
+    );
     if (newPassword!.data.text.length < 5) {
       askNewPassword();
     } else {
       _passwordService.updatePassword(newPassword.data.text);
     }
-
   }
 
   Future<void> askAndValidatePassword() async {
-  final result = await _dialogService.showCustomDialog(
-    variant: DialogType.password,
-    title: "Informe a senha atual",
-  );
+    final result = await _dialogService.showCustomDialog(
+      variant: DialogType.password,
+      title: "Informe a senha atual",
+    );
 
-  if (result != null) {
-    final text = result.data?.text;
+    if (result != null) {
+      final text = result.data?.text;
 
-    if (text != null && await _passwordService.isValid(text)) {
-      // Password is valid, proceed with your logic.
+      if (text != null && await _passwordService.isValid(text)) {
+        // Password is valid, proceed with your logic.
+      } else {
+        // Password is not valid, you might want to handle this case.
+        await askAndValidatePassword(); // Re-ask for the password.
+      }
     } else {
-      // Password is not valid, you might want to handle this case.
-      await askAndValidatePassword(); // Re-ask for the password.
+      // Handle the case when the dialog is dismissed or cancelled.
     }
-  } else {
-    // Handle the case when the dialog is dismissed or cancelled.
   }
-}
-
 
   void populate() {
     listMenu = [

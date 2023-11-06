@@ -29,13 +29,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme:  ThemeData(
+      theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: kcPrimaryColor,
-          brightness: Brightness.light,
-          primary: kcPrimaryColor
-        ),
+            seedColor: kcPrimaryColor,
+            brightness: Brightness.light,
+            primary: kcPrimaryColor),
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.startupView,

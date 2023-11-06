@@ -40,12 +40,13 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
   Future<List<PlayerContractModel>> getAll() async {
     try {
       var data = await dbm.getInstanceDB().rawQuery(''' 
-          SELECT * FROM PlayerContract
-          LEFT JOIN Team  ON Team.idTeam = idPlayerContract
+          SELECT pc.*, t.* FROM PlayerContract as pc
+          LEFT JOIN Team as t ON t.idTeam = pc.idTeam 
       ''');
       List<PlayerContractModel> result = [];
       for (var element in data) {
-        result.add(await PlayerContractModel.fromMap(element));
+        var contract = await PlayerContractModel.fromMap(element);
+        result.add(contract);
       }
       return result;
     } catch (e) {

@@ -30,6 +30,7 @@ import 'package:tactical_e_clipboard/services/password_service.dart';
 import 'package:tactical_e_clipboard/ui/dialogs/password/password_dialog.dart';
 import 'package:tactical_e_clipboard/ui/views/player_contract_list/player_contract_list_view.dart';
 import 'package:tactical_e_clipboard/ui/views/player_contract_detail/player_contract_detail_view.dart';
+import 'package:tactical_e_clipboard/ui/views/date_picker_widget/date_picker_widget_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -46,6 +47,7 @@ import 'package:tactical_e_clipboard/ui/views/player_contract_detail/player_cont
     MaterialRoute(page: PatternOfPlayDetailView),
     MaterialRoute(page: PlayerContractListView),
     MaterialRoute(page: PlayerContractDetailView),
+    MaterialRoute(page: DatePickerWidgetView),
 // @stacked-route
   ],
   dependencies: [
