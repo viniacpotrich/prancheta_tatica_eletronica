@@ -8,6 +8,8 @@ import 'package:uuid/data.dart';
 import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
 
+import '../ui/common/app_strings.dart';
+
 class PlayerContractRepositoryService implements PlayerContractRepository {
   final _table = "PlayerContract";
 
@@ -38,7 +40,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
     if (results.isNotEmpty) {
       return await PlayerContractModel.fromMap(results.first);
     } else {
-      throw Exception('No record found for Uuid: $t');
+      throw Exception('$noRecordFoundForKey: $t');
     }
   }
 
@@ -56,7 +58,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
       }
       return result;
     } catch (e) {
-      logger.e('Error! Something bad happened', error: e);
+      logger.e(genericErrorMessage, error: e);
       return [];
     }
   }
@@ -72,7 +74,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
         whereArgs: [k.idPlayerContract.toString()],
       );
     } catch (e) {
-      logger.e('Error! Something bad happened', error: e);
+      logger.e(genericErrorMessage, error: e);
     }
     return k;
   }
@@ -82,7 +84,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
     k.idPlayerContract = const Uuid().v4(config: V4Options(null, CryptoRNG()));
     var mapped = await k.toMap();
     if (k.idPlayerContract == null) {
-      Exception("UUID cannot be null");
+      Exception(uuidCannotBeNull);
     }
     await dbm.getInstanceDB().insert(
           _table,

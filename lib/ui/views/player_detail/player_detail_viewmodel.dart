@@ -5,6 +5,7 @@ import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/services/player_service.dart';
 import '../../../app/app.locator.dart';
+import '../../common/app_strings.dart';
 
 class PlayerDetailViewModel extends FutureViewModel
     with FormStateHelper
@@ -16,9 +17,9 @@ class PlayerDetailViewModel extends FutureViewModel
   PreferredFootEnum actualPreferredFootEnum = PreferredFootEnum.left;
 
   late PlayerModel tempPlayer = PlayerModel(
-    "",
-    "",
-    "",
+    empty,
+    empty,
+    empty,
     [],
     PreferredFootEnum.left,
   );
@@ -32,9 +33,9 @@ class PlayerDetailViewModel extends FutureViewModel
       actualPreferredFootEnum = tempPlayer.preferredFootPlayer;
     } else {
       tempPlayer = PlayerModel(
-        "",
-        "",
-        "",
+        empty,
+        empty,
+        empty,
         [],
         PreferredFootEnum.left,
       );

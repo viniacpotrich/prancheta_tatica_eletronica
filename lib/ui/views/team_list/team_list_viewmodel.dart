@@ -5,6 +5,7 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/services/team_service.dart';
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 
 class TeamListViewModel extends FutureViewModel {
   final TeamService _teamService = locator<TeamService>();
@@ -43,10 +44,9 @@ class TeamListViewModel extends FutureViewModel {
         context: context,
         builder: (BuildContext ctx) {
           return AlertDialog(
-            title: const Text('Please Confirm'),
-            content: const Text('Are you sure to delete the Team?'),
+            title: const Text(pleaseConfirm),
+            content: const Text(deleteTeamConfirmation),
             actions: [
-              // The "Yes" button
               TextButton(
                   onPressed: () {
                     _teamService
@@ -54,7 +54,7 @@ class TeamListViewModel extends FutureViewModel {
                         .then((_) {
                       teams.removeAt(index);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Deleted Successfully!'),
+                        content: Text(deletedSuccessfully),
                         showCloseIcon: true,
                         backgroundColor: Color(0xFF00C853),
                       ));
@@ -62,12 +62,12 @@ class TeamListViewModel extends FutureViewModel {
                     });
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Yes')),
+                  child: const Text(yes)),
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('No'))
+                  child: const Text(no))
             ],
           );
         });

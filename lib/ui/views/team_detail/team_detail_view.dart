@@ -4,7 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.form.dart';
-
+import '../../common/app_strings.dart';
 import 'team_detail_viewmodel.dart';
 
 @FormView(fields: [
@@ -18,6 +18,9 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
     with $TeamDetailView {
   const TeamDetailView({required this.teamModel, Key? key}) : super(key: key);
   final TeamModel? teamModel;
+
+  static const String _heroTagPrimaryColor = "heroTagPrimaryColor";
+  static const String _heroTagSecondaryColor = "heroTagSecondaryColor";
 
   @override
   void onViewModelReady(viewModel) {
@@ -33,7 +36,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Team Detail"),
+        title: const Text(teamDetail),
         actions: [
           ElevatedButton(
             onPressed: () => viewModel.submit(context),
@@ -49,7 +52,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: "Name",
+                    labelText: name,
                   ),
                   initialValue: viewModel.teamModelTemp.nameTeam,
                   onChanged: (value) => viewModel.controllerNameInput(
@@ -59,7 +62,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                 const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: "Nickname",
+                    labelText: nickname,
                   ),
                   initialValue: viewModel.teamModelTemp.nicknameTeam,
                   onChanged: (value) => viewModel.controllerNickNameInput(
@@ -69,7 +72,7 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                 const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: "City",
+                    labelText: city,
                   ),
                   initialValue: viewModel.teamModelTemp.cityTeam,
                   onChanged: (value) => viewModel.controllerCitiesTeamInput(
@@ -79,13 +82,13 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                 const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
                 Row(
                   children: [
-                    const Text("Colors:",
+                    const Text("$colors:",
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     const Gap(20,
                         color: Colors.transparent, crossAxisExtent: 20),
                     FloatingActionButton.extended(
-                      heroTag: "clr1",
-                      label: const Text("Primary Color"),
+                      heroTag: _heroTagPrimaryColor,
+                      label: const Text(primaryColor),
                       onPressed: () => viewModel.showColorPicker(
                         context,
                         viewModel.picker1Color,
@@ -96,8 +99,8 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
                     const Gap(20,
                         color: Colors.transparent, crossAxisExtent: 20),
                     FloatingActionButton.extended(
-                      heroTag: "clr2",
-                      label: const Text("Secondary Color"),
+                      heroTag: _heroTagSecondaryColor,
+                      label: const Text(secondaryColor),
                       onPressed: () => viewModel.showColorPicker(
                         context,
                         viewModel.picker2Color,

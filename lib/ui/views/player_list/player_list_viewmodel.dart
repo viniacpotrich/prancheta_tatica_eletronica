@@ -5,6 +5,7 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/services/player_service.dart';
+import '../../common/app_strings.dart';
 
 class PlayerListViewModel extends FutureViewModel {
   final PlayerService _playerService = locator<PlayerService>();
@@ -36,10 +37,9 @@ class PlayerListViewModel extends FutureViewModel {
         context: context,
         builder: (BuildContext ctx) {
           return AlertDialog(
-            title: const Text('Please Confirm'),
-            content: const Text('Are you sure to delete the Player?'),
+            title: const Text(pleaseConfirm),
+            content: const Text(deletePlayerConfirmation),
             actions: [
-              // The "Yes" button
               TextButton(
                   onPressed: () {
                     _playerService
@@ -47,7 +47,7 @@ class PlayerListViewModel extends FutureViewModel {
                         .then((_) {
                       players.removeAt(index);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Deleted Successfully!'),
+                        content: Text(deletedSuccessfully),
                         showCloseIcon: true,
                         backgroundColor: Color(0xFF00C853),
                       ));
@@ -55,12 +55,12 @@ class PlayerListViewModel extends FutureViewModel {
                     });
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Yes')),
+                  child: const Text(yes)),
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('No'))
+                  child: const Text(no))
             ],
           );
         });

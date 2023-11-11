@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 import 'package:tactical_e_clipboard/ui/common/ui_helpers.dart';
-
 import 'startup_viewmodel.dart';
 
 class StartupView extends StackedView<StartupViewModel> {
@@ -20,13 +20,13 @@ class StartupView extends StackedView<StartupViewModel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'ELECTRONIC TACTICAL CLIPBOARD',
+              appTitle,
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Loading ...', style: TextStyle(fontSize: 16)),
+                Text('$loading $etc', style: TextStyle(fontSize: 16)),
                 horizontalSpaceSmall,
                 SizedBox(
                   width: 16,

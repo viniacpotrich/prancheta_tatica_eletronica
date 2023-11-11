@@ -3,9 +3,11 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/parameter_model.dart';
 import 'package:tactical_e_clipboard/repository/parameter_repository.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
+import '../ui/common/app_strings.dart';
 
 class ParameterRepositoryService implements ParameterRepository {
   final _table = "Params";
+  final _whereKey = "key = ?";
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
@@ -24,16 +26,16 @@ class ParameterRepositoryService implements ParameterRepository {
   Future<ParameterModel> get(String t) async {
     try {
       List<Map<String, dynamic>> results = await dbm.getInstanceDB().rawQuery(
-        "SELECT * FROM $_table WHERE key = ?",
+        "SELECT * FROM $_table WHERE $_whereKey",
         [t],
       );
       if (results.isNotEmpty) {
         return await ParameterModel.fromMap(results.first);
       } else {
-        throw Exception('No record found for key: $t');
+        throw Exception('$noRecordFoundForKey: $t');
       }
     } catch (e) {
-      logger.e('Error! Something bad happened', error: e);
+      logger.e(genericErrorMessage, error: e);
       return ParameterModel(key: t, value: "");
     }
   }
@@ -48,7 +50,7 @@ class ParameterRepositoryService implements ParameterRepository {
       }
       return result;
     } catch (e) {
-      logger.e('Error! Something bad happened', error: e);
+      logger.e(genericErrorMessage, error: e);
       return [];
     }
   }
@@ -59,11 +61,11 @@ class ParameterRepositoryService implements ParameterRepository {
       await dbm.getInstanceDB().update(
         _table,
         k.toMap(),
-        where: "key = ?",
+        where: _whereKey,
         whereArgs: [k.key],
       );
     } catch (e) {
-      logger.e('Error! Something bad happened', error: e);
+      logger.e(genericErrorMessage, error: e);
     }
     return k;
   }

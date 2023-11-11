@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import '../../common/app_strings.dart';
 import 'date_picker_widget_viewmodel.dart';
-
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DatePickerWidgetView extends StackedView<DatePickerWidgetViewModel> {
@@ -16,7 +15,7 @@ class DatePickerWidgetView extends StackedView<DatePickerWidgetViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Selecione um periodo"),
+        title: const Text(selectARange),
         actions: [
           IconButton(onPressed: viewModel.pop, icon: const Icon(Icons.check))
         ],

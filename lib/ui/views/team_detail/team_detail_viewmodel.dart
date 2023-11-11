@@ -9,6 +9,8 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/services/team_service.dart';
 
+import '../../common/app_strings.dart';
+
 class TeamDetailViewModel extends FutureViewModel
     with FormStateHelper
     implements FormViewModel {
@@ -76,11 +78,11 @@ class TeamDetailViewModel extends FutureViewModel
     if (isEditing) {
       teamService.update(teamModelTemp).then((value) =>
           ScaffoldMessenger.of(context)
-              .showSnackBar(getSuccessSnackBar("Updated Succesfully!")));
+              .showSnackBar(getSuccessSnackBar(updatedSuccessfully)));
     } else {
       teamService.put(teamModelTemp).then((value) =>
           ScaffoldMessenger.of(context)
-              .showSnackBar(getSuccessSnackBar("Created Succesfully!")));
+              .showSnackBar(getSuccessSnackBar(createdSuccessfully)));
     }
     _navigationService.back();
     rebuildUi();
@@ -99,8 +101,6 @@ class TeamDetailViewModel extends FutureViewModel
       var base64 = await TeamModel.fileToBase64(file);
       teamModelTemp.logoTeam = await TeamModel.base64ToImage(base64);
       rebuildUi();
-    } else {
-      // User canceled the picker
     }
   }
 
@@ -121,7 +121,7 @@ class TeamDetailViewModel extends FutureViewModel
     return showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Pick a color!'),
+        title: const Text(pickAColor),
         content: SingleChildScrollView(
           child: Column(
             children: [

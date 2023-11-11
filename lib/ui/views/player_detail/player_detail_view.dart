@@ -6,8 +6,8 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/ui/views/player_detail/player_detail_view.form.dart';
-
 import '../../../enum/soccer_position_enum.dart';
+import '../../common/app_strings.dart';
 import 'player_detail_viewmodel.dart';
 
 @FormView(fields: [
@@ -16,28 +16,28 @@ import 'player_detail_viewmodel.dart';
   FormDropdownField(
     name: "preferredPositionsPlayer",
     items: [
-      StaticDropdownItem(title: "Goalkeeper", value: '1'),
-      StaticDropdownItem(title: "Center Back", value: '2'),
-      StaticDropdownItem(title: "Right Back", value: '3'),
-      StaticDropdownItem(title: "Left Back", value: '4'),
-      StaticDropdownItem(title: "Wing Back", value: '5'),
-      StaticDropdownItem(title: "Sweeper", value: '6'),
-      StaticDropdownItem(title: "Defensive Midfielder", value: '7'),
-      StaticDropdownItem(title: "Central Midfielder", value: '8'),
-      StaticDropdownItem(title: "Attacking Midfielder", value: '9'),
-      StaticDropdownItem(title: "Right Midfielder", value: '10'),
-      StaticDropdownItem(title: "Left Midfielder", value: '11'),
-      StaticDropdownItem(title: "Right Winger", value: '12'),
-      StaticDropdownItem(title: "Left Winger", value: '13'),
-      StaticDropdownItem(title: "Forward", value: '14'),
-      StaticDropdownItem(title: "Striker", value: '15'),
+      StaticDropdownItem(title: goalkeeper, value: '1'),
+      StaticDropdownItem(title: centerBack, value: '2'),
+      StaticDropdownItem(title: rightBack, value: '3'),
+      StaticDropdownItem(title: leftBack, value: '4'),
+      StaticDropdownItem(title: wingBack, value: '5'),
+      StaticDropdownItem(title: sweeper, value: '6'),
+      StaticDropdownItem(title: defensiveMidfielder, value: '7'),
+      StaticDropdownItem(title: centralMidfielder, value: '8'),
+      StaticDropdownItem(title: attackingMidfielder, value: '9'),
+      StaticDropdownItem(title: rightMidfielder, value: '10'),
+      StaticDropdownItem(title: leftMidfielder, value: '11'),
+      StaticDropdownItem(title: rightWinger, value: '12'),
+      StaticDropdownItem(title: leftWinger, value: '13'),
+      StaticDropdownItem(title: forward, value: '14'),
+      StaticDropdownItem(title: striker, value: '15'),
     ],
   ),
   FormDropdownField(
     name: "preferredFootPlayer",
     items: [
-      StaticDropdownItem(title: 'Left', value: '1'),
-      StaticDropdownItem(title: 'Right', value: '2'),
+      StaticDropdownItem(title: left, value: '1'),
+      StaticDropdownItem(title: right, value: '2'),
     ],
   ),
 ])
@@ -61,7 +61,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Player Detail"),
+        title: const Text(playerDetail),
         actions: [
           ElevatedButton(
             onPressed: viewModel.submit,
@@ -76,7 +76,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
             const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: "Full Name",
+                labelText: fullName,
               ),
               initialValue: viewModel.tempPlayer.namePlayer,
               onChanged: (value) => viewModel.controllerNameInput(
@@ -86,7 +86,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
             const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: "Nickname",
+                labelText: nickname,
               ),
               initialValue: viewModel.tempPlayer.nicknamePlayer,
               onChanged: (value) => viewModel.controllerNickNameInput(
@@ -95,8 +95,8 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
             ),
             const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
             MultiSelectDialogField(
-              buttonText: const Text("Preferred Position(s)"),
-              title: const Text("Select Preferred Position(s):"),
+              buttonText: const Text(preferredPosition),
+              title: const Text(selectPreferedPositions),
               initialValue: viewModel.actualSoccerPositionsEnum,
               items: SoccerPositionEnum.values
                   .toList()
@@ -115,7 +115,7 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
               value: viewModel.actualPreferredFootEnum,
               icon: const Icon(Icons.arrow_downward),
               decoration: const InputDecoration(
-                labelText: "Select Preferred foot",
+                labelText: selectPreferredFoot,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
               ),
               onChanged: (value) =>
