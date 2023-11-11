@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
@@ -12,6 +13,11 @@ class TeamRepositoryService implements TeamRepository {
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
+
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<bool> delete(String k) async {
@@ -46,7 +52,7 @@ class TeamRepositoryService implements TeamRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
       return [];
     }
   }
@@ -62,7 +68,7 @@ class TeamRepositoryService implements TeamRepository {
         whereArgs: [k.idTeam.toString()],
       );
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
     }
     return k;
   }

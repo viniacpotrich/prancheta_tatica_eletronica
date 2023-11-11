@@ -131,23 +131,6 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
                   .toList(),
             ),
             const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-            /* DropdownButtonFormField(
-              icon: const Icon(Icons.arrow_downward),
-              decoration: const InputDecoration(
-                labelText: "Selecione o Time",
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              ),
-              onChanged: (value) =>
-                  viewModel.controllerPositionsPlayerDropDown(value),
-              items: PreferredFootPlayerValueToTitleMap
-                  .values // TODO buscar os times
-                  .toList()
-                  .map((val) => DropdownMenuItem(
-                        value: val,
-                        child: Text(val),
-                      ))
-                  .toList(),
-            ),*/
           ],
         ),
       ),

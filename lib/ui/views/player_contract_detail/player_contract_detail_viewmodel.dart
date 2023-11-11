@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
@@ -66,9 +65,9 @@ class PlayerContractDetailViewModel extends FutureViewModel
   Future<void> getAllTeams() async {
     _teamService.getAll().then((value) {
       teams = value;
-      value.forEach((element) {
+      for (var element in value) {
         teamsMap.addAll({element.idTeam!: element.nameTeam!});
-      });
+      }
       if (isEditing) {
         actualTeam = playerContractTemp.team!.idTeam;
       }
@@ -78,9 +77,9 @@ class PlayerContractDetailViewModel extends FutureViewModel
   Future<void> getAllPlayers() async {
     _playerService.getAll().then((value) {
       palyers = value;
-      value.forEach((element) {
+      for (var element in value) {
         playersMap.addAll({element.idPlayer!: element.namePlayer});
-      });
+      }
       if (isEditing) {
         actualPlayer = playerContractTemp.idPlayer;
       }

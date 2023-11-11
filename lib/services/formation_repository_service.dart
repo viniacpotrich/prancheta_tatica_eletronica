@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/formation_model.dart';
 import 'package:tactical_e_clipboard/repository/formation_repository.dart';
@@ -6,6 +7,11 @@ import 'package:tactical_e_clipboard/services/database_service.dart';
 class FormationRepositoryService implements FormationRepository {
   @override
   DatabaseService get dbm => locator<DatabaseService>();
+
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<bool> delete(String k) {

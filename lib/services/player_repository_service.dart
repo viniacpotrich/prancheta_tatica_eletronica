@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
@@ -13,6 +14,11 @@ class PlayerRepositoryService implements PlayerRepository {
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
+
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<PlayerModel> get(String id) async {
@@ -35,7 +41,7 @@ class PlayerRepositoryService implements PlayerRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
       return [];
     }
   }
@@ -107,7 +113,8 @@ class PlayerRepositoryService implements PlayerRepository {
   }
 
   Future<List<Map<String, dynamic>>> _getPlayers(String? id) {
-    String query = '''
+    String query =
+        '''
         SELECT $_table.$_primaryKey, 
           $_table.namePlayer, 
           $_table.nicknamePlayer, 

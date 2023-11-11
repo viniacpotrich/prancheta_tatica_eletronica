@@ -15,7 +15,7 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Players"),
-        actions: [],
+        actions: const [],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.large(

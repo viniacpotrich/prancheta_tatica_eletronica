@@ -5,6 +5,8 @@ interface class PlayerContractRepository
     extends RepositoryInterface<String, PlayerContractModel> {
   @override
   get dbm => throw UnimplementedError();
+  @override
+  get logger => throw UnimplementedError();
 
   @override
   Future<bool> delete(String t) {

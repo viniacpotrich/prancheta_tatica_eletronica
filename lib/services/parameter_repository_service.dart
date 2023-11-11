@@ -1,13 +1,19 @@
+import 'package:logger/logger.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/parameter_model.dart';
 import 'package:tactical_e_clipboard/repository/parameter_repository.dart';
 import 'package:tactical_e_clipboard/services/database_service.dart';
 
 class ParameterRepositoryService implements ParameterRepository {
+  final _table = "Params";
+
   @override
   DatabaseService get dbm => locator<DatabaseService>();
 
-  final _table = "Params";
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<bool> delete(String k) {
@@ -27,7 +33,7 @@ class ParameterRepositoryService implements ParameterRepository {
         throw Exception('No record found for key: $t');
       }
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
       return ParameterModel(key: t, value: "");
     }
   }
@@ -42,7 +48,7 @@ class ParameterRepositoryService implements ParameterRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
       return [];
     }
   }
@@ -57,7 +63,7 @@ class ParameterRepositoryService implements ParameterRepository {
         whereArgs: [k.key],
       );
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
     }
     return k;
   }

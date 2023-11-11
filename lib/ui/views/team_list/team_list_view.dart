@@ -23,7 +23,7 @@ class TeamListView extends StackedView<TeamListViewModel> {
         title: const Text(
           "Times",
         ),
-        actions: [],
+        actions: const [],
       ),
       body: Padding(
           padding: const EdgeInsets.all(8.0),

@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart';
@@ -12,6 +13,11 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
+
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<bool> delete(String k) async {
@@ -50,7 +56,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
       return [];
     }
   }
@@ -66,7 +72,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
         whereArgs: [k.idPlayerContract.toString()],
       );
     } catch (e) {
-      print(e);
+      logger.e('Error! Something bad happened', error: e);
     }
     return k;
   }

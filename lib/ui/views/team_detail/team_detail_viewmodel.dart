@@ -64,7 +64,7 @@ class TeamDetailViewModel extends FutureViewModel
     return SnackBar(
       content: Text(msg),
       showCloseIcon: true,
-      backgroundColor: Color(0xFF00C853),
+      backgroundColor: const Color(0xFF00C853),
     );
   }
 
@@ -77,7 +77,6 @@ class TeamDetailViewModel extends FutureViewModel
       teamService.update(teamModelTemp).then((value) =>
           ScaffoldMessenger.of(context)
               .showSnackBar(getSuccessSnackBar("Updated Succesfully!")));
-      ;
     } else {
       teamService.put(teamModelTemp).then((value) =>
           ScaffoldMessenger.of(context)

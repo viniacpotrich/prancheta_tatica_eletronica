@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart';
-import 'package:tactical_e_clipboard/model/player_model.dart';
-import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/ui/views/player_contract_detail/player_contract_detail_view.form.dart';
 
 import 'player_contract_detail_viewmodel.dart';
@@ -71,12 +69,10 @@ class PlayerContractDetailView
                 .toList(),
           ),
           ListTile(
-            title: Text(viewModel.playerContractTemp.startDate.toString() ??
-                "Data não selecionada"),
+            title: Text(viewModel.playerContractTemp.startDate.toString()),
           ),
           ListTile(
-            title: Text(viewModel.playerContractTemp.endDate.toString() ??
-                "Data não selecionada"),
+            title: Text(viewModel.playerContractTemp.endDate.toString()),
           ),
           ElevatedButton(
             onPressed: viewModel.selectDate,
