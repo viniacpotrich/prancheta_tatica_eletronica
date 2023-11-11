@@ -10,6 +10,8 @@ import '../../../enum/soccer_position_enum.dart';
 import '../../common/app_strings.dart';
 import 'player_detail_viewmodel.dart';
 
+final _formKey = GlobalKey<FormState>();
+
 @FormView(fields: [
   FormTextField(name: 'namePlayerInput'),
   FormTextField(name: 'nicknamePlayerInput'),
@@ -64,74 +66,88 @@ class PlayerDetailView extends StackedView<PlayerDetailViewModel>
         title: const Text(playerDetail),
         actions: [
           ElevatedButton(
-            onPressed: viewModel.submit,
+            onPressed: () =>
+                _formKey.currentState!.validate() ? viewModel.submit(context) : (),
             child: const Icon(Icons.check),
           ),
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-        child: Column(
-          children: [
-            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: fullName,
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+          child: Column(
+            children: [
+              const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: fullName,
+                ),
+                initialValue: viewModel.tempPlayer.namePlayer,
+                onChanged: (value) => viewModel.controllerNameInput(
+                  value,
+                ),
+                validator: (value) =>
+                    value!.isEmpty ? playerMustHaveName : null,
               ),
-              initialValue: viewModel.tempPlayer.namePlayer,
-              onChanged: (value) => viewModel.controllerNameInput(
-                value,
+              const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: nickname,
+                ),
+                initialValue: viewModel.tempPlayer.nicknamePlayer,
+                onChanged: (value) => viewModel.controllerNickNameInput(
+                  value,
+                ),
+                validator: (value) =>
+                    value!.isEmpty ? playerMustHaveNickname : null,
               ),
-            ),
-            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: nickname,
+              const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+              MultiSelectDialogField(
+                buttonText: const Text(preferredPosition),
+                title: const Text(selectPreferedPositions),
+                initialValue: viewModel.actualSoccerPositionsEnum,
+                items: SoccerPositionEnum.values
+                    .toList()
+                    .map((val) => MultiSelectItem(
+                          val,
+                          val.toString(),
+                        ))
+                    .toList(),
+                listType: MultiSelectListType.LIST,
+                onConfirm: (values) {
+                  viewModel.controllerPositionsPlayerDropDown(values);
+                },
+                validator: (value) => value!.isEmpty
+                    ? playerMustHavePreferredPosition
+                    : null,
               ),
-              initialValue: viewModel.tempPlayer.nicknamePlayer,
-              onChanged: (value) => viewModel.controllerNickNameInput(
-                value,
+              const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+              DropdownButtonFormField(
+                value: viewModel.actualPreferredFootEnum,
+                icon: const Icon(Icons.arrow_downward),
+                decoration: const InputDecoration(
+                  labelText: selectPreferredFoot,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                ),
+                onChanged: (value) =>
+                    viewModel.controllerPreferredFootPlayerDropDown(value),
+                items: PreferredFootEnum.values
+                    .toList()
+                    .map(
+                      (val) => DropdownMenuItem(
+                        value: val,
+                        child: Text(val.toString()),
+                      ),
+                    )
+                    .toList(),
+                validator: (value) => value == null
+                    ? playerMustHavePreferredFoot
+                    : null,
               ),
-            ),
-            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-            MultiSelectDialogField(
-              buttonText: const Text(preferredPosition),
-              title: const Text(selectPreferedPositions),
-              initialValue: viewModel.actualSoccerPositionsEnum,
-              items: SoccerPositionEnum.values
-                  .toList()
-                  .map((val) => MultiSelectItem(
-                        val,
-                        val.toString(),
-                      ))
-                  .toList(),
-              listType: MultiSelectListType.LIST,
-              onConfirm: (values) {
-                viewModel.controllerPositionsPlayerDropDown(values);
-              },
-            ),
-            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-            DropdownButtonFormField(
-              value: viewModel.actualPreferredFootEnum,
-              icon: const Icon(Icons.arrow_downward),
-              decoration: const InputDecoration(
-                labelText: selectPreferredFoot,
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              ),
-              onChanged: (value) =>
-                  viewModel.controllerPreferredFootPlayerDropDown(value),
-              items: PreferredFootEnum.values
-                  .toList()
-                  .map(
-                    (val) => DropdownMenuItem(
-                      value: val,
-                      child: Text(val.toString()),
-                    ),
-                  )
-                  .toList(),
-            ),
-            const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-          ],
+              const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+            ],
+          ),
         ),
       ),
     );

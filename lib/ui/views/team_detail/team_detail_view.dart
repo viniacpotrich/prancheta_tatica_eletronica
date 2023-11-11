@@ -7,6 +7,8 @@ import 'package:tactical_e_clipboard/ui/views/team_detail/team_detail_view.form.
 import '../../common/app_strings.dart';
 import 'team_detail_viewmodel.dart';
 
+final _formKey = GlobalKey<FormState>();
+
 @FormView(fields: [
   FormTextField(name: 'nameTeamInput'),
   FormTextField(name: 'nicknameTeamInput'),
@@ -39,93 +41,101 @@ class TeamDetailView extends StackedView<TeamDetailViewModel>
         title: const Text(teamDetail),
         actions: [
           ElevatedButton(
-            onPressed: () => viewModel.submit(context),
+            onPressed: () => _formKey.currentState!.validate()
+                ? viewModel.submit(context)
+                : (),
             child: const Icon(Icons.check),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(children: [
-          Expanded(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: name,
-                  ),
-                  initialValue: viewModel.teamModelTemp.nameTeam,
-                  onChanged: (value) => viewModel.controllerNameInput(
-                    value,
-                  ),
-                ),
-                const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: nickname,
-                  ),
-                  initialValue: viewModel.teamModelTemp.nicknameTeam,
-                  onChanged: (value) => viewModel.controllerNickNameInput(
-                    value,
-                  ),
-                ),
-                const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: city,
-                  ),
-                  initialValue: viewModel.teamModelTemp.cityTeam,
-                  onChanged: (value) => viewModel.controllerCitiesTeamInput(
-                    value,
-                  ),
-                ),
-                const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
-                Row(
-                  children: [
-                    const Text("$colors:",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    const Gap(20,
-                        color: Colors.transparent, crossAxisExtent: 20),
-                    FloatingActionButton.extended(
-                      heroTag: _heroTagPrimaryColor,
-                      label: const Text(primaryColor),
-                      onPressed: () => viewModel.showColorPicker(
-                        context,
-                        viewModel.picker1Color,
-                        viewModel.controllerColor1Team,
-                      ),
-                      backgroundColor: viewModel.picker1Color,
-                    ),
-                    const Gap(20,
-                        color: Colors.transparent, crossAxisExtent: 20),
-                    FloatingActionButton.extended(
-                      heroTag: _heroTagSecondaryColor,
-                      label: const Text(secondaryColor),
-                      onPressed: () => viewModel.showColorPicker(
-                        context,
-                        viewModel.picker2Color,
-                        viewModel.controllerColor2Team,
-                      ),
-                      backgroundColor: viewModel.picker2Color,
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Expanded(
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(children: [
+            Expanded(
               child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                foregroundDecoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                ),
-                child: viewModel.getImage(),
-              )
-            ],
-          ))
-        ]),
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: name,
+                    ),
+                    initialValue: viewModel.teamModelTemp.nameTeam,
+                    onChanged: (value) => viewModel.controllerNameInput(
+                      value,
+                    ),
+                    validator: (value) => value!.isEmpty ? teamMustHaveName : null,
+                  ),
+                  const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: nickname,
+                    ),
+                    initialValue: viewModel.teamModelTemp.nicknameTeam,
+                    onChanged: (value) => viewModel.controllerNickNameInput(
+                      value,
+                    ),
+                    validator: (value) => value!.isEmpty ? teamMustHaveNickname : null
+                  ),
+                  const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: city,
+                    ),
+                    initialValue: viewModel.teamModelTemp.cityTeam,
+                    onChanged: (value) => viewModel.controllerCitiesTeamInput(
+                      value,
+                    ),
+                    validator: (value) => value!.isEmpty ? teamMustHaveCity : null
+                  ),
+                  const Gap(20, color: Colors.transparent, crossAxisExtent: 20),
+                  Row(
+                    children: [
+                      const Text("$colors:",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      const Gap(20,
+                          color: Colors.transparent, crossAxisExtent: 20),
+                      FloatingActionButton.extended(
+                        heroTag: _heroTagPrimaryColor,
+                        label: const Text(primaryColor),
+                        onPressed: () => viewModel.showColorPicker(
+                          context,
+                          viewModel.picker1Color,
+                          viewModel.controllerColor1Team,
+                        ),
+                        backgroundColor: viewModel.picker1Color,
+                      ),
+                      const Gap(20,
+                          color: Colors.transparent, crossAxisExtent: 20),
+                      FloatingActionButton.extended(
+                        heroTag: _heroTagSecondaryColor,
+                        label: const Text(secondaryColor),
+                        onPressed: () => viewModel.showColorPicker(
+                          context,
+                          viewModel.picker2Color,
+                          viewModel.controllerColor2Team,
+                        ),
+                        backgroundColor: viewModel.picker2Color,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  foregroundDecoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                  child: viewModel.getImage(),
+                )
+              ],
+            ))
+          ]),
+        ),
       ),
     );
   }

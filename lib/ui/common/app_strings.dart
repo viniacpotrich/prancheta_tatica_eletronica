@@ -33,6 +33,17 @@ const String noRecordFoundForKey = "No record found for key";
 const String uuidCannotBeNull = "UUID cannot be null";
 const String dateNotSelected = "Date not selected";
 
+// Player Validation Error Messages
+const String playerMustHavePreferredPosition = "Player must have a preferred position";
+const String playerMustHavePreferredFoot = "Player must have a preferred foot";
+const String playerMustHaveNickname = "Player must have a nickname";
+const String playerMustHaveName = "Player must have a name";
+
+// Team Validation Error Messages
+const String teamMustHaveName = "Team must have name";
+const String teamMustHaveNickname = "Team must have a nickname";
+const String teamMustHaveCity = "Team must have a city";
+
 // Emojis
 const String star = "⭐️";
 
