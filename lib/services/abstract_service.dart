@@ -1,5 +1,4 @@
 import 'package:tactical_e_clipboard/repository/repository.dart';
-
 import '../app/app.locator.dart';
 
 abstract class AbstractService<T, R, K extends RepositoryInterface<R, T>> {

@@ -37,7 +37,7 @@ class PasswordDialog extends StackedView<PasswordDialogModel>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              request.title ?? 'Password Dialog',
+              request.title ?? passwordDialogTitle,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black,
@@ -76,7 +76,7 @@ class PasswordDialog extends StackedView<PasswordDialogModel>
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
-                  'Salvar',
+                  save,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 
+import '../../common/app_colors.dart';
 import 'player_list_viewmodel.dart';
 
 class PlayerListView extends StackedView<PlayerListViewModel> {
@@ -14,12 +16,12 @@ class PlayerListView extends StackedView<PlayerListViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Players"),
-        actions: [],
+        title: const Text(players),
+        actions: const [],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.large(
-        backgroundColor: const Color(0xff03dac6),
+        backgroundColor: actionButtonColor,
         foregroundColor: Colors.black,
         onPressed: () => viewModel.addPlayer(),
         child: const Icon(Icons.add),

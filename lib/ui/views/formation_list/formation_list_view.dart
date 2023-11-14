@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
 import 'formation_list_viewmodel.dart';
 
 class FormationListView extends StackedView<FormationListViewModel> {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
+import '../../common/app_colors.dart';
 import 'team_list_viewmodel.dart';
 
 class TeamListView extends StackedView<TeamListViewModel> {
@@ -14,16 +15,16 @@ class TeamListView extends StackedView<TeamListViewModel> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.large(
-        backgroundColor: const Color(0xff03dac6),
+        backgroundColor: actionButtonColor,
         foregroundColor: Colors.black,
         onPressed: () => viewModel.addTeam(),
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
         title: const Text(
-          "Times",
+          teams,
         ),
-        actions: [],
+        actions: const [],
       ),
       body: Padding(
           padding: const EdgeInsets.all(8.0),

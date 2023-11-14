@@ -5,6 +5,8 @@ interface class FormationRepository
     extends RepositoryInterface<String, FormationModel> {
   @override
   get dbm => throw UnimplementedError();
+  @override
+  get logger => throw UnimplementedError();
 
   @override
   Future<bool> delete(String t) {

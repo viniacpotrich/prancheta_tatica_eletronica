@@ -1,6 +1,8 @@
 import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
 import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 
+import '../ui/common/app_strings.dart';
+
 class PlayerModel {
   String? idPlayer;
   String namePlayer = '';
@@ -39,7 +41,7 @@ class PlayerModel {
     return positions.split(',').map((position) {
       int index = int.parse(position.trim());
       if (index < 0 || index >= SoccerPositionEnum.values.length) {
-        throw ArgumentError('Invalid position: $position');
+        throw ArgumentError('$invalidPosition: $position');
       }
       return SoccerPositionEnum.values[index];
     }).toList();

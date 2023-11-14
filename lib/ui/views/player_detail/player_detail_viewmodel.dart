@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:tactical_e_clipboard/enum/preferred_foot_enum.dart';
 import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
 import 'package:tactical_e_clipboard/services/player_service.dart';
+
 import '../../../app/app.locator.dart';
+import '../../common/app_strings.dart';
 
 class PlayerDetailViewModel extends FutureViewModel
     with FormStateHelper
@@ -16,9 +19,9 @@ class PlayerDetailViewModel extends FutureViewModel
   PreferredFootEnum actualPreferredFootEnum = PreferredFootEnum.left;
 
   late PlayerModel tempPlayer = PlayerModel(
-    "",
-    "",
-    "",
+    empty,
+    empty,
+    empty,
     [],
     PreferredFootEnum.left,
   );
@@ -32,11 +35,11 @@ class PlayerDetailViewModel extends FutureViewModel
       actualPreferredFootEnum = tempPlayer.preferredFootPlayer;
     } else {
       tempPlayer = PlayerModel(
-        "",
-        "",
-        "",
+        empty,
+        empty,
+        empty,
         [],
-        PreferredFootEnum.left,
+        PreferredFootEnum.right,
       );
     }
 
@@ -66,13 +69,26 @@ class PlayerDetailViewModel extends FutureViewModel
     }
   }
 
-  submit() {
+  submit(BuildContext context) {
     if (isEditing) {
-      _service.update(tempPlayer);
+      _service.update(tempPlayer).then((value) => ScaffoldMessenger.of(context)
+          .showSnackBar(getSuccessSnackBar(updatedSuccessfully)));
     } else {
       _service.put(tempPlayer);
     }
     _navigationService.back();
     rebuildUi();
+  }
+
+  void showInSnackBar(ScaffoldMessengerState scaffoldContext, String value) {
+    scaffoldContext.showSnackBar(SnackBar(content: Text(value)));
+  }
+
+  SnackBar getSuccessSnackBar(String msg) {
+    return SnackBar(
+      content: Text(msg),
+      showCloseIcon: true,
+      backgroundColor: const Color(0xFF00C853),
+    );
   }
 }

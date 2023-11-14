@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tactical_e_clipboard/ui/common/app_colors.dart';
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 import 'package:tactical_e_clipboard/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -60,14 +61,14 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                   width: _graphicSize,
                   height: _graphicSize,
                   decoration: const BoxDecoration(
-                    color: Color(0xffF6E7B0),
+                    color: alert,
                     borderRadius: BorderRadius.all(
                       Radius.circular(_graphicSize / 2),
                     ),
                   ),
                   alignment: Alignment.center,
                   child: const Text(
-                    '⭐️',
+                    star,
                     style: TextStyle(fontSize: 30),
                   ),
                 )
@@ -87,7 +88,7 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
-                  'Got it',
+                  gotIt,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

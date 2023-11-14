@@ -4,6 +4,8 @@ import 'package:tactical_e_clipboard/repository/repository.dart';
 interface class TeamRepository extends RepositoryInterface<String, TeamModel> {
   @override
   get dbm => throw UnimplementedError();
+  @override
+  get logger => throw UnimplementedError();
 
   @override
   Future<bool> delete(String t) {
