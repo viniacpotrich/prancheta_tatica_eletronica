@@ -7,9 +7,9 @@ class PositionField {
   Float? posX;
   Float? posY;
 
-  PositionField(
+  PositionField({
     this.playerModel,
     this.posX,
     this.posY,
-  );
+  });
 }

@@ -5,15 +5,17 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i15;
+import 'package:flutter/material.dart' as _i16;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i19;
-import 'package:tactical_e_clipboard/model/palyer_contract_model.dart' as _i18;
-import 'package:tactical_e_clipboard/model/player_model.dart' as _i16;
-import 'package:tactical_e_clipboard/model/team_model.dart' as _i17;
+import 'package:stacked_services/stacked_services.dart' as _i21;
+import 'package:tactical_e_clipboard/model/formation_model.dart' as _i19;
+import 'package:tactical_e_clipboard/model/palyer_contract_model.dart' as _i20;
+import 'package:tactical_e_clipboard/model/player_model.dart' as _i17;
+import 'package:tactical_e_clipboard/model/team_model.dart' as _i18;
 import 'package:tactical_e_clipboard/ui/views/date_picker_widget/date_picker_widget_view.dart'
     as _i14;
+import 'package:tactical_e_clipboard/ui/views/field/field_view.dart' as _i15;
 import 'package:tactical_e_clipboard/ui/views/formation_detail/formation_detail_view.dart'
     as _i9;
 import 'package:tactical_e_clipboard/ui/views/formation_list/formation_list_view.dart'
@@ -64,6 +66,8 @@ class Routes {
 
   static const datePickerWidgetView = '/date-picker-widget-view';
 
+  static const fieldView = '/field-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -78,6 +82,7 @@ class Routes {
     playerContractListView,
     playerContractDetailView,
     datePickerWidgetView,
+    fieldView,
   };
 }
 
@@ -135,23 +140,27 @@ class StackedRouter extends _i1.RouterBase {
       Routes.datePickerWidgetView,
       page: _i14.DatePickerWidgetView,
     ),
+    _i1.RouteDef(
+      Routes.fieldView,
+      page: _i15.FieldView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.PlayerListView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.PlayerListView(),
         settings: data,
       );
@@ -160,52 +169,54 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<PlayerDetailViewArguments>(
         orElse: () => const PlayerDetailViewArguments(),
       );
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i5.PlayerDetailView(playerModel: args.playerModel, key: args.key),
         settings: data,
       );
     },
     _i6.TeamListView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.TeamListView(),
         settings: data,
       );
     },
     _i7.TeamDetailView: (data) {
       final args = data.getArgs<TeamDetailViewArguments>(nullOk: false);
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i7.TeamDetailView(teamModel: args.teamModel, key: args.key),
         settings: data,
       );
     },
     _i8.FormationListView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.FormationListView(),
         settings: data,
       );
     },
     _i9.FormationDetailView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i9.FormationDetailView(),
+      final args = data.getArgs<FormationDetailViewArguments>(nullOk: false);
+      return _i16.MaterialPageRoute<dynamic>(
+        builder: (context) => _i9.FormationDetailView(
+            formationModel: args.formationModel, key: args.key),
         settings: data,
       );
     },
     _i10.PatternOfPlayListView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.PatternOfPlayListView(),
         settings: data,
       );
     },
     _i11.PatternOfPlayDetailView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.PatternOfPlayDetailView(),
         settings: data,
       );
     },
     _i12.PlayerContractListView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.PlayerContractListView(),
         settings: data,
       );
@@ -213,15 +224,21 @@ class StackedRouter extends _i1.RouterBase {
     _i13.PlayerContractDetailView: (data) {
       final args =
           data.getArgs<PlayerContractDetailViewArguments>(nullOk: false);
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => _i13.PlayerContractDetailView(
             playerContractModel: args.playerContractModel, key: args.key),
         settings: data,
       );
     },
     _i14.DatePickerWidgetView: (data) {
-      return _i15.MaterialPageRoute<dynamic>(
+      return _i16.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.DatePickerWidgetView(),
+        settings: data,
+      );
+    },
+    _i15.FieldView: (data) {
+      return _i16.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i15.FieldView(),
         settings: data,
       );
     },
@@ -239,9 +256,9 @@ class PlayerDetailViewArguments {
     this.key,
   });
 
-  final _i16.PlayerModel? playerModel;
+  final _i17.PlayerModel? playerModel;
 
-  final _i15.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -266,9 +283,9 @@ class TeamDetailViewArguments {
     this.key,
   });
 
-  final _i17.TeamModel? teamModel;
+  final _i18.TeamModel? teamModel;
 
-  final _i15.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -287,15 +304,42 @@ class TeamDetailViewArguments {
   }
 }
 
+class FormationDetailViewArguments {
+  const FormationDetailViewArguments({
+    required this.formationModel,
+    this.key,
+  });
+
+  final _i19.FormationModel? formationModel;
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return '{"formationModel": "$formationModel", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant FormationDetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.formationModel == formationModel && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return formationModel.hashCode ^ key.hashCode;
+  }
+}
+
 class PlayerContractDetailViewArguments {
   const PlayerContractDetailViewArguments({
     required this.playerContractModel,
     this.key,
   });
 
-  final _i18.PlayerContractModel? playerContractModel;
+  final _i20.PlayerContractModel? playerContractModel;
 
-  final _i15.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -314,7 +358,7 @@ class PlayerContractDetailViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i19.NavigationService {
+extension NavigatorStateExtension on _i21.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -358,8 +402,8 @@ extension NavigatorStateExtension on _i19.NavigationService {
   }
 
   Future<dynamic> navigateToPlayerDetailView({
-    _i16.PlayerModel? playerModel,
-    _i15.Key? key,
+    _i17.PlayerModel? playerModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -390,8 +434,8 @@ extension NavigatorStateExtension on _i19.NavigationService {
   }
 
   Future<dynamic> navigateToTeamDetailView({
-    required _i17.TeamModel? teamModel,
-    _i15.Key? key,
+    required _i18.TeamModel? teamModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -420,14 +464,18 @@ extension NavigatorStateExtension on _i19.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToFormationDetailView([
+  Future<dynamic> navigateToFormationDetailView({
+    required _i19.FormationModel? formationModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.formationDetailView,
+        arguments: FormationDetailViewArguments(
+            formationModel: formationModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -477,8 +525,8 @@ extension NavigatorStateExtension on _i19.NavigationService {
   }
 
   Future<dynamic> navigateToPlayerContractDetailView({
-    required _i18.PlayerContractModel? playerContractModel,
-    _i15.Key? key,
+    required _i20.PlayerContractModel? playerContractModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -502,6 +550,20 @@ extension NavigatorStateExtension on _i19.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.datePickerWidgetView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToFieldView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.fieldView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -551,8 +613,8 @@ extension NavigatorStateExtension on _i19.NavigationService {
   }
 
   Future<dynamic> replaceWithPlayerDetailView({
-    _i16.PlayerModel? playerModel,
-    _i15.Key? key,
+    _i17.PlayerModel? playerModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -583,8 +645,8 @@ extension NavigatorStateExtension on _i19.NavigationService {
   }
 
   Future<dynamic> replaceWithTeamDetailView({
-    required _i17.TeamModel? teamModel,
-    _i15.Key? key,
+    required _i18.TeamModel? teamModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -613,14 +675,18 @@ extension NavigatorStateExtension on _i19.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithFormationDetailView([
+  Future<dynamic> replaceWithFormationDetailView({
+    required _i19.FormationModel? formationModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.formationDetailView,
+        arguments: FormationDetailViewArguments(
+            formationModel: formationModel, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -670,8 +736,8 @@ extension NavigatorStateExtension on _i19.NavigationService {
   }
 
   Future<dynamic> replaceWithPlayerContractDetailView({
-    required _i18.PlayerContractModel? playerContractModel,
-    _i15.Key? key,
+    required _i20.PlayerContractModel? playerContractModel,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -695,6 +761,20 @@ extension NavigatorStateExtension on _i19.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.datePickerWidgetView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithFieldView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.fieldView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

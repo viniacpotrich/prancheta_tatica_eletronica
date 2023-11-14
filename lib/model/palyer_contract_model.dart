@@ -39,7 +39,7 @@ class PlayerContractModel {
     return {
       'idPlayerContract': idPlayerContract,
       'idPlayer': idPlayer,
-      'team': team,
+      'idTeam': team!.idTeam,
       'dateStart': startDate!.millisecondsSinceEpoch,
       'dateEnd': endDate!.millisecondsSinceEpoch,
     };

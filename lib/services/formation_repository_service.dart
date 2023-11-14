@@ -18,8 +18,8 @@ class FormationRepositoryService implements FormationRepository {
   }
 
   @override
-  Future<List<FormationModel>> getAll() {
-    throw UnimplementedError();
+  Future<List<FormationModel>> getAll() async {
+    return [];
   }
 
   @override

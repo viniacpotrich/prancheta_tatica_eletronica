@@ -74,7 +74,7 @@ class PlayerRepositoryService implements PlayerRepository {
         where: 'idPlayer = ?',
         whereArgs: [k.idPlayer],
       );
-      for (var position in k.preferredPositionsPlayer) {
+      for (var position in k.preferredPositionsPlayer!) {
         await txn.insert('PlayerPositions', {
           'idPlayer': k.idPlayer,
           'position': position.index,
@@ -95,7 +95,7 @@ class PlayerRepositoryService implements PlayerRepository {
         k.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-      for (var position in k.preferredPositionsPlayer) {
+      for (var position in k.preferredPositionsPlayer!) {
         await txn.insert('PlayerPositions', {
           'idPlayer': k.idPlayer,
           'position': position.index,

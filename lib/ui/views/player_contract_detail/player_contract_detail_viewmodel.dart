@@ -71,6 +71,8 @@ class PlayerContractDetailViewModel extends FutureViewModel
       });
       if (isEditing) {
         actualTeam = playerContractTemp.team!.idTeam;
+      } else {
+        actualTeam = teamsMap.keys.first;
       }
     });
   }
@@ -79,10 +81,12 @@ class PlayerContractDetailViewModel extends FutureViewModel
     _playerService.getAll().then((value) {
       palyers = value;
       value.forEach((element) {
-        playersMap.addAll({element.idPlayer!: element.namePlayer});
+        playersMap.addAll({element.idPlayer!: element.namePlayer!});
       });
       if (isEditing) {
         actualPlayer = playerContractTemp.idPlayer;
+      } else {
+        actualPlayer = playersMap.keys.first;
       }
     });
   }
@@ -91,7 +95,11 @@ class PlayerContractDetailViewModel extends FutureViewModel
     playerContractTemp.team =
         teams.firstWhere((element) => element.idTeam == actualTeam);
     playerContractTemp.idPlayer = actualPlayer;
-    _playerContractService.update(playerContractTemp);
+    if (isEditing) {
+      _playerContractService.update(playerContractTemp);
+    } else {
+      _playerContractService.put(playerContractTemp);
+    }
     _navigationService.back();
   }
 }

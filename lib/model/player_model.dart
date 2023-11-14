@@ -3,35 +3,36 @@ import 'package:tactical_e_clipboard/enum/soccer_position_enum.dart';
 
 class PlayerModel {
   String? idPlayer;
-  String namePlayer = '';
-  String nicknamePlayer = '';
-  List<SoccerPositionEnum> preferredPositionsPlayer;
-  PreferredFootEnum preferredFootPlayer;
+  String? namePlayer;
+  String? nicknamePlayer;
+  List<SoccerPositionEnum>? preferredPositionsPlayer = [];
+  PreferredFootEnum? preferredFootPlayer;
 
-  PlayerModel(
+  PlayerModel({
     this.idPlayer,
-    this.namePlayer,
-    this.nicknamePlayer,
+    this.namePlayer = '',
+    this.nicknamePlayer = '',
     this.preferredPositionsPlayer,
     this.preferredFootPlayer,
-  );
+  });
 
   Map<String, Object?> toMap() {
     return {
       'idPlayer': idPlayer?.toString(),
       'namePlayer': namePlayer,
       'nicknamePlayer': nicknamePlayer,
-      'preferredFootPlayer': preferredFootPlayer.index
+      'preferredFootPlayer': preferredFootPlayer!.index
     };
   }
 
   static PlayerModel fromMap(Map<String, dynamic> map) {
     return PlayerModel(
-      map['idPlayer'],
-      map['namePlayer'],
-      map['nicknamePlayer'],
-      map['positions'] == null ? [] : convertPositions(map['positions']),
-      PreferredFootEnum.values[map['preferredFootPlayer']],
+      idPlayer: map['idPlayer'],
+      namePlayer: map['namePlayer'],
+      nicknamePlayer: map['nicknamePlayer'],
+      preferredPositionsPlayer:
+          map['positions'] == null ? [] : convertPositions(map['positions']),
+      preferredFootPlayer: PreferredFootEnum.values[map['preferredFootPlayer']],
     );
   }
 

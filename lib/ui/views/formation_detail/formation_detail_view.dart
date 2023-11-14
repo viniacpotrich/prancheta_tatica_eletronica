@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
+import 'package:tactical_e_clipboard/model/formation_model.dart';
+import 'package:tactical_e_clipboard/ui/views/field/field_view.dart';
 
 import 'formation_detail_viewmodel.dart';
 
 class FormationDetailView extends StackedView<FormationDetailViewModel> {
-  const FormationDetailView({Key? key}) : super(key: key);
+  const FormationDetailView({
+    required this.formationModel,
+    Key? key,
+  }) : super(key: key);
+
+  final FormationModel? formationModel;
 
   @override
   Widget builder(
@@ -14,8 +22,31 @@ class FormationDetailView extends StackedView<FormationDetailViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      appBar: AppBar(
+        title: const Text("Formação"),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            DropdownButtonFormField(
+              items: viewModel.items
+                  .map(
+                    (e) => DropdownMenuItem(value: e, child: Text(e)),
+                  )
+                  .toList(),
+              onChanged: (Object? value) {},
+            ),
+            DropdownButtonFormField(
+              items: viewModel.items
+                  .map(
+                    (e) => DropdownMenuItem(value: e, child: Text(e)),
+                  )
+                  .toList(),
+              onChanged: (Object? value) {},
+            ),
+            const Expanded(flex: 6, child: FieldView()),
+          ],
+        ),
       ),
     );
   }

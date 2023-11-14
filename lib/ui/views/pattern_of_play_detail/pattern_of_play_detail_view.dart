@@ -15,6 +15,9 @@ class PatternOfPlayDetailView
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: Text("Patterns of Play Detail"),
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       ),

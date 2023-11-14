@@ -11,7 +11,7 @@ import 'package:stacked/stacked.dart';
 
 const bool _autoTextFieldValidation = true;
 
-const String NamePlayerInputValueKey = 'namePlayerInput';
+const String LixoValueKey = 'lixo';
 const String PlayerValueKey = 'player';
 const String TeamValueKey = 'team';
 
@@ -29,15 +29,14 @@ final Map<String, FocusNode> _PlayerContractDetailViewFocusNodes = {};
 
 final Map<String, String? Function(String?)?>
     _PlayerContractDetailViewTextValidations = {
-  NamePlayerInputValueKey: null,
+  LixoValueKey: null,
 };
 
 mixin $PlayerContractDetailView {
-  TextEditingController get namePlayerInputController =>
-      _getFormTextEditingController(NamePlayerInputValueKey);
+  TextEditingController get lixoController =>
+      _getFormTextEditingController(LixoValueKey);
 
-  FocusNode get namePlayerInputFocusNode =>
-      _getFormFocusNode(NamePlayerInputValueKey);
+  FocusNode get lixoFocusNode => _getFormFocusNode(LixoValueKey);
 
   TextEditingController _getFormTextEditingController(
     String key, {
@@ -63,7 +62,7 @@ mixin $PlayerContractDetailView {
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
   void syncFormWithViewModel(FormStateHelper model) {
-    namePlayerInputController.addListener(() => _updateFormData(model));
+    lixoController.addListener(() => _updateFormData(model));
 
     _updateFormData(model, forceValidate: _autoTextFieldValidation);
   }
@@ -75,7 +74,7 @@ mixin $PlayerContractDetailView {
     'This feature was deprecated after 3.1.0.',
   )
   void listenToFormUpdated(FormViewModel model) {
-    namePlayerInputController.addListener(() => _updateFormData(model));
+    lixoController.addListener(() => _updateFormData(model));
 
     _updateFormData(model, forceValidate: _autoTextFieldValidation);
   }
@@ -85,7 +84,7 @@ mixin $PlayerContractDetailView {
     model.setData(
       model.formValueMap
         ..addAll({
-          NamePlayerInputValueKey: namePlayerInputController.text,
+          LixoValueKey: lixoController.text,
         }),
     );
 
@@ -128,39 +127,37 @@ extension ValueProperties on FormStateHelper {
     return !hasAnyValidationMessage;
   }
 
-  String? get namePlayerInputValue =>
-      this.formValueMap[NamePlayerInputValueKey] as String?;
+  String? get lixoValue => this.formValueMap[LixoValueKey] as String?;
   String? get playerValue => this.formValueMap[PlayerValueKey] as String?;
   String? get teamValue => this.formValueMap[TeamValueKey] as String?;
 
-  set namePlayerInputValue(String? value) {
+  set lixoValue(String? value) {
     this.setData(
-      this.formValueMap..addAll({NamePlayerInputValueKey: value}),
+      this.formValueMap..addAll({LixoValueKey: value}),
     );
 
     if (_PlayerContractDetailViewTextEditingControllers.containsKey(
-        NamePlayerInputValueKey)) {
-      _PlayerContractDetailViewTextEditingControllers[NamePlayerInputValueKey]
-          ?.text = value ?? '';
+        LixoValueKey)) {
+      _PlayerContractDetailViewTextEditingControllers[LixoValueKey]?.text =
+          value ?? '';
     }
   }
 
-  bool get hasNamePlayerInput =>
-      this.formValueMap.containsKey(NamePlayerInputValueKey) &&
-      (namePlayerInputValue?.isNotEmpty ?? false);
+  bool get hasLixo =>
+      this.formValueMap.containsKey(LixoValueKey) &&
+      (lixoValue?.isNotEmpty ?? false);
   bool get hasPlayer => this.formValueMap.containsKey(PlayerValueKey);
   bool get hasTeam => this.formValueMap.containsKey(TeamValueKey);
 
-  bool get hasNamePlayerInputValidationMessage =>
-      this.fieldsValidationMessages[NamePlayerInputValueKey]?.isNotEmpty ??
-      false;
+  bool get hasLixoValidationMessage =>
+      this.fieldsValidationMessages[LixoValueKey]?.isNotEmpty ?? false;
   bool get hasPlayerValidationMessage =>
       this.fieldsValidationMessages[PlayerValueKey]?.isNotEmpty ?? false;
   bool get hasTeamValidationMessage =>
       this.fieldsValidationMessages[TeamValueKey]?.isNotEmpty ?? false;
 
-  String? get namePlayerInputValidationMessage =>
-      this.fieldsValidationMessages[NamePlayerInputValueKey];
+  String? get lixoValidationMessage =>
+      this.fieldsValidationMessages[LixoValueKey];
   String? get playerValidationMessage =>
       this.fieldsValidationMessages[PlayerValueKey];
   String? get teamValidationMessage =>
@@ -188,9 +185,8 @@ extension Methods on FormStateHelper {
     }
   }
 
-  setNamePlayerInputValidationMessage(String? validationMessage) =>
-      this.fieldsValidationMessages[NamePlayerInputValueKey] =
-          validationMessage;
+  setLixoValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[LixoValueKey] = validationMessage;
   setPlayerValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[PlayerValueKey] = validationMessage;
   setTeamValidationMessage(String? validationMessage) =>
@@ -198,13 +194,13 @@ extension Methods on FormStateHelper {
 
   /// Clears text input fields on the Form
   void clearForm() {
-    namePlayerInputValue = '';
+    lixoValue = '';
   }
 
   /// Validates text input fields on the Form
   void validateForm() {
     this.setValidationMessages({
-      NamePlayerInputValueKey: getValidationMessage(NamePlayerInputValueKey),
+      LixoValueKey: getValidationMessage(LixoValueKey),
     });
   }
 }
@@ -224,5 +220,5 @@ String? getValidationMessage(String key) {
 /// Updates the fieldsValidationMessages on the FormViewModel
 void updateValidationData(FormStateHelper model) =>
     model.setValidationMessages({
-      NamePlayerInputValueKey: getValidationMessage(NamePlayerInputValueKey),
+      LixoValueKey: getValidationMessage(LixoValueKey),
     });

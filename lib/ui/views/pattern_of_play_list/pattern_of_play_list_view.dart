@@ -14,6 +14,9 @@ class PatternOfPlayListView extends StackedView<PatternOfPlayListViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: Text("Patterns of Play"),
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       ),

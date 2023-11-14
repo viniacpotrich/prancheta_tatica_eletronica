@@ -18,16 +18,13 @@ class PlayerContractListView extends StackedView<PlayerContractListViewModel> {
         title: const Text(
           "Contratos",
         ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {},
-            child: const Icon(Icons.search),
-          ),
-          ElevatedButton(
-            onPressed: () => viewModel.addPlayerContract(),
-            child: const Icon(Icons.add),
-          ),
-        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.large(
+        backgroundColor: const Color(0xff03dac6),
+        foregroundColor: Colors.black,
+        onPressed: () => viewModel.addPlayerContract(),
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: viewModel.playerContracts.length,

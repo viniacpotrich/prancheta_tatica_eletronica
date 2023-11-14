@@ -62,7 +62,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
       await dbm.getInstanceDB().update(
         _table,
         mapped,
-        where: "idTeam = ?",
+        where: "idPlayerContract = ?",
         whereArgs: [k.idPlayerContract.toString()],
       );
     } catch (e) {

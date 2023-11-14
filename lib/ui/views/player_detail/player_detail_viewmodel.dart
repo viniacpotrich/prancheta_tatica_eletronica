@@ -16,11 +16,12 @@ class PlayerDetailViewModel extends FutureViewModel
   PreferredFootEnum actualPreferredFootEnum = PreferredFootEnum.left;
 
   late PlayerModel tempPlayer = PlayerModel(
-    "",
-    "",
-    "",
-    [],
-    PreferredFootEnum.left,
+    //TODO REVER SE NECESSARIO
+    idPlayer: "",
+    namePlayer: "",
+    nicknamePlayer: "",
+    preferredPositionsPlayer: [],
+    preferredFootPlayer: PreferredFootEnum.left,
   );
   bool isEditing = false;
 
@@ -28,15 +29,15 @@ class PlayerDetailViewModel extends FutureViewModel
     if (playerModel != null) {
       isEditing = true;
       tempPlayer = playerModel;
-      actualSoccerPositionsEnum = tempPlayer.preferredPositionsPlayer;
-      actualPreferredFootEnum = tempPlayer.preferredFootPlayer;
+      actualSoccerPositionsEnum = tempPlayer.preferredPositionsPlayer!;
+      actualPreferredFootEnum = tempPlayer.preferredFootPlayer!;
     } else {
       tempPlayer = PlayerModel(
-        "",
-        "",
-        "",
-        [],
-        PreferredFootEnum.left,
+        idPlayer: "",
+        namePlayer: "",
+        nicknamePlayer: "",
+        preferredPositionsPlayer: [],
+        preferredFootPlayer: PreferredFootEnum.left,
       );
     }
 

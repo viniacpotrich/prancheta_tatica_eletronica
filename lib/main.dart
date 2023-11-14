@@ -5,6 +5,7 @@ import 'package:tactical_e_clipboard/app/app.bottomsheets.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/ui/common/app_colors.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'app/app.dialogs.dart';
 
@@ -19,6 +20,7 @@ Future<void> main() async {
   setupDialogUi();
   setupBottomSheetUi();
   WidgetsFlutterBinding.ensureInitialized();
+  await WindowManager.instance.maximize();
   _setDataBaseFactory();
   runApp(const MainApp());
 }
