@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../common/app_strings.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -14,7 +15,7 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Prancheta Eletronica"),
+        title: const Text(appTitle),
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
       body: SafeArea(

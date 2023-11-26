@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:tactical_e_clipboard/model/position_field.dart';
 
 import 'field_viewmodel.dart';
 
 class FieldView extends StackedView<FieldViewModel> {
-  const FieldView({Key? key}) : super(key: key);
+  const FieldView({
+    required this.positions,
+    required this.callback,
+    Key? key,
+  }) : super(key: key);
+
+  final List<PositionField> positions;
+  final Function callback;
+
+  @override
+  void onViewModelReady(FieldViewModel viewModel) {
+    viewModel.saveCallback(positions, callback);
+  }
 
   @override
   Widget builder(
@@ -12,11 +25,9 @@ class FieldView extends StackedView<FieldViewModel> {
     FieldViewModel viewModel,
     Widget? child,
   ) {
+    viewModel.refreshPostions();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      floatingActionButton: FloatingActionButton(
-        onPressed: viewModel.addMovable,
-      ),
       body: Stack(
         fit: StackFit.expand,
         children: [

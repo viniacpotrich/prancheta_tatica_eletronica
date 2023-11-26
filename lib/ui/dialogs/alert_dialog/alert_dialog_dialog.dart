@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tactical_e_clipboard/ui/common/app_colors.dart';
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 import 'package:tactical_e_clipboard/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
 import 'alert_dialog_dialog_model.dart';
 
 const double _graphicSize = 60;
@@ -41,7 +41,7 @@ class AlertDialogDialog extends StackedView<AlertDialogDialogModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        request.title ?? 'Hello Stacked Dialog!!',
+                        request.title ?? helloDialog,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
@@ -66,13 +66,13 @@ class AlertDialogDialog extends StackedView<AlertDialogDialogModel> {
                   width: _graphicSize,
                   height: _graphicSize,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFF6E7B0),
+                    color: alert,
                     borderRadius: BorderRadius.all(
                       Radius.circular(_graphicSize / 2),
                     ),
                   ),
                   alignment: Alignment.center,
-                  child: const Text('⭐️', style: TextStyle(fontSize: 30)),
+                  child: const Text(star, style: TextStyle(fontSize: 30)),
                 )
               ],
             ),
@@ -88,7 +88,7 @@ class AlertDialogDialog extends StackedView<AlertDialogDialogModel> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
-                  'Got it',
+                  gotIt,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

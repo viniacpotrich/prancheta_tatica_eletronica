@@ -8,6 +8,10 @@ class MovableItemModel extends BaseViewModel {
   onChangePosition(DragUpdateDetails tapInfo) {
     xPosition += tapInfo.delta.dx;
     yPosition += tapInfo.delta.dy;
-    rebuildUi();
+  }
+
+  void savePositions(double posx, double posy) {
+    xPosition = posx;
+    yPosition = posy;
   }
 }

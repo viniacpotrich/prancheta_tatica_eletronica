@@ -6,6 +6,8 @@ import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/item_home_menu_model.dart';
 import 'package:tactical_e_clipboard/services/password_service.dart';
 
+import '../../common/app_strings.dart';
+
 class HomeViewModel extends FutureViewModel {
   final _passwordService = locator<PasswordService>();
   final _navigationService = locator<NavigationService>();
@@ -36,7 +38,7 @@ class HomeViewModel extends FutureViewModel {
   Future<void> askNewPassword() async {
     final newPassword = await _dialogService.showCustomDialog(
       variant: DialogType.password,
-      title: "Informe uma NOVA senha (pelo menos 5 caracteres)",
+      title: enterNewPassword,
     );
     if (newPassword!.data.text.length < 5) {
       askNewPassword();
@@ -48,43 +50,38 @@ class HomeViewModel extends FutureViewModel {
   Future<void> askAndValidatePassword() async {
     final result = await _dialogService.showCustomDialog(
       variant: DialogType.password,
-      title: "Informe a senha atual",
+      title: enterCurrentPassword,
     );
+    final text = result?.data?.text;
 
-    if (result != null) {
-      final text = result.data?.text;
-
-      if (text != null && await _passwordService.isValid(text)) {
-        // Password is valid, proceed with your logic.
-      } else {
-        // Password is not valid, you might want to handle this case.
-        await askAndValidatePassword(); // Re-ask for the password.
-      }
-    } else {
-      // Handle the case when the dialog is dismissed or cancelled.
+    if (text == null) {
+      return; // Handle the case when the dialog is dismissed or cancelled.
+    }
+    if (!(await _passwordService.isValid(text))) {
+      await askAndValidatePassword();
     }
   }
 
   void populate() {
     listMenu = [
       ItemHomeMenuModel(
-        title: "Players",
+        title: players,
         callBack: _navigationService.navigateToPlayerListView,
       ),
       ItemHomeMenuModel(
-        title: "Teams",
+        title: teams,
         callBack: _navigationService.navigateToTeamListView,
       ),
       ItemHomeMenuModel(
-        title: "Patterns of Play",
+        title: patternsOfPlay,
         callBack: _navigationService.navigateToPatternOfPlayListView,
       ),
       ItemHomeMenuModel(
-        title: "Formations",
+        title: formations,
         callBack: _navigationService.navigateToFormationListView,
       ),
       ItemHomeMenuModel(
-        title: "Contracts",
+        title: contracts,
         callBack: _navigationService.navigateToPlayerContractListView,
       ),
     ];

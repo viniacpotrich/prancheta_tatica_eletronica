@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
@@ -6,18 +7,25 @@ import 'package:tactical_e_clipboard/services/database_service.dart';
 import 'package:uuid/data.dart';
 import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
+import '../ui/common/app_strings.dart';
 
 class TeamRepositoryService implements TeamRepository {
   final _table = "Team";
+  final _whereIdTeam = "idTeam = ?";
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
 
   @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
+
+  @override
   Future<bool> delete(String k) async {
     var result = await dbm.getInstanceDB().delete(
       _table,
-      where: "idTeam = ?",
+      where: _whereIdTeam,
       whereArgs: [k.toString()],
     );
     return result > 0;
@@ -26,13 +34,13 @@ class TeamRepositoryService implements TeamRepository {
   @override
   Future<TeamModel> get(String t) async {
     List<Map<String, dynamic>> results = await dbm.getInstanceDB().rawQuery(
-      "SELECT * FROM $_table WHERE idTeam = ?",
+      "SELECT * FROM $_table WHERE $_whereIdTeam",
       [t],
     );
     if (results.isNotEmpty) {
       return await TeamModel.fromMap(results.first);
     } else {
-      throw Exception('No record found for Uuid: $t');
+      throw Exception('$noRecordFoundForKey: $t');
     }
   }
 
@@ -46,7 +54,7 @@ class TeamRepositoryService implements TeamRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e(genericErrorMessage, error: e);
       return [];
     }
   }
@@ -58,11 +66,11 @@ class TeamRepositoryService implements TeamRepository {
       await dbm.getInstanceDB().update(
         _table,
         mapped,
-        where: "idTeam = ?",
+        where: _whereIdTeam,
         whereArgs: [k.idTeam.toString()],
       );
     } catch (e) {
-      print(e);
+      logger.e(genericErrorMessage, error: e);
     }
     return k;
   }
@@ -72,7 +80,7 @@ class TeamRepositoryService implements TeamRepository {
     k.idTeam = const Uuid().v4(config: V4Options(null, CryptoRNG()));
     var mapped = await k.toMap();
     if (k.idTeam == null) {
-      Exception("UUID cannot be null");
+      Exception(uuidCannotBeNull);
     }
     await dbm.getInstanceDB().insert(
           _table,

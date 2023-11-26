@@ -9,3 +9,5 @@ const Color kcLightGrey = Color.fromARGB(255, 187, 187, 187);
 const Color kcVeryLightGrey = Color(0xFFE3E3E3);
 const Color kcVeryVeryLightGrey = Color.fromARGB(255, 247, 247, 247);
 const Color kcBackgroundColor = kcVeryVeryLightGrey;
+const Color alert = Color(0xFFF6E7B0);
+const Color actionButtonColor = Color(0xff03dac6);

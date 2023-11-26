@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/player_model.dart';
@@ -7,12 +8,19 @@ import 'package:uuid/data.dart';
 import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
 
+import '../ui/common/app_strings.dart';
+
 class PlayerRepositoryService implements PlayerRepository {
   final _table = "Player";
   final _primaryKey = "idPlayer";
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
+
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<PlayerModel> get(String id) async {
@@ -22,7 +30,7 @@ class PlayerRepositoryService implements PlayerRepository {
       return PlayerModel.fromMap(maps[0]);
     }
 
-    throw Exception('ID $id not found');
+    throw Exception('$noRecordFoundForKey: $id');
   }
 
   @override
@@ -35,7 +43,7 @@ class PlayerRepositoryService implements PlayerRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e(genericErrorMessage, error: e);
       return [];
     }
   }
@@ -46,7 +54,7 @@ class PlayerRepositoryService implements PlayerRepository {
     await db.transaction((txn) async {
       await txn.delete(
         'PlayerPositions',
-        where: 'idPlayer = ?',
+        where: '$_primaryKey = ?',
         whereArgs: [k],
       );
       await txn.delete(
@@ -71,12 +79,12 @@ class PlayerRepositoryService implements PlayerRepository {
       );
       await txn.delete(
         'PlayerPositions',
-        where: 'idPlayer = ?',
+        where: '$_primaryKey = ?',
         whereArgs: [k.idPlayer],
       );
       for (var position in k.preferredPositionsPlayer!) {
         await txn.insert('PlayerPositions', {
-          'idPlayer': k.idPlayer,
+          _primaryKey: k.idPlayer,
           'position': position.index,
         });
       }
@@ -97,7 +105,7 @@ class PlayerRepositoryService implements PlayerRepository {
       );
       for (var position in k.preferredPositionsPlayer!) {
         await txn.insert('PlayerPositions', {
-          'idPlayer': k.idPlayer,
+          _primaryKey: k.idPlayer,
           'position': position.index,
         });
       }
@@ -119,10 +127,9 @@ class PlayerRepositoryService implements PlayerRepository {
     ''';
 
     if (id != null) {
-      query += ''' WHERE Player.idPlayer = ?''';
+      query += ''' WHERE $_table.$_primaryKey = ?''';
     }
-
-    query += ''' GROUP BY Player.idPlayer''';
+    query += ''' GROUP BY $_table.$_primaryKey''';
 
     return id == null
         ? dbm.getInstanceDB().rawQuery(query)

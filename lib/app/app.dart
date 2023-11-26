@@ -32,6 +32,7 @@ import 'package:tactical_e_clipboard/ui/views/player_contract_list/player_contra
 import 'package:tactical_e_clipboard/ui/views/player_contract_detail/player_contract_detail_view.dart';
 import 'package:tactical_e_clipboard/ui/views/date_picker_widget/date_picker_widget_view.dart';
 import 'package:tactical_e_clipboard/ui/views/field/field_view.dart';
+import 'package:tactical_e_clipboard/ui/dialogs/formation_settings/formation_settings_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -80,6 +81,7 @@ import 'package:tactical_e_clipboard/ui/views/field/field_view.dart';
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: AlertDialogDialog),
     StackedDialog(classType: PasswordDialog),
+    StackedDialog(classType: FormationSettingsDialog),
 // @stacked-dialog
   ],
 )

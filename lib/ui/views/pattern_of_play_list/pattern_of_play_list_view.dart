@@ -14,6 +14,13 @@ class PatternOfPlayListView extends StackedView<PatternOfPlayListViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.large(
+        backgroundColor: const Color(0xff03dac6),
+        foregroundColor: Colors.black,
+        onPressed: viewModel.addPatternOfPlaye,
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text("Patterns of Play"),
       ),

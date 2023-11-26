@@ -9,6 +9,8 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/services/team_service.dart';
 
+import '../../common/app_strings.dart';
+
 class TeamDetailViewModel extends FutureViewModel
     with FormStateHelper
     implements FormViewModel {
@@ -45,7 +47,7 @@ class TeamDetailViewModel extends FutureViewModel
   }
 
   void controllerCitiesTeamInput(String text) {
-    teamModelTemp.nicknameTeam = text;
+    teamModelTemp.cityTeam = text;
   }
 
   void controllerColor1Team(Color color) {
@@ -64,27 +66,27 @@ class TeamDetailViewModel extends FutureViewModel
     return SnackBar(
       content: Text(msg),
       showCloseIcon: true,
-      backgroundColor: Color(0xFF00C853),
+      backgroundColor: const Color(0xFF00C853),
     );
   }
 
   void submit(BuildContext context) {
     teamModelTemp.colorPrimaryTeam = picker1Color.value.toString();
     teamModelTemp.colorSecondaryTeam = picker2Color.value.toString();
-    teamModelTemp.cityTeam = "";
     TeamService teamService = TeamService();
     if (isEditing) {
-      teamService.update(teamModelTemp).then((value) =>
-          ScaffoldMessenger.of(context)
-              .showSnackBar(getSuccessSnackBar("Updated Succesfully!")));
-      ;
+      teamService
+          .update(teamModelTemp)
+          .then((value) => ScaffoldMessenger.of(context)
+              .showSnackBar(getSuccessSnackBar(updatedSuccessfully)))
+          .whenComplete(() => _navigationService.back());
     } else {
-      teamService.put(teamModelTemp).then((value) =>
-          ScaffoldMessenger.of(context)
-              .showSnackBar(getSuccessSnackBar("Created Succesfully!")));
+      teamService
+          .put(teamModelTemp)
+          .then((value) => ScaffoldMessenger.of(context)
+              .showSnackBar(getSuccessSnackBar(createdSuccessfully)))
+          .whenComplete(() => _navigationService.back());
     }
-    _navigationService.back();
-    rebuildUi();
   }
 
   void showInSnackBar(ScaffoldMessengerState scaffoldContext, String value) {
@@ -100,8 +102,6 @@ class TeamDetailViewModel extends FutureViewModel
       var base64 = await TeamModel.fileToBase64(file);
       teamModelTemp.logoTeam = await TeamModel.base64ToImage(base64);
       rebuildUi();
-    } else {
-      // User canceled the picker
     }
   }
 
@@ -122,7 +122,7 @@ class TeamDetailViewModel extends FutureViewModel
     return showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Pick a color!'),
+        title: const Text(pickAColor),
         content: SingleChildScrollView(
           child: Column(
             children: [

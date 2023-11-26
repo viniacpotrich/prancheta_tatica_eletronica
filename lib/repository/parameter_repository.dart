@@ -5,6 +5,8 @@ interface class ParameterRepository
     extends RepositoryInterface<String, ParameterModel> {
   @override
   get dbm => throw UnimplementedError();
+  @override
+  get logger => throw UnimplementedError();
 
   @override
   Future<bool> delete(String t) {

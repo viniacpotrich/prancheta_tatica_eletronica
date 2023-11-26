@@ -73,6 +73,16 @@ class DatabaseService {
       value TEXT NOT NULL
     );
     ''');
+    await db.execute('''
+     CREATE TABLE IF NOT EXISTS Formation (
+      idFormation TEXT PRIMARY KEY,
+      idTeam TEXT NOT NULL,
+      dateStart INT NOT NULL,
+      dateEnd INT NOT NULL,
+      positions TEXT NOT NULL,
+      FOREIGN KEY (idTeam) REFERENCES Team(idTeam)
+    );
+    ''');
     await db.insert(
       "Params",
       ParameterModel(

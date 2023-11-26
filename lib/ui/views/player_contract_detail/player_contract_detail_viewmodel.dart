@@ -10,6 +10,8 @@ import 'package:tactical_e_clipboard/services/player_contract_service.dart';
 import 'package:tactical_e_clipboard/services/player_service.dart';
 import 'package:tactical_e_clipboard/services/team_service.dart';
 
+import '../../common/app_strings.dart';
+
 class PlayerContractDetailViewModel extends FutureViewModel
     with FormStateHelper
     implements FormViewModel {
@@ -66,9 +68,9 @@ class PlayerContractDetailViewModel extends FutureViewModel
   Future<void> getAllTeams() async {
     _teamService.getAll().then((value) {
       teams = value;
-      value.forEach((element) {
+      for (var element in value) {
         teamsMap.addAll({element.idTeam!: element.nameTeam!});
-      });
+      }
       if (isEditing) {
         actualTeam = playerContractTemp.team!.idTeam;
       } else {
@@ -80,9 +82,9 @@ class PlayerContractDetailViewModel extends FutureViewModel
   Future<void> getAllPlayers() async {
     _playerService.getAll().then((value) {
       palyers = value;
-      value.forEach((element) {
+      for (var element in value) {
         playersMap.addAll({element.idPlayer!: element.namePlayer!});
-      });
+      }
       if (isEditing) {
         actualPlayer = playerContractTemp.idPlayer;
       } else {
@@ -91,15 +93,30 @@ class PlayerContractDetailViewModel extends FutureViewModel
     });
   }
 
-  void submit() {
+  void submit(BuildContext context) {
     playerContractTemp.team =
         teams.firstWhere((element) => element.idTeam == actualTeam);
     playerContractTemp.idPlayer = actualPlayer;
     if (isEditing) {
-      _playerContractService.update(playerContractTemp);
+      _playerContractService
+          .update(playerContractTemp)
+          .then((value) => ScaffoldMessenger.of(context)
+              .showSnackBar(getSuccessSnackBar(updatedSuccessfully)))
+          .whenComplete(() => _navigationService.back());
     } else {
-      _playerContractService.put(playerContractTemp);
+      _playerContractService
+          .put(playerContractTemp)
+          .then((value) => ScaffoldMessenger.of(context)
+              .showSnackBar(getSuccessSnackBar(createdSuccessfully)))
+          .whenComplete(() => _navigationService.back());
     }
-    _navigationService.back();
+  }
+
+  SnackBar getSuccessSnackBar(String msg) {
+    return SnackBar(
+      content: Text(msg),
+      showCloseIcon: true,
+      backgroundColor: const Color(0xFF00C853),
+    );
   }
 }

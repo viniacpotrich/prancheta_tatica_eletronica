@@ -8,10 +8,12 @@
 import 'package:flutter/material.dart' as _i16;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i21;
+import 'package:stacked_services/stacked_services.dart' as _i23;
 import 'package:tactical_e_clipboard/model/formation_model.dart' as _i19;
-import 'package:tactical_e_clipboard/model/palyer_contract_model.dart' as _i20;
+import 'package:tactical_e_clipboard/model/palyer_contract_model.dart' as _i21;
+import 'package:tactical_e_clipboard/model/pattern_of_play_model.dart' as _i20;
 import 'package:tactical_e_clipboard/model/player_model.dart' as _i17;
+import 'package:tactical_e_clipboard/model/position_field.dart' as _i22;
 import 'package:tactical_e_clipboard/model/team_model.dart' as _i18;
 import 'package:tactical_e_clipboard/ui/views/date_picker_widget/date_picker_widget_view.dart'
     as _i14;
@@ -210,8 +212,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i11.PatternOfPlayDetailView: (data) {
+      final args =
+          data.getArgs<PatternOfPlayDetailViewArguments>(nullOk: false);
       return _i16.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i11.PatternOfPlayDetailView(),
+        builder: (context) => _i11.PatternOfPlayDetailView(
+            patternOfPlay: args.patternOfPlay, key: args.key),
         settings: data,
       );
     },
@@ -237,8 +242,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i15.FieldView: (data) {
+      final args = data.getArgs<FieldViewArguments>(nullOk: false);
       return _i16.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i15.FieldView(),
+        builder: (context) => _i15.FieldView(
+            positions: args.positions, callback: args.callback, key: args.key),
         settings: data,
       );
     },
@@ -331,13 +338,40 @@ class FormationDetailViewArguments {
   }
 }
 
+class PatternOfPlayDetailViewArguments {
+  const PatternOfPlayDetailViewArguments({
+    required this.patternOfPlay,
+    this.key,
+  });
+
+  final _i20.PatternOfPlayModel? patternOfPlay;
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return '{"patternOfPlay": "$patternOfPlay", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant PatternOfPlayDetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.patternOfPlay == patternOfPlay && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return patternOfPlay.hashCode ^ key.hashCode;
+  }
+}
+
 class PlayerContractDetailViewArguments {
   const PlayerContractDetailViewArguments({
     required this.playerContractModel,
     this.key,
   });
 
-  final _i20.PlayerContractModel? playerContractModel;
+  final _i21.PlayerContractModel? playerContractModel;
 
   final _i16.Key? key;
 
@@ -358,7 +392,39 @@ class PlayerContractDetailViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i21.NavigationService {
+class FieldViewArguments {
+  const FieldViewArguments({
+    required this.positions,
+    required this.callback,
+    this.key,
+  });
+
+  final List<_i22.PositionField> positions;
+
+  final Function callback;
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return '{"positions": "$positions", "callback": "$callback", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant FieldViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.positions == positions &&
+        other.callback == callback &&
+        other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return positions.hashCode ^ callback.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i23.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -496,14 +562,18 @@ extension NavigatorStateExtension on _i21.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToPatternOfPlayDetailView([
+  Future<dynamic> navigateToPatternOfPlayDetailView({
+    required _i20.PatternOfPlayModel? patternOfPlay,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.patternOfPlayDetailView,
+        arguments: PatternOfPlayDetailViewArguments(
+            patternOfPlay: patternOfPlay, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -525,7 +595,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> navigateToPlayerContractDetailView({
-    required _i20.PlayerContractModel? playerContractModel,
+    required _i21.PlayerContractModel? playerContractModel,
     _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -556,14 +626,19 @@ extension NavigatorStateExtension on _i21.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToFieldView([
+  Future<dynamic> navigateToFieldView({
+    required List<_i22.PositionField> positions,
+    required Function callback,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.fieldView,
+        arguments: FieldViewArguments(
+            positions: positions, callback: callback, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -707,14 +782,18 @@ extension NavigatorStateExtension on _i21.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithPatternOfPlayDetailView([
+  Future<dynamic> replaceWithPatternOfPlayDetailView({
+    required _i20.PatternOfPlayModel? patternOfPlay,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.patternOfPlayDetailView,
+        arguments: PatternOfPlayDetailViewArguments(
+            patternOfPlay: patternOfPlay, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -736,7 +815,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> replaceWithPlayerContractDetailView({
-    required _i20.PlayerContractModel? playerContractModel,
+    required _i21.PlayerContractModel? playerContractModel,
     _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
@@ -767,14 +846,19 @@ extension NavigatorStateExtension on _i21.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithFieldView([
+  Future<dynamic> replaceWithFieldView({
+    required List<_i22.PositionField> positions,
+    required Function callback,
+    _i16.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.fieldView,
+        arguments: FieldViewArguments(
+            positions: positions, callback: callback, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

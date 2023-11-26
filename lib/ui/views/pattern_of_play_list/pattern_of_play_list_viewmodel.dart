@@ -20,26 +20,26 @@ class PatternOfPlayListViewModel extends FutureViewModel {
     });
   }
 
-  Future<void> addPlayerContract() async {
-    await _navigationService.navigateToPatternOfPlayDetailView(
-        // playerContractModel: null,
-        );
-    await futureToRun();
-  }
-
-  Future<void> editPlayerContract(int index) async {
-    await _navigationService.navigateToPatternOfPlayDetailView(
-        // playerContractModel: playerContracts.elementAt(index),
-        );
-    await futureToRun();
-  }
-
   void deletePlayerContract(int index) {
-    // _patternOfPlayService
-    //     .delete(patternsOfPlay.elementAt(index).idPlayerContract!)
-    //     .then((_) {
-    //   patternsOfPlay.removeAt(index);
-    //   rebuildUi();
-    // });
+    _patternOfPlayService
+        .delete(patternsOfPlay.elementAt(index).idPatternOfPlay!)
+        .then((_) {
+      patternsOfPlay.removeAt(index);
+      rebuildUi();
+    });
+  }
+
+  void addPatternOfPlaye() async {
+    await _navigationService.navigateToPatternOfPlayDetailView(
+      patternOfPlay: null,
+    );
+    await futureToRun();
+  }
+
+  void editPatternOfPlaye(int index) async {
+    await _navigationService.navigateToPatternOfPlayDetailView(
+      patternOfPlay: patternsOfPlay.elementAt(index),
+    );
+    await futureToRun();
   }
 }

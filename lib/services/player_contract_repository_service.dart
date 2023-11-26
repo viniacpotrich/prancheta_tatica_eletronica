@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/model/palyer_contract_model.dart';
@@ -7,11 +8,18 @@ import 'package:uuid/data.dart';
 import 'package:uuid/rng.dart';
 import 'package:uuid/uuid.dart';
 
+import '../ui/common/app_strings.dart';
+
 class PlayerContractRepositoryService implements PlayerContractRepository {
   final _table = "PlayerContract";
 
   @override
   DatabaseService get dbm => locator<DatabaseService>();
+
+  @override
+  get logger => Logger(
+        printer: PrettyPrinter(),
+      );
 
   @override
   Future<bool> delete(String k) async {
@@ -32,7 +40,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
     if (results.isNotEmpty) {
       return await PlayerContractModel.fromMap(results.first);
     } else {
-      throw Exception('No record found for Uuid: $t');
+      throw Exception('$noRecordFoundForKey: $t');
     }
   }
 
@@ -50,7 +58,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
       }
       return result;
     } catch (e) {
-      print(e);
+      logger.e(genericErrorMessage, error: e);
       return [];
     }
   }
@@ -66,7 +74,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
         whereArgs: [k.idPlayerContract.toString()],
       );
     } catch (e) {
-      print(e);
+      logger.e(genericErrorMessage, error: e);
     }
     return k;
   }
@@ -76,7 +84,7 @@ class PlayerContractRepositoryService implements PlayerContractRepository {
     k.idPlayerContract = const Uuid().v4(config: V4Options(null, CryptoRNG()));
     var mapped = await k.toMap();
     if (k.idPlayerContract == null) {
-      Exception("UUID cannot be null");
+      Exception(uuidCannotBeNull);
     }
     await dbm.getInstanceDB().insert(
           _table,

@@ -5,6 +5,7 @@ import 'package:tactical_e_clipboard/app/app.locator.dart';
 import 'package:tactical_e_clipboard/app/app.router.dart';
 import 'package:tactical_e_clipboard/model/team_model.dart';
 import 'package:tactical_e_clipboard/services/team_service.dart';
+import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 
 class TeamListViewModel extends FutureViewModel {
   final TeamService _teamService = locator<TeamService>();
@@ -14,7 +15,7 @@ class TeamListViewModel extends FutureViewModel {
 
   @override
   Future futureToRun() async {
-    populate();
+    WidgetsBinding.instance.addPostFrameCallback((_) => populate());
   }
 
   void populate() {
@@ -40,36 +41,34 @@ class TeamListViewModel extends FutureViewModel {
 
   void deleteTeam(int index, BuildContext context) {
     showDialog(
-        context: context,
-        builder: (BuildContext ctx) {
-          return AlertDialog(
-            title: const Text('Please Confirm'),
-            content: const Text('Are you sure to delete the Team?'),
-            actions: [
-              // The "Yes" button
-              TextButton(
-                  onPressed: () {
-                    _teamService
-                        .delete(teams.elementAt(index).idTeam!)
-                        .then((_) {
-                      teams.removeAt(index);
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Deleted Successfully!'),
-                        showCloseIcon: true,
-                        backgroundColor: Color(0xFF00C853),
-                      ));
-                      rebuildUi();
-                    });
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Yes')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('No'))
-            ],
-          );
-        });
+      context: context,
+      builder: (BuildContext ctx) {
+        return AlertDialog(
+          title: const Text(pleaseConfirm),
+          content: const Text(deleteTeamConfirmation),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  _teamService.delete(teams.elementAt(index).idTeam!).then((_) {
+                    teams.removeAt(index);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(deletedSuccessfully),
+                      showCloseIcon: true,
+                      backgroundColor: Color(0xFF00C853),
+                    ));
+                    rebuildUi();
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: const Text(yes)),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(no))
+          ],
+        );
+      },
+    );
   }
 }

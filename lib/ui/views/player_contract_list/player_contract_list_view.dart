@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../common/app_strings.dart';
 import 'player_contract_list_viewmodel.dart';
 
 class PlayerContractListView extends StackedView<PlayerContractListViewModel> {
@@ -16,7 +17,7 @@ class PlayerContractListView extends StackedView<PlayerContractListViewModel> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text(
-          "Contratos",
+          contracts,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

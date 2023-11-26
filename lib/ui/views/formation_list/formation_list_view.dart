@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
 import 'formation_list_viewmodel.dart';
 
 class FormationListView extends StackedView<FormationListViewModel> {
@@ -24,8 +23,46 @@ class FormationListView extends StackedView<FormationListViewModel> {
       appBar: AppBar(
         title: Text("Formation"),
       ),
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      body: ListView.builder(
+        itemCount: viewModel.formations.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: Text(
+                  viewModel.formations[index].team?.nameTeam ?? "",
+                ),
+              ),
+              Expanded(
+                flex: 8,
+                child: Text(
+                  viewModel.formations[index].dateEnd.toString(),
+                ),
+              ),
+              Expanded(
+                flex: 8,
+                child: Text(
+                  viewModel.formations[index].dateEnd.toString(),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: () => viewModel.editPlayerContract(index),
+                  child: const Icon(Icons.edit),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: () => viewModel.deletePlayerContract(index, context),
+                  child: const Icon(Icons.delete),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

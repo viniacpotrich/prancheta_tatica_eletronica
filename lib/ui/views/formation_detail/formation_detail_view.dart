@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/model/formation_model.dart';
 import 'package:tactical_e_clipboard/ui/views/field/field_view.dart';
 
@@ -24,27 +23,35 @@ class FormationDetailView extends StackedView<FormationDetailViewModel> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("Formação"),
+        actions: [
+          IconButton(
+            onPressed: viewModel.selectDate,
+            icon: const Icon(Icons.date_range),
+          ),
+          IconButton(
+            onPressed: viewModel.openSettings,
+            icon: const Icon(Icons.settings),
+          ),
+          IconButton(
+            onPressed: viewModel.addPositionField,
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () => viewModel.submit(context),
+            icon: const Icon(Icons.check),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            DropdownButtonFormField(
-              items: viewModel.items
-                  .map(
-                    (e) => DropdownMenuItem(value: e, child: Text(e)),
-                  )
-                  .toList(),
-              onChanged: (Object? value) {},
+            Expanded(
+              flex: 6,
+              child: FieldView(
+                positions: viewModel.positions,
+                callback: viewModel.onCallback,
+              ),
             ),
-            DropdownButtonFormField(
-              items: viewModel.items
-                  .map(
-                    (e) => DropdownMenuItem(value: e, child: Text(e)),
-                  )
-                  .toList(),
-              onChanged: (Object? value) {},
-            ),
-            const Expanded(flex: 6, child: FieldView()),
           ],
         ),
       ),
