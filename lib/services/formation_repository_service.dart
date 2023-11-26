@@ -63,7 +63,7 @@ class FormationRepositoryService implements FormationRepository {
 
   @override
   Future<FormationModel> patch(FormationModel k) async {
-    var mapped = await k.toMap();
+    var mapped = await k.toJson();
     try {
       await dbm.getInstanceDB().update(
         _table,
@@ -80,7 +80,7 @@ class FormationRepositoryService implements FormationRepository {
   @override
   Future<FormationModel> put(FormationModel k) async {
     k.idFormation = const Uuid().v4(config: V4Options(null, CryptoRNG()));
-    var mapped = await k.toMap();
+    var mapped = await k.toJson();
     if (k.idFormation == null) {
       Exception(uuidCannotBeNull);
     }

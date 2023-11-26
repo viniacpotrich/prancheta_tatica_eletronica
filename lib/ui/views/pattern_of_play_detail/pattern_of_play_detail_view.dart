@@ -23,32 +23,88 @@ class PatternOfPlayDetailView
         title: Text("Patterns of Play Detail"),
         actions: [
           IconButton(
+            onPressed: viewModel.selectDate,
+            icon: const Icon(Icons.date_range),
+          ),
+          IconButton(
+            onPressed: viewModel.openSettings,
+            icon: const Icon(Icons.settings),
+          ),
+          IconButton(
             onPressed: viewModel.addFormation,
             icon: const Icon(Icons.add),
           ),
           IconButton(
-            onPressed: viewModel.play,
-            icon: const Icon(Icons.play_arrow),
-          ),
-          IconButton(
-            onPressed: viewModel.submit,
+            onPressed: () => viewModel.submit(context),
             icon: const Icon(Icons.check),
           ),
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 6,
-              child: Row(
-                children: [
-                  viewModel.widgets[viewModel.selected],
-                ],
+        child: LayoutBuilder(
+          builder: (context, constraints) => ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(
+                height: constraints.maxHeight * 80 / 100,
+                width: constraints.maxWidth,
+                child: viewModel.formationsView.isEmpty
+                    ? Placeholder()
+                    : Stack(
+                        children: [
+                          FieldView(
+                            positions: viewModel
+                                    .formationsView[viewModel.selected]
+                                    .positions ??
+                                [],
+                            callback: () {},
+                          ),
+                        ],
+                      ),
               ),
-            ),
-            Expanded(flex: 1, child: Row(children: viewModel.widgets)),
-          ],
+              SizedBox(
+                height: constraints.maxHeight * 20 / 100,
+                width: constraints.maxWidth,
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                  ),
+                  // shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: viewModel.formationsView.length,
+                  itemBuilder: (context, index) => Stack(
+                    children: [
+                      SizedBox(
+                        height: constraints.maxHeight,
+                        width: constraints.maxWidth,
+                        child: GestureDetector(
+                          child: Stack(
+                            children: [
+                              FieldView(
+                                positions: viewModel
+                                        .formationsView[viewModel.selected]
+                                        .positions ??
+                                    [],
+                                callback: () {},
+                              ),
+                            ],
+                          ),
+                          onTap: () => viewModel.changeSelected(index),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => viewModel.removeField(index),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

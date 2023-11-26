@@ -49,6 +49,7 @@ class FormationDetailViewModel extends FutureViewModel {
       title: settings,
       data: SettingsDto(
         selected: actualTeam,
+        label: selectTeam,
         onCallback: onChangeSettingsTeam,
         map: teamsMap,
       ),
@@ -94,6 +95,7 @@ class FormationDetailViewModel extends FutureViewModel {
       title: settings,
       data: SettingsDto(
         selected: actualPlayer,
+        label: selectPlayer,
         onCallback: onChangeSettingsPlayer,
         map: playersMap,
       ),

@@ -33,7 +33,7 @@ class FormationModel {
     return newList;
   }
 
-  Map<String, Object?> toMap() {
+  Map<String, Object?> toJson() {
     return {
       'idFormation': idFormation?.toString(),
       'idTeam': team!.idTeam.toString(),

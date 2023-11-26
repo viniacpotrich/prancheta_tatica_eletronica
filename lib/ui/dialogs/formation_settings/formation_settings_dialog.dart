@@ -72,9 +72,10 @@ class FormationSettingsDialog
                       DropdownButtonFormField(
                         value: request.data.selected, //.actualTeam
                         icon: const Icon(Icons.arrow_downward),
-                        decoration: const InputDecoration(
-                          labelText: selectTeam, //.selectTeam
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: InputDecoration(
+                          labelText: request.data.label, //.selectTeam
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10),
                         ),
                         onChanged: (value) => request.data
                             .onCallback(value), //.onChangedSelectTeam(value)

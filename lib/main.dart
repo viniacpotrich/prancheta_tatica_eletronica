@@ -8,6 +8,7 @@ import 'package:tactical_e_clipboard/ui/common/app_colors.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app/app.dialogs.dart';
+import 'my_custom_scroll_behavior.dart';
 
 void _setDataBaseFactory() {
   setupBottomSheetUi();
@@ -31,6 +32,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: MyCustomScrollBehavior(),
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(

@@ -64,6 +64,7 @@ const String teamDetail = "Team Detail";
 // Select
 const String selectPlayer = "Select Player";
 const String selectTeam = "Select Team";
+const String selectFormation = "Select Fromation";
 const String selectPreferredFoot = "Select Preferred foot";
 const String selectPreferedPositions = "Select Preferred Position(s):";
 

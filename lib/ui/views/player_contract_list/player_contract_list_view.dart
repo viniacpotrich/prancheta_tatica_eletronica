@@ -60,7 +60,7 @@ class PlayerContractListView extends StackedView<PlayerContractListViewModel> {
               Expanded(
                 flex: 1,
                 child: InkWell(
-                  onTap: () => viewModel.deletePlayerContract(index),
+                  onTap: () => viewModel.deletePlayerContract(index, context),
                   child: const Icon(Icons.delete),
                 ),
               ),
