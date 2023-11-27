@@ -37,7 +37,8 @@ class MovableItem extends StackedView<MovableItemModel> {
     MovableItemModel viewModel,
     Widget? child,
   ) {
-    return Positioned(
+    return AnimatedPositioned(
+      duration: const Duration(seconds: 2),
       top: viewModel.yPosition,
       left: viewModel.xPosition,
       child: GestureDetector(

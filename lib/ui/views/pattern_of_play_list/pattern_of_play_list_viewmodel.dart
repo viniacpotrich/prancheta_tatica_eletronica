@@ -66,6 +66,13 @@ class PatternOfPlayListViewModel extends FutureViewModel {
     await futureToRun();
   }
 
+  void execPatternsOfPlay(int index) async {
+    await _navigationService.navigateToPatternOfPlayExecutionView(
+      patternOfPlay: patternsOfPlay.elementAt(index),
+    );
+    await futureToRun();
+  }
+
   void editPatternsOfPlay(int index) async {
     await _navigationService.navigateToPatternOfPlayDetailView(
       patternOfPlay: patternsOfPlay.elementAt(index),

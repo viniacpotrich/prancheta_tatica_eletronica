@@ -33,6 +33,7 @@ import 'package:tactical_e_clipboard/ui/views/player_contract_detail/player_cont
 import 'package:tactical_e_clipboard/ui/views/date_picker_widget/date_picker_widget_view.dart';
 import 'package:tactical_e_clipboard/ui/views/field/field_view.dart';
 import 'package:tactical_e_clipboard/ui/dialogs/formation_settings/formation_settings_dialog.dart';
+import 'package:tactical_e_clipboard/ui/views/pattern_of_play_execution/pattern_of_play_execution_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -51,6 +52,7 @@ import 'package:tactical_e_clipboard/ui/dialogs/formation_settings/formation_set
     MaterialRoute(page: PlayerContractDetailView),
     MaterialRoute(page: DatePickerWidgetView),
     MaterialRoute(page: FieldView),
+    MaterialRoute(page: PatternOfPlayExecutionView),
 // @stacked-route
   ],
   dependencies: [

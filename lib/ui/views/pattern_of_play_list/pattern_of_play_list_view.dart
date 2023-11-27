@@ -50,6 +50,13 @@ class PatternOfPlayListView extends StackedView<PatternOfPlayListViewModel> {
               Expanded(
                 flex: 1,
                 child: InkWell(
+                  onTap: () => viewModel.execPatternsOfPlay(index),
+                  child: const Icon(Icons.edit),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: InkWell(
                   onTap: () => viewModel.editPatternsOfPlay(index),
                   child: const Icon(Icons.edit),
                 ),
