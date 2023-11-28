@@ -57,7 +57,7 @@ class PatternOfPlayDetailView
                                     .formationsView[viewModel.selected]
                                     .positions ??
                                 [],
-                            callback: () {},
+                            callback: (index, d1, d2) {},
                           ),
                         ],
                       ),
@@ -69,7 +69,6 @@ class PatternOfPlayDetailView
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                   ),
-                  // shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: viewModel.formationsView.length,
                   itemBuilder: (context, index) => Stack(
@@ -77,7 +76,7 @@ class PatternOfPlayDetailView
                       SizedBox(
                         height: constraints.maxHeight,
                         width: constraints.maxWidth,
-                        child: GestureDetector(
+                        child: InkWell(
                           child: Stack(
                             children: [
                               FieldView(
@@ -85,11 +84,13 @@ class PatternOfPlayDetailView
                                         .formationsView[viewModel.selected]
                                         .positions ??
                                     [],
-                                callback: () {},
+                                callback: (index, d1, d2) {},
                               ),
                             ],
                           ),
-                          onTap: () => viewModel.changeSelected(index),
+                          onTap: () {
+                            viewModel.changeSelected(index);
+                          },
                         ),
                       ),
                       IconButton(

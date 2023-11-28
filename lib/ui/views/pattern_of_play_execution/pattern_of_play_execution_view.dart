@@ -34,7 +34,7 @@ class PatternOfPlayExecutionView
               flex: 6,
               child: FieldView(
                 positions: viewModel.formationView.positions ?? [],
-                callback: () {},
+                callback: (index, d1, d2) {},
               ),
             ),
           ],

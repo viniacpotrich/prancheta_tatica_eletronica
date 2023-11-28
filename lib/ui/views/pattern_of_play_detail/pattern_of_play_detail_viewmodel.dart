@@ -162,6 +162,7 @@ class PatternOfPlayDetailViewModel extends FutureViewModel {
 
   void changeSelected(index) {
     selected = index;
+    rebuildUi();
   }
 
   void onChangedSelectTeam(String? key) {

@@ -14,7 +14,6 @@ class PatternOfPlayExecutionViewModel extends FutureViewModel {
   FormationModel formationView = FormationModel();
 
   void interate() {
-    print("iterate $index");
     if (index < allFormations.length - 1) {
       index++;
     } else {
@@ -24,8 +23,6 @@ class PatternOfPlayExecutionViewModel extends FutureViewModel {
   }
 
   void updateFormationPosition() {
-    print("update");
-
     for (int i = 0; i < formationView.positions!.length; i++) {
       formationView.positions![i].posX =
           allFormations[index].positions![i].posX;

@@ -20,7 +20,6 @@ class FieldViewModel extends FutureViewModel {
       scale: 0.1,
       fit: BoxFit.fill,
     );
-    Completer completer = Completer();
     image.image
         .resolve(const ImageConfiguration())
         .addListener(ImageStreamListener((image, synchronousCall) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:tactical_e_clipboard/ui/common/app_colors.dart';
-import 'package:tactical_e_clipboard/ui/common/app_strings.dart';
 import 'package:tactical_e_clipboard/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
