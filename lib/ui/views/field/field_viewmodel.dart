@@ -38,8 +38,15 @@ class FieldViewModel extends FutureViewModel {
   void refreshPostions() {
     movableItems = [];
     for (int i = 0; i < positions.length; i++) {
-      addMovable(positions[i].posX!, positions[i].posY!, i, i, Colors.amber,
-          Colors.white, callback);
+      addMovable(
+        positions[i].posX!,
+        positions[i].posY!,
+        i,
+        i,
+        Colors.amber,
+        Colors.white,
+        callback,
+      );
     }
   }
 

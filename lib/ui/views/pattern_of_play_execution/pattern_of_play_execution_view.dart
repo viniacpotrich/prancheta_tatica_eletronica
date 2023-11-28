@@ -22,7 +22,7 @@ class PatternOfPlayExecutionView
         title: Text("Patterns of Play Detail"),
         actions: [
           IconButton(
-            onPressed: () => viewModel.interate(),
+            onPressed: () => viewModel.interate,
             icon: const Icon(Icons.add),
           ),
         ],
@@ -33,8 +33,7 @@ class PatternOfPlayExecutionView
             Expanded(
               flex: 6,
               child: FieldView(
-                positions:
-                    viewModel.formationsView[viewModel.index].positions ?? [],
+                positions: viewModel.formationView.positions ?? [],
                 callback: () {},
               ),
             ),

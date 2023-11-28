@@ -10,13 +10,27 @@ class PatternOfPlayExecutionViewModel extends FutureViewModel {
   late PatternOfPlayModel patternOfPlayModel;
 
   int index = 0;
-  List<FormationModel> formationsView = [];
+  List<FormationModel> allFormations = [];
+  FormationModel formationView = FormationModel();
 
   void interate() {
-    if (index < formationsView.length - 1) {
+    print("iterate $index");
+    if (index < allFormations.length - 1) {
       index++;
     } else {
       index = 0;
+    }
+    updateFormationPosition();
+  }
+
+  void updateFormationPosition() {
+    print("update");
+
+    for (int i = 0; i < formationView.positions!.length; i++) {
+      formationView.positions![i].posX =
+          allFormations[index].positions![i].posX;
+      formationView.positions![i].posY =
+          allFormations[index].positions![i].posY;
     }
     rebuildUi();
   }
@@ -24,6 +38,7 @@ class PatternOfPlayExecutionViewModel extends FutureViewModel {
   @override
   Future futureToRun() async {
     patternOfPlayModel = _navigationService.currentArguments.patternOfPlay;
-    formationsView = patternOfPlayModel.formations ?? [];
+    allFormations = patternOfPlayModel.formations ?? [];
+    formationView = allFormations[index];
   }
 }
